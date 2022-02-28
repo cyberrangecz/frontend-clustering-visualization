@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import data from '../../assets/mock.json';
+//import data from '../../assets/mock.json';
 
 @Component({
   selector: 'app-clustering-overview',
@@ -13,7 +13,7 @@ export class ClusteringOverviewComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.data = data as any;
+    //this.data = data as any;
     this.test = [
       {
         "id": 1,

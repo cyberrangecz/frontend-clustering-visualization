@@ -7,18 +7,18 @@ const routes: Routes = [
   {
     path: 'clustering',
     loadChildren: () => import('./clustering/clustering.module').then(m => m.ClusteringModule),
-    canActivate: [SentinelAuthGuardWithLogin],
+    //canActivate: [SentinelAuthGuardWithLogin],
   },
   {
     path: '',
     redirectTo: 'clustering',
     pathMatch: 'full'
   },
-  {
+  /*{
     path: 'login',
     component: SentinelAuthProviderListComponent,
     canActivate: [SentinelNegativeAuthGuard]
-  },
+  },*/
   {
     path: '**',
     redirectTo: 'clustering'

@@ -21,14 +21,7 @@ import {ClusteringVisualizationConfig} from "./visualization/config/kypo2-traini
 
 @NgModule({
   declarations: [
-    /*RadarChartComponent,
-    PlayerSelectionComponent,
-    MouseWheelDirective,
-    MouseMoveDirective,
-    ColumnHeaderComponent,
-    OverviewProgressBarComponent,
-    LevelListComponent,
-    LegendComponent,*/
+    RadarChartComponent,
     VisualizationsComponent
   ],
   imports: [
@@ -49,7 +42,8 @@ import {ClusteringVisualizationConfig} from "./visualization/config/kypo2-traini
     { provide: VisualizationsDataService, useClass: VisualizationsDataConcreteService }
   ],
   exports: [
-    RadarChartComponent
+    RadarChartComponent,
+    VisualizationsComponent
   ]
 })
 export class Kypo2TrainingsClusteringVizLibModule {

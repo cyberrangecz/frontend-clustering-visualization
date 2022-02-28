@@ -16,10 +16,9 @@ import {Player} from "../../models/player";
 })
 export class VisualizationsComponent implements OnInit, OnDestroy {
 
-  @Input() trainingDefinitionId: number;
-  @Input() trainingInstanceId: number;
+ /* @Input() trainingDefinitionId: number;
+  @Input() trainingInstanceId: number;*/
   @Input() JSONData: VisualizationDataDTO;
-  @Input() colorScheme: string[];
 
   @Input() isStandalone: boolean;
 
