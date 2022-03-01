@@ -1,13 +1,6 @@
-import { User } from '@sentinel/auth';
-import { GenericObject } from './generic-object.type';
+import {RadarPoint} from "./radar-point";
+import {RadarVisualizationData} from "./radar-visualization-data";
 
 export class VisualizationData {
-	time: number;
-	levels: GenericObject[];
-	keys?: string[];
-	trainingDataSet?: GenericObject[];
-	planDataSet?: GenericObject[];
-	levelsTimePlan?: number[];
-	teams?: GenericObject[];
-	participants?: User[];
+	radarData: RadarVisualizationData[];
 }

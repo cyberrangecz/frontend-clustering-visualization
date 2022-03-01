@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { VisualizationDataApi } from '../api/visualization-data-api.service';
 import { VisualizationData } from '../models/visualization-data';
 import { VisualizationsDataService } from './visualizations-data.service';
+import {VisualizationDataMapper} from "../mappers/visualization-data-mapper";
 
 @Injectable()
 export class VisualizationsDataConcreteService extends VisualizationsDataService{
@@ -13,16 +14,12 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
     }
 
     getData(trainingInstanceId: number): Observable<VisualizationData> {
-      return this.visualizationApi.getVisualizationData(trainingInstanceId).pipe(
-        tap(
-          (visualizationData) => {
-            this.visualizationDataSubject$.next(visualizationData);
-          },
-          (err) => {
-            console.log(err)
-          }
-        )
-      );
+        return this.visualizationApi.getVisualizationData(trainingInstanceId).pipe(
+            map((data: any) => VisualizationDataMapper.fromDTO(data)),
+            catchError((error) => {
+                return throwError('VisualizationsDataService not connect to API: ' + error.message);
+            })
+        );
 
-}
+    }
 }

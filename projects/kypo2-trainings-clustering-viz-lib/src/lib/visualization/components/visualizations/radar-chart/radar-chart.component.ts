@@ -17,6 +17,8 @@ import { ConfigService } from '../../../config/config.service';
 import { Subscription } from 'rxjs';
 import { TrainingDataEntry } from '../../../models/training-data-entry';
 import { Player } from '../../../models/player';
+import {RadarChartEntry} from "../../../models/radar-chart-entry";
+import {VisualizationData} from "../../../models/visualization-data";
 
 @Component({
   selector: 'kypo2-viz-radar-chart',
@@ -26,23 +28,7 @@ import { Player } from '../../../models/player';
 })
 export class RadarChartComponent implements OnChanges, OnDestroy, AfterViewInit {
 
-
- // @Input() visualizationData: VisualizationData;
-
-  /*@Input() view = this.appConfig.defaultView;
-  @Input() selectedPlayerView: PlayerView = PlayerView.Both;
-
-  @Input() colorScheme: string[];
-  @Input() eventService: TrainingAnalysisEventService;
-  @Input() setDashboardView = false;
-  @Input() externalFilters;
-  @Input() trainingColors = this.appConfig.trainingColors;
-  @Input() playerColorScheme: string[];
-  @Input() trainingInstanceId: number;
-
-  @Input() selectedPlayers: Player[];
-  @Output() outputSelectedPlayers = new EventEmitter<number[]>();
-  @Output() highlightedPlayer = new EventEmitter<number>();*/
+  @Input() visualizationData: VisualizationData;
 
   private wrapperWidth: number;
   private wrapperHeight: number;
@@ -59,12 +45,6 @@ export class RadarChartComponent implements OnChanges, OnDestroy, AfterViewInit 
   private yScale: ScaleBand<string>;
   private xAxis: Axis<number | { valueOf(): number }>;
   private tooltip: any;
-  private trainingDataSet: TrainingDataEntry[] = [];
-  private planDataSet: GenericObject[] = [];
-
-  public time = 0;
-  public startTime = 0;
-  public participants;
 
   public hasData;
   public errorMessage: string = null;
@@ -78,17 +58,11 @@ export class RadarChartComponent implements OnChanges, OnDestroy, AfterViewInit 
   }
 
   ngOnChanges(): void {
-    //this.configService.trainingColors = this.trainingColors;
-    this.setData();
+    console.log(this.visualizationData);
+    this.drawChart();
   }
 
   ngAfterViewInit(): void  {
-    this.setData()
-    this.initializeZoom();
-  }
-
-  setData(){
-
     this.drawChart();
   }
 
@@ -96,23 +70,6 @@ export class RadarChartComponent implements OnChanges, OnDestroy, AfterViewInit 
     /*const data: PreparedData = this.getPreparedData();
     this.applyData(data.trainingDataSet, data.planDataSet);
     this.pan();*/
-  }
-
-  initializeZoom(): void {
-    /*if (this.view === View.Overview) {
-      // in the case of overview mode, we initially want to see only the player progress, not the whole training plan
-      this.overviewZoomValue =
-        this.view === View.Overview
-          ? Math.max(
-            // but we don't want the zooming to be extreme
-            Math.min(
-              this.appConfig.maxZoomValue,
-              this.xScale(this.planDomain) / this.xScale(this.time)), 1)
-          : this.zoomValue;
-      this.zoomValue = this.overviewZoomValue;
-    } else if (this.view === View.Progress) {
-      this.zoomValue = this.progressZoomValue;
-    }*/
   }
 
   drawChartBase(baseConfig: BaseConfig): void {

@@ -1,5 +1,6 @@
 import { PlayerDTO } from './player-dto';
+import {RadarVisualizationData} from "../models/radar-visualization-data";
 
 export class VisualizationDataDTO {
-    players: PlayerDTO[];
+    [index: number | string ]: RadarVisualizationData
 }
