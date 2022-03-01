@@ -21,7 +21,7 @@ import {RadarChartEntry} from "../../../models/radar-chart-entry";
 import {VisualizationData} from "../../../models/visualization-data";
 
 @Component({
-  selector: 'kypo2-viz-radar-chart',
+  selector: 'kypo-viz-radar-chart',
   templateUrl: './radar-chart.component.html',
   styleUrls: ['./radar-chart.component.css'],
   encapsulation: ViewEncapsulation.None

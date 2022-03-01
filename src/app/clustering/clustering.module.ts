@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {ClusteringOverviewComponent} from './clustering-overview.component';
 import {ClusteringRoutingModule} from './clustering-routing.module';
 import {CustomConfig} from '../custom-config';
-import {Kypo2TrainingsClusteringVizLibModule} from '../../../projects/kypo2-trainings-clustering-viz-lib/src/public_api';
+import {KypoTrainingsClusteringVizLibModule} from '../../../projects/kypo-trainings-clustering-viz-lib/src/public_api';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,7 @@ import {Kypo2TrainingsClusteringVizLibModule} from '../../../projects/kypo2-trai
   imports: [
     CommonModule,
     ClusteringRoutingModule,
-    Kypo2TrainingsClusteringVizLibModule.forRoot(CustomConfig)
+    KypoTrainingsClusteringVizLibModule.forRoot(CustomConfig)
   ],
   exports: [
     ClusteringOverviewComponent

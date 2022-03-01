@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/kypo2-trainings-clustering-viz-lib",
+  "dest": "../../dist/kypo-trainings-clustering-viz-lib",
   "lib": {
     "entryFile": "src/public_api.ts"
   }

@@ -132,38 +132,38 @@
         }
       }
     },
-    "kypo2-trainings-clustering-viz-lib": {
-      "root": "projects/kypo2-trainings-clustering-viz-lib",
-      "sourceRoot": "projects/kypo2-trainings-clustering-viz-lib/src",
+    "kypo-trainings-clustering-viz-lib": {
+      "root": "projects/kypo-trainings-clustering-viz-lib",
+      "sourceRoot": "projects/kypo-trainings-clustering-viz-lib/src",
       "projectType": "library",
-      "prefix": "kypo2-viz-clustering",
+      "prefix": "kypo-viz-clustering",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "projects/kypo2-trainings-clustering-viz-lib/tsconfig.lib.json",
-            "project": "projects/kypo2-trainings-clustering-viz-lib/ng-package.json"
+            "tsConfig": "projects/kypo-trainings-clustering-viz-lib/tsconfig.lib.json",
+            "project": "projects/kypo-trainings-clustering-viz-lib/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/kypo2-trainings-clustering-viz-lib/tsconfig.lib.prod.json"
+              "tsConfig": "projects/kypo-trainings-clustering-viz-lib/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/kypo2-trainings-clustering-viz-lib/src/test.ts",
-            "tsConfig": "projects/kypo2-trainings-clustering-viz-lib/tsconfig.spec.json",
-            "karmaConfig": "projects/kypo2-trainings-clustering-viz-lib/karma.conf.js"
+            "main": "projects/kypo-trainings-clustering-viz-lib/src/test.ts",
+            "tsConfig": "projects/kypo-trainings-clustering-viz-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/kypo-trainings-clustering-viz-lib/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "projects/kypo2-trainings-clustering-viz-lib/**/*.ts",
-              "projects/kypo2-trainings-clustering-viz-lib/**/*.component.html"
+              "projects/kypo-trainings-clustering-viz-lib/**/*.ts",
+              "projects/kypo-trainings-clustering-viz-lib/**/*.component.html"
             ]
           }
         }
