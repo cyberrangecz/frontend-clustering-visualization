@@ -1,6 +1,7 @@
-import {RadarPoint} from "./radar-point";
-import {RadarVisualizationData} from "./radar-visualization-data";
+import {ClusterVisualizationData} from "./cluster-visualization-data";
+import {EuclidianDoublePoint} from "./eucledian-double-point";
 
 export class VisualizationData {
-	radarData: RadarVisualizationData[];
+	radarData?: EuclidianDoublePoint[];
+	clusterData?: ClusterVisualizationData[];
 }

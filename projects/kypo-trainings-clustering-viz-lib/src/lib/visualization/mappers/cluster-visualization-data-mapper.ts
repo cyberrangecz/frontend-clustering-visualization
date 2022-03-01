@@ -1,13 +1,13 @@
 import { VisualizationDataDTO } from '../DTOs/visualization-data-dto';
 import { VisualizationData } from '../models/visualization-data';
-import { PlayerMapper } from './player-mapper';
+import {ClusterDto} from "../DTOs/cluster-data-dto";
 
-export class VisualizationDataMapper {
+export class ClusterVisualizationDataMapper {
   static fromDTO(dto: VisualizationDataDTO): VisualizationData {
     const result = new VisualizationData();
-    result.radarData = [];
+    result.clusterData = [];
     for (let dtoKey in dto) {
-      result.radarData.push(dto[dtoKey])
+      result.clusterData.push(dto[dtoKey] as ClusterDto)
     }
     return result;
   }

@@ -4,9 +4,10 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ConfigService } from '../config/config.service';
 import { VisualizationDataDTO } from '../DTOs/visualization-data-dto';
-import { VisualizationDataMapper } from '../mappers/visualization-data-mapper';
 import { VisualizationData } from '../models/visualization-data';
 import { VisualizationDataApi } from './visualization-data-api.service';
+import {ClusterVisualizationDataMapper} from "../mappers/cluster-visualization-data-mapper";
+import {RadarChartDataMapper} from "../mappers/radar-chart-data-mapper";
 
 /**
  * Default implementation of service abstracting http communication with visualization data endpoints.
@@ -30,8 +31,21 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
       .pipe(
         map(
           (response) =>
-              VisualizationDataMapper.fromDTO(response),
+              ClusterVisualizationDataMapper.fromDTO(response),
         )
       );
+  }
+
+  getRadarChartData(trainingInstanceId: number): Observable<VisualizationData> {
+    return this.http
+        .get<VisualizationDataDTO>(
+            this.configService.config.trainingServiceUrl + `visualizations/training-instances/${trainingInstanceId}/radar-chart`
+        )
+        .pipe(
+            map(
+                (response) =>
+                    RadarChartDataMapper.fromDTO(response),
+            )
+        );
   }
 }

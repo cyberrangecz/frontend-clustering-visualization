@@ -1,5 +1,6 @@
-export class RadarPoint {
-    userRefId: number;
+import {Clusterable} from "./clusterable";
+
+export class WrongFlags extends Clusterable {
     wrongFlagsSubmitted: number;
     timePlayed: number;
     wrongFlagsSubmittedNormalized: number;

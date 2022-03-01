@@ -9,4 +9,6 @@ export abstract class VisualizationDataApi {
      * Sends http request to retrieve all visualization data
      */
     abstract getVisualizationData(trainingInstanceId: number): Observable<VisualizationData>;
+
+    abstract getRadarChartData(trainingInstanceId: number): Observable<VisualizationData>;
   }

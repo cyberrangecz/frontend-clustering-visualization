@@ -1,3 +1,4 @@
 {
-  "/kypo-rest-training/api/v1/visualizations/training-instances/:id/progress": "/progress"
+  "/kypo-rest-training/api/v1/visualizations/training-instances/:id/progress": "/clusters",
+  "/kypo-rest-training/api/v1/visualizations/training-instances/:id/radar-chart": "/radarChart"
 }

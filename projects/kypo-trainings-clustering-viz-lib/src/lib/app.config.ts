@@ -1,33 +1,42 @@
-import { GenericObject } from './visualization/models/generic-object.type';
-
 export class AppConfig {
-	levelsTimePlan: number[];
-	trainingColors: string[];
-	playerColors: string[];
-	darkColor: string;
-	finalViewBarPadding: number;
-	minBarHeight: number;
-	maxBarHeight: number;
-	maxZoomValue: number;
-	zoomStep: number;
-	simulationInterval: number;
-	loadDataInterval: number;
-	assetsRoot: string;
+	colors: string[];
+	features: string[];
+	featureTooltips: string[];
+	radialScaleDomain: number[];
+	radialScaleRange: number[];
 }
 
-export const CTF_PROGRESS_CONFIG: AppConfig = {
-	levelsTimePlan: [],
-	trainingColors: ['#ebebeb', '#dadada', '#c0c0c0', '#aeaeae', '#9b9b9b', '#646464', '#3e3e3c'],
-	playerColors: ['#D8008C', '#92D88C', '#372A9F', '#9035A6', '#D88C8C', '#7A9EBD', '#D8D88C', '#ADAAE1', '#8CD8C7'],
-	// playerColors: ['#D88C8C', '#7A9EBD', '#D8D88C', '#92D88C', '#ADAAE1', '#D8008C', '#8CD8C7'],
-	darkColor: '#2f2f2f',
-	finalViewBarPadding: 50,
-	minBarHeight: 18,
-	maxBarHeight: 35,
-	maxZoomValue: 10,
-	zoomStep: 0.25,
-	simulationInterval: 800,
-	loadDataInterval: 5000,
-	assetsRoot: '/portlet_ctf_progress-0.1/',
+export const VIS_CONFIG: AppConfig = {
+	colors: [
+		'#FFB300',
+		'#803E75',
+		'#FF6800',
+		'#A6BDD7',
+		'#C10020',
+		'#CEA262',
+		'#817066',
+		'#007D34',
+		'#F6768E',
+		'#00538A',
+		'#FF7A5C',
+		'#53377A',
+		'#FF8E00',
+		'#B32851',
+		'#F4C800',
+		'#7F180D',
+		'#93AA00',
+		'#593315',
+		'#F13A13',
+		'#232C16',
+	],
+	features: ['Maximum time after hint', 'Wrong flags', 'Score total', 'Time played', 'Hints taken'],
+	featureTooltips: [
+		'How long does it take the players to solve level <br/> after the last used hint',
+		'Wrong flags submitted during the game',
+		'The final game score of finished players',
+		'Total time played',
+		'Hints taken across the whole game'
+	],
+	radialScaleDomain: [-1, 4.5],
+	radialScaleRange: [0, 100],
 };
-

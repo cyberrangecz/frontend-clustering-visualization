@@ -11,4 +11,6 @@ export abstract class VisualizationsDataService {
     .pipe(filter((vd) => vd !== undefined && vd !== null));
 
   abstract getData(trainingInstanceId: number)/*: Observable<VisualizationData>*/;
+
+  abstract getRadarData(trainingInstanceId: number);
 }

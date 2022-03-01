@@ -2,7 +2,7 @@ import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ConfigService } from './visualization/config/config.service';
-import { AppConfig, CTF_PROGRESS_CONFIG } from './app.config';
+import { AppConfig, VIS_CONFIG } from './app.config';
 import { D3Service } from '@muni-kypo-crp/d3-service';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -37,7 +37,7 @@ import {ClusteringVisualizationConfig} from "./visualization/config/kypo-trainin
   providers: [
     D3Service,
     ConfigService,
-    { provide: AppConfig, useValue: CTF_PROGRESS_CONFIG },
+    { provide: AppConfig, useValue: VIS_CONFIG },
     { provide: VisualizationDataApi, useClass: VisualizationDataDefaultApi },
     { provide: VisualizationsDataService, useClass: VisualizationsDataConcreteService }
   ],

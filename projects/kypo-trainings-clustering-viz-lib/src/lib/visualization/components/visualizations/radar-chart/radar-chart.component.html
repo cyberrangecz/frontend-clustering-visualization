@@ -1,4 +1,40 @@
-<div class="cluster-wrapper">
-	<p>Works</p>
+<div class="pt-3 h-100">
+	<div class="row">
+		<div class="col-sm-2">
+			<h2>Radar chart</h2>
+		</div>
+	</div>
+
+	<div class="row pt-1">
+		<div class="col-sm-2">
+			<label>Number of clusters:</label>
+		</div>
+		<div class="col-sm-2">
+			<input type="number" [(ngModel)]="numOfClusters">
+		</div>
+	</div>
+
+	<div class="row pt-1">
+		<div class="col-sm-2">
+			<label>Training definition identification:</label>
+		</div>
+		<div class="col-sm-2">
+			<input type="number" [(ngModel)]="trainingDefinitionId">
+		</div>
+	</div>
+
+	<div class="row pt-1">
+		<div class="col-sm-2">
+			<!--<button type="submit" class="btn btn-primary" (click)="redraw()">Recalculate</button>-->
+		</div>
+	</div>
+	<div class="row  pt-1 mx-auto h-50">
+		<div id="radar-chart" class="col-sm-6 m-3"
+			 (window:resize)="onResize()">
+		</div>
+		<div id="small-radar-charts" class="col-sm-4 m-3 vh-75" style="overflow: auto">
+		</div>
+	</div>
 </div>
+
 
