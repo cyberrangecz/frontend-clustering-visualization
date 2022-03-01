@@ -7,6 +7,7 @@ import { ConfigService } from '../../../config/config.service';
 import { Subscription } from 'rxjs';
 import {VisualizationData} from "../../../models/visualization-data";
 import {EuclidianDoublePoint, Point} from "../../../models/eucledian-double-point";
+import {element} from "protractor";
 
 @Component({
   selector: 'kypo-viz-radar-chart',
@@ -21,6 +22,7 @@ export class RadarChartComponent implements OnChanges, AfterViewInit {
   private readonly d3: D3;
   private readonly radialScale;
   private readonly smallScale;
+  private chartArea;
   private features: string[];
   private featureTooltips: string[];
   private svg: any;
@@ -32,10 +34,7 @@ export class RadarChartComponent implements OnChanges, AfterViewInit {
   private width: number = 450;
   private height: number = 400;
   private padding: Padding;
-  private bounds: any;
   private outerWrapper: any;
-  public xScale: ScaleLinear<number, number>;
-  private yScale: ScaleBand<string>;
   private tooltip: any;
 
   public numOfClusters = 6;
@@ -65,9 +64,19 @@ export class RadarChartComponent implements OnChanges, AfterViewInit {
   ngAfterViewInit(): void  {
     this.features = this.appConfig.features;
     this.featureTooltips = this.appConfig.featureTooltips;
+    this.drawChartBase({
+          element: 'main-radar',
+          padding: {
+            top: 10,
+            bottom: 40
+          }
+        }
+    );
   }
 
   drawChart(): void {
+    this.clearSelection('#radar-chart');
+    this.clearSelection('#small-radar-charts');
     this.createTooltip();
     this.createChart();
     this.createSmallCharts();
@@ -75,9 +84,6 @@ export class RadarChartComponent implements OnChanges, AfterViewInit {
 
   createSmallCharts(data: EuclidianDoublePoint[] = this.visualizationData.radarData) {
     let radialScaleSmall = this.smallScale;
-
-    //clear small charts content
-    this.d3.select('#small-radar-charts').html('');
 
     data.forEach((cluster, i) => {
       let smallChartsSvg = this.d3.select("#small-radar-charts").append("svg")
@@ -110,7 +116,8 @@ export class RadarChartComponent implements OnChanges, AfterViewInit {
               .attr("cx", 190)
               .attr("cy", 190)
               .attr("fill", "none")
-              .attr("stroke", "gray")
+              .attr("stroke-width", "1.2")
+              .attr("stroke", "lightGray")
               .attr("r", radialScaleSmall(t))
       );
 
@@ -126,13 +133,15 @@ export class RadarChartComponent implements OnChanges, AfterViewInit {
             .attr("y1", 190)
             .attr("x2", line_coordinate.x)
             .attr("y2", line_coordinate.y)
-            .attr("stroke", "black");
+            .attr("stroke-width", "0.8")
+            .attr("stroke", "gray");
 
         //draw axis label
         smallChartsClipPath.append("text")
             .attr("x", label_coordinate.x)
             .attr("y", label_coordinate.y)
             .attr("text-anchor", "middle")
+            .style("font-size","14")
             .text(ft_name);
       }
 
@@ -148,19 +157,16 @@ export class RadarChartComponent implements OnChanges, AfterViewInit {
       smallChartsClipPath.append("path")
           .datum(coordinates)
           .attr("d", line)
-          .attr("stroke-width", 3)
+          .attr("stroke-width", 1)
           .attr("stroke", color)
           .attr("fill", color)
           .attr("stroke-opacity", 1)
-          .attr("opacity", 0.5);
+          .attr("fill-opacity", 0.5);
     });
   }
 
   createChart(data: EuclidianDoublePoint[] = this.visualizationData.radarData) {
     const d3: D3 = this.d3;
-
-    //clear main chart content
-    this.d3.select('#radar-chart').html('');
 
     this.svg = d3.select("#radar-chart").append("svg")
         .attr("width", this.width)
@@ -186,7 +192,8 @@ export class RadarChartComponent implements OnChanges, AfterViewInit {
             .attr("cx", 190)
             .attr("cy", 190)
             .attr("fill", "none")
-            .attr("stroke", "gray")
+            .attr("stroke", "#919191")
+            .attr("stroke-width", "0.5")
             .attr("r", this.radialScale(t))
     );
 
@@ -203,7 +210,8 @@ export class RadarChartComponent implements OnChanges, AfterViewInit {
           .attr("y1", 190)
           .attr("x2", line_coordinate.x)
           .attr("y2", line_coordinate.y)
-          .attr("stroke", "black");
+          .attr("stroke-width", "0.5")
+          .attr("stroke", "gray");
 
       let tooltip = this.tooltip;
 
@@ -224,8 +232,8 @@ export class RadarChartComponent implements OnChanges, AfterViewInit {
                 .style('opacity', 0.9);
             tooltip
                 .html(ft_tooltip)
-                .style("left", (d3.pointer(event, d3.select("#radar-chart"))[0]+20) + "px")
-                .style("top", (d3.pointer(event, d3.select("#radar-chart"))[1]-30) + "px")
+                .style("left", (d3.pointer(event, d3.select("#radar-chart"))[0]) + "px")
+                .style("top", (d3.pointer(event, d3.select("#radar-chart"))[1]-20) + "px")
           })
           .on("mouseout", function(){
             tooltip
@@ -249,11 +257,11 @@ export class RadarChartComponent implements OnChanges, AfterViewInit {
       this.gPlot.append("path")
           .datum(coordinates)
           .attr("d", line)
-          .attr("stroke-width", 3)
-          .attr("stroke", color)
+          .attr("stroke-width", 1)
+          .attr("stroke", color)//d3.hsl(color).darker(0.5).toString())
           .attr("fill", color)
-          .attr("stroke-opacity", 1)
-          .attr("opacity", 0.5);
+          .attr("stroke-opacity", 0.7)
+          .attr("fill-opacity", 0.4);
     }
   }
 
@@ -276,10 +284,15 @@ export class RadarChartComponent implements OnChanges, AfterViewInit {
 
   getPathCoordinates(data_point: Point, radialScale: any) {
     let coordinates = [];
+    // to close the path
+    let lastCoordinate = {};
     for (let i = 0; i < this.features.length; i++) {
       let angle = (Math.PI / 2) + (2 * Math.PI * i / this.features.length);
-      coordinates.push(this.angleToCoordinate(angle, data_point.point[i], radialScale));
+      let newCoordinate = this.angleToCoordinate(angle, data_point.point[i], radialScale);
+      lastCoordinate = (i === 0) ? newCoordinate : lastCoordinate;
+      coordinates.push(newCoordinate);
     }
+    coordinates.push(lastCoordinate);
     return coordinates;
   }
 
@@ -293,12 +306,10 @@ export class RadarChartComponent implements OnChanges, AfterViewInit {
   }
 
   drawChartBase(baseConfig: BaseConfig): void {
-    /*const d3: D3 = this.d3
-    this.padding = padding;
+    const d3: D3 = this.d3,
+    padding = baseConfig.padding,
+    element = baseConfig.element;
 
-    // clear wrapper content
-    d3.select('#' + element).html('');
-    this.outerWrapper = d3.select('.' + baseConfig.outerWrapperElement);
     // create svg
     // calculate the height first, width can change when the scrollbar is added
     this.wrapperWidth = Math.max(
@@ -307,23 +318,23 @@ export class RadarChartComponent implements OnChanges, AfterViewInit {
     ); // get width in the dashboard as a 75% piece of a halfpage
     const maxHeight: number = Math.min(
       this.wrapperWidth * 0.7,
-      window.innerHeight - 130,
-      baseConfig.maxBarHeight * planData.teams.length
+      window.innerHeight - 130
     );
-    const minHeight: number =
-      baseConfig.minBarHeight * planData.teams.length + 80;
+    const minHeight: number = 400;
     this.wrapperHeight = Math.max(maxHeight, minHeight);
 
-    this.chart = d3
+    this.chartArea = d3
       .select('#' + element)
-      .append('svg')
-      .attr('class', 'ctf-progress-chart')
       .attr('height', this.wrapperHeight)
       .attr('width', this.wrapperWidth)
-      .attr('transform', 'translate(0, ' + padding.top + ')');
+      .attr('style', 'padding: 10px 15px')
+  }
 
-    this.width = this.wrapperWidth;
-    this.height = this.wrapperHeight - padding.top - padding.bottom;*/
+  /**
+   * Clear the specified HTML when needed (e.g., resize)
+   */
+  clearSelection(selection: string): void {
+    this.d3.select(selection).html('');
   }
 
   onResize() {
