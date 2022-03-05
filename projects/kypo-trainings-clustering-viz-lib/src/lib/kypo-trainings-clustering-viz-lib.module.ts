@@ -17,12 +17,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import {RadarChartComponent} from "./visualization/components/visualizations/radar-chart/radar-chart.component";
 import {ClusteringVisualizationConfig} from "./visualization/config/kypo-trainings-clustering-viz-lib";
+import { LineChartComponent } from './visualization/components/visualizations/line-chart/line-chart.component';
 
 
 @NgModule({
   declarations: [
     RadarChartComponent,
-    VisualizationsComponent
+    VisualizationsComponent,
+    LineChartComponent
   ],
   imports: [
     CommonModule,

@@ -1,11 +1,9 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import { BehaviorSubject, Observable, of, Subscription, throwError, timer } from 'rxjs';
-import { ConfigService } from '../../config/config.service';
+import {Component, Input, OnInit} from '@angular/core';
+import { BehaviorSubject, Observable, of, Subscription, throwError, timer } from 'rxjs';;
 import { VisualizationDataDTO } from '../../DTOs/visualization-data-dto';
 import { VisualizationData } from '../../models/visualization-data';
 import { VisualizationsDataService } from '../../services/visualizations-data.service';
 import { AppConfig } from '../../../app.config';
-import {catchError, map, take} from 'rxjs/operators';
 
 @Component({
   selector: 'kypo-clustering-visualization',

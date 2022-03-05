@@ -1,6 +1,6 @@
-import {WrongFlags} from "./wrong-flags";
+import {Clusterable} from "./clusterable";
 
 export class ClusterVisualizationData {
-	points: WrongFlags[];
-	center: WrongFlags[];
+	points: Clusterable[];
+	center: Clusterable[];
 }

@@ -1,5 +1,6 @@
 export class AppConfig {
 	colors: string[];
+	radarClusterOpacity: number;
 	features: string[];
 	featureTooltips: string[];
 	radialScaleDomain: number[];
@@ -29,6 +30,7 @@ export const VIS_CONFIG: AppConfig = {
 		'#F13A13',
 		'#232C16',
 	],
+	radarClusterOpacity: 0.5,
 	features: ['Maximum time after hint', 'Wrong flags', 'Score total', 'Time played', 'Hints taken'],
 	featureTooltips: [
 		'How long does it take the players to solve level <br/> after the last used hint',

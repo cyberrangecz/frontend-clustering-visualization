@@ -1,22 +1,38 @@
 <div id="main-radar">
-
-	<!-- inputs for testing purposes -->
-	<div>
-		<label>Number of clusters:</label>
-	</div>
-	<div>
-		<input type="number" [(ngModel)]="numOfClusters">
-	</div>
-    <br/>
-	<div>
-		<label>Training definition identification:</label>
-	</div>
-	<div>
-		<input type="number" [(ngModel)]="trainingDefinitionId">
-	</div>
-	<br/>
-	<div>
+	<div *ngIf="isStandalone">
+		<!-- inputs for testing purposes -->
+		<button
+				mat-mini-fab
+				color="primary"
+				id="show-info"
+				aria-label="help"
+				[attr.style]="showInfo ? 'opacity: 0.5' : 'opacity: 1'"
+				(click)="toggleInfo()">
+			<span>?</span>
+		</button>
+		<mat-card *ngIf="showInfo">Basic information
+			<mat-card-subtitle>
+				The chart displays overview of trainee groups and their playing behavior. In the small radar charts, 'n' denotes the number of trainees whose playing styles were similar. In this testing GUI, you can choose desired datasets with the input fields below.
+			</mat-card-subtitle>
+		</mat-card>
+		<br/>
+		<div>
+			<label>Number of clusters:</label>
+		</div>
+		<div>
+			<input type="number" [(ngModel)]="numOfClusters">
+		</div>
+		<br/>
+		<div>
+			<label>Training definition identification:</label>
+		</div>
+		<div>
+			<input type="number" [(ngModel)]="trainingDefinitionId">
+		</div>
+		<br/>
+		<div>
 			<button type="submit" class="btn btn-primary">Recalculate</button>
+		</div>
 	</div>
 
 	<div id="radar-chart"
