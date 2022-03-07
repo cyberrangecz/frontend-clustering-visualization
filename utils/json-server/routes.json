@@ -1,4 +1,7 @@
 {
   "/kypo-rest-training/api/v1/visualizations/training-instances/:id/progress": "/clusters",
-  "/kypo-rest-training/api/v1/visualizations/training-instances/:id/radar-chart": "/radarChart"
+  "/kypo-rest-training/api/v1/visualizations/training-instances/:id/radar-chart": "/radarChart",
+  "/kypo-rest-training/api/v1/visualizations/training-instances/:id/wrong-flags/sse": "/sse1",
+  "/kypo-rest-training/api/v1/visualizations/training-instances/:id/time-after-hint/sse": "/sse2",
+  "/kypo-rest-training/api/v1/visualizations/training-instances/:id/n-dimensional/sse": "/sseNDim"
 }

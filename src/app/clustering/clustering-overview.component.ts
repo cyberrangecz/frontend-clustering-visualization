@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
+import {Clusterables} from "../../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/models/clusterables-enum";
+import {element} from "protractor";
 
 export enum Components {
   SCATTER,
@@ -20,7 +22,10 @@ export class ClusteringOverviewComponent implements OnInit {
   test;
   selectedComponent = 0;
   COMPONENTS = Components;
-  selectedFeature = 0; //: Clusterables = 0;
+  selectedFeature : Clusterables = Clusterables.NDimensional;
+  numOfClusters:number = 6;
+  trainingDefinitionId: number;
+  trainingInstanceId: number = 25;
 
   constructor() { }
 

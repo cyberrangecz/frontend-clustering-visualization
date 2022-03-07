@@ -1,6 +1,9 @@
 <ng-container>
-	<kypo-viz-clustering-line-chart>
-
+	<kypo-viz-clustering-line-chart
+			[visualizationData]="lineData$"
+			[trainingDefinitionId]="trainingDefinitionId"
+			[trainingInstanceId]="trainingInstanceId"
+			[numOfClusters]="numOfClusters">
 	</kypo-viz-clustering-line-chart>
 	<kypo-viz-radar-chart
 			[visualizationData]="radarChartData$"

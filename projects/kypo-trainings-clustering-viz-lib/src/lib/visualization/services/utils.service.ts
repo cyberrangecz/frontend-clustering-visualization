@@ -14,15 +14,25 @@ import {TimeAfterHint} from "../models/time-after-hint";
 })
 export class UtilsService {
 
-    set selectedFeature(value: Clusterables) {
+    /*set selectedFeature(value: Clusterables) {
     this._selectedFeature = value;
-  }
-  private _selectedFeature: Clusterables; //|undefined;
+  }*/
+  private _selectedFeature: Clusterables;
+/*
 
-  /*constructor(private restService: RestService) {
+  getDataLine(trainingDefinitionId: number, numOfClusters: number): Observable<number[]> {
+    switch (this._selectedFeature) {
+      case Clusterables.WrongFlags:
+        return null; //this.restService.getFeatureOneSSE(eventId, numOfClusters);
+      case Clusterables.TimeAfterHint:
+        return null; //this.restService.getFeatureTwoSSE(eventId, numOfClusters);
+      case Clusterables.NDimensional:
+        return null; //this.restService.getNDimensionalSSE(eventId, numOfClusters);
+    }
+    return null; //this.restService.getFeatureOneSSE(eventId, numOfClusters);
   }*/
 
-  getDataScatter(event: EventIdentification, numOfClusters: number): Observable<ClusterVisualizationData<any>[]> {
+  getDataScatter(event: EventIdentification, numOfClusters: number): Observable<ClusterVisualizationData[]> {
     switch (this._selectedFeature) {
       case Clusterables.WrongFlags:
         return null;//this.restService.getFeatureOneClusters(event, numOfClusters);
@@ -61,18 +71,6 @@ export class UtilsService {
     return tmp.timePlayedNormalized;
   }
 
-  getDataLine(eventId: EventIdentification, numOfClusters: number): Observable<number[]> {
-    switch (this._selectedFeature) {
-      case Clusterables.WrongFlags:
-        return null; //this.restService.getFeatureOneSSE(eventId, numOfClusters);
-      case Clusterables.TimeAfterHint:
-        return null; //this.restService.getFeatureTwoSSE(eventId, numOfClusters);
-      case Clusterables.NDimensional:
-        return null; //this.restService.getNDimensionalSSE(eventId, numOfClusters);
-    }
-    return null; //this.restService.getFeatureOneSSE(eventId, numOfClusters);
-  }
-
   getXLabel(): string {
     switch (this._selectedFeature) {
       case Clusterables.WrongFlags:
@@ -93,11 +91,11 @@ export class UtilsService {
     return "";
   }
 
-  static getEventIdentification(trainingDefinitionId: number): EventIdentification {
+  /*static getEventIdentification(trainingDefinitionId: number): EventIdentification {
     let res = new EventIdentification();
     res.trainingDefinitionId = trainingDefinitionId != null ? trainingDefinitionId.toString() : '';
     return res;
-  }
+  }*/
 
   filterPoints(options: Map<number, boolean>, point: Clusterable): string {
     switch (this._selectedFeature) {

@@ -1,27 +1,31 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {D3, D3Service} from "@muni-kypo-crp/d3-service";
 import {ConfigService} from "../../../config/config.service";
 import {AppConfig} from "../../../../app.config";
-import {Clusterables} from "../../../models/clusterables-enum";
+import {SseData} from "../../../models/sse-data";
 
 @Component({
   selector: 'kypo-viz-clustering-line-chart',
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.css']
 })
-export class LineChartComponent implements OnInit {
+export class LineChartComponent implements OnChanges {
 
-  public feature: Clusterables = Clusterables.NDimensional;
-  public numOfClusters: number = 10;
-  public trainingDefinitionId: number = 25;
+  @Input() visualizationData: number[] = []; //SseData = [];
+  @Input() trainingDefinitionId: number;
+  @Input() trainingInstanceId: number;
+  @Input() numOfClusters: number;
 
   private readonly d3: D3;
-  private data: number[] = [];
   private gChart: any;
   private svg: any;
-  private height = 450;
-  private width = 910;
-  private margin = 25;
+  private height: number = 450;
+  private width: number = 910;
+  private margin: number = 25;
+  private x: any;
+  private y: any;
+  private xAxis: any;
+  private yAxis: any;
 
   constructor(d3Service: D3Service,
               private configService: ConfigService,
@@ -29,43 +33,38 @@ export class LineChartComponent implements OnInit {
     this.d3 = d3Service.getD3();
   }
 
-  ngOnInit(): void {
-    this.createChart();
+  ngOnChanges(): void {
+    if (this.visualizationData != undefined) {
+      this.createChart();
+    }
   }
 
   createChart(): void {
-    //this.utilsService.selectedFeature = this.feature;
-    //this.utilsService.getDataLine(UtilsService.getEventIdentification(this.trainingDefinitionId), this.numOfClusters).subscribe(value => {
-      /*this.data = value;
       if (this.gChart != undefined) {
         this.clear();
       }
-      console.log(this.data);
       this.createSvg();
       this.drawPlot();
-    });*/
   }
 
   private createSvg(): void {
     this.svg = this.d3.select("#chartDiv")
         .append("svg")
-        .attr("viewBox", "-50 0 1010 550")
+        .attr("viewBox", "-50 0 1500 550")
         .attr("preserveAspectRatio", "xMidYMid meet")
     this.gChart = this.svg
         .append("g")
         .attr("transform", "translate(" + this.margin + "," + this.margin + ")");
   }
 
-  private x: any;
-  private y: any;
-  private xAxis: any;
-  private yAxis: any;
-
   private drawPlot(): void {
-    const d3: D3 = this.d3;
+    const d3: D3 = this.d3,
+    // slicing data to make sure we have a line with specified number of clusters
+    data = this.visualizationData.slice(0, this.numOfClusters);
+
     // Add X axis
     this.x = d3.scaleLinear()
-        .domain([0, this.numOfClusters + 1])
+        .domain([1, this.numOfClusters])
         .rangeRound([0, this.width]);
     this.xAxis = this.gChart.append("g")
         .attr("transform", "translate(0," + this.height + ")")
@@ -76,9 +75,10 @@ export class LineChartComponent implements OnInit {
 
     // Add Y axis
     this.y = d3.scaleLinear()
-        .domain(d3.extent(this.data) as [number, number])
+        .domain(d3.extent(data) as [number, number])
         .range([this.height, 0])
         .nice();
+
     this.yAxis = this.gChart.append("g")
         .call(d3.axisLeft(this.y));
     this.gChart.append("text")
@@ -90,18 +90,21 @@ export class LineChartComponent implements OnInit {
 
     // add the line connecting all data points
     this.svg.append("path")
-        .datum(this.data)
+        .datum(data)
         .attr("fill", "none")
         .attr("stroke", "steelblue")
         .attr("stroke-width", 4)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("transform", "translate(" + this.margin + "," + this.margin + ")")
-        .attr("d", d3.line().x((d, index) => this.x(index + 1)).y(d => this.y(d)));
+        .attr("d", d3.line()
+                  .x((d, index) => this.x(index + 1))
+                  .y(d => this.y(d))
+        );
 
     // Add the dots
     this.gChart.selectAll("dot")
-        .data(this.data)
+        .data(data)
         .enter()
         .append("circle")
         .attr("cx", (d: number, index: number) => this.x(index + 1))

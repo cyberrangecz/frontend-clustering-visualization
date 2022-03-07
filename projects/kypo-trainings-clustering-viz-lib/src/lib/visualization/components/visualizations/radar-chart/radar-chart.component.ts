@@ -37,7 +37,7 @@ export class RadarChartComponent implements OnChanges, AfterViewInit {
   public numOfClusters = 6;
   public trainingDefinitionId: number = 25;
   public errorMessage: string = null;
-  public showInfo: boolean = true;
+  public showInfo: boolean;
 
   constructor(
     d3Service: D3Service,
@@ -320,6 +320,7 @@ export class RadarChartComponent implements OnChanges, AfterViewInit {
         .select('#radar-chart')
         .append('div')
         .attr('class', 'clustering-radar-tooltip')
+        .style("opacity", "0");
   }
 
   angleToCoordinate(angle: number, value: number, radialScale: any) {

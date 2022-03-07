@@ -4,7 +4,7 @@ import {EuclidianDoublePoint} from "../models/eucledian-double-point";
 
 export class RadarChartDataMapper {
   static fromDTO(dto: VisualizationDataDTO): VisualizationData {
-    // TODO refactor
+    // TODO refactor the condition?
     if (dto.constructor.name  !== "VisualizationData"){
       const result = new VisualizationData();
       result.radarData = [];

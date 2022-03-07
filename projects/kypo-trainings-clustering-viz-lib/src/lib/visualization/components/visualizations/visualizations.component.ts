@@ -4,6 +4,7 @@ import { VisualizationDataDTO } from '../../DTOs/visualization-data-dto';
 import { VisualizationData } from '../../models/visualization-data';
 import { VisualizationsDataService } from '../../services/visualizations-data.service';
 import { AppConfig } from '../../../app.config';
+import {Clusterables} from "../../models/clusterables-enum";
 
 @Component({
   selector: 'kypo-clustering-visualization',
@@ -12,14 +13,17 @@ import { AppConfig } from '../../../app.config';
 })
 export class VisualizationsComponent implements OnInit {
 
- /* @Input() trainingDefinitionId: number;*/
-  @Input() trainingInstanceId: number = 25;
+  @Input() trainingDefinitionId: number;
+  @Input() trainingInstanceId: number;
+  @Input() numOfClusters: number;
   @Input() JSONData: VisualizationDataDTO;
-
   @Input() isStandalone: boolean;
+
+  public feature: Clusterables = Clusterables.NDimensional;
 
   visualizationData$: Observable<VisualizationData>;
   radarChartData$: Observable<VisualizationData>;
+  lineData$: Observable<VisualizationData>;
 
   private isAlive = true;
 
@@ -33,13 +37,19 @@ export class VisualizationsComponent implements OnInit {
   }
 
   private loadData() {
-    const service = this.visualizationDataService.getData(this.trainingInstanceId);
-    service.subscribe((res) => {
+    this.visualizationDataService.selectedFeature = this.feature;
+
+    const scatterService = this.visualizationDataService.getData(this.trainingInstanceId);
+    scatterService.subscribe((res) => {
       this.visualizationData$ = res;
     });
     const radarService = this.visualizationDataService.getRadarData(this.trainingInstanceId);
     radarService.subscribe((res) => {
       this.radarChartData$ = res;
+    });
+    const lineService = this.visualizationDataService.getLineData(this.trainingInstanceId, this.numOfClusters);
+    lineService.subscribe((res) => {
+      this.lineData$ = res;
     })
   }
 
