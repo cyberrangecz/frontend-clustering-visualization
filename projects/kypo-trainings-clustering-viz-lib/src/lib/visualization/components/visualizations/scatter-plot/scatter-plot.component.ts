@@ -2,6 +2,7 @@ import {Component, Input, OnChanges} from '@angular/core';
 import {D3, D3Service} from "@muni-kypo-crp/d3-service";
 import {AppConfig} from "../../../../app.config";
 import {VisualizationsDataService} from "../../../services/visualizations-data.service";
+import {Clusterables} from "../../../models/clusterables-enum";
 
 @Component({
   selector: 'kypo-viz-clustering-scatter-plot',
@@ -19,7 +20,7 @@ export class ScatterPlotComponent implements OnChanges {
   private data: any[] = [];
   private gPlot: any;
   private margin = 60;
-  private topMargin = 30;
+  private topMargin = 40;
   private width = 660;
   private height = 380;
   options: Map<number, boolean> = new Map();
@@ -28,8 +29,6 @@ export class ScatterPlotComponent implements OnChanges {
   private svg: any;
   private x: d3.ScaleLinear<number, number>;
   private y: any;
-  private newAllowedX;
-  private newAllowedY;
   private xRef: any;
   private yRef: any;
   private xAxis: any;
@@ -44,7 +43,10 @@ export class ScatterPlotComponent implements OnChanges {
   }
 
   ngOnChanges(): void {
+    console.log("change")
+    console.log(this.visualizationData)
     if (this.visualizationData != undefined) {
+      console.log("create")
       this.createScatter();
     }
   }
@@ -77,24 +79,28 @@ export class ScatterPlotComponent implements OnChanges {
     this.options = new Map();
     if (this.options.size == 1) { this.options.clear(); }
     if (this.gPlot != undefined) { this.clear(); }
-    this.createSvg();
+    this.prepareSvg();
     this.drawPlot();
   }
 
-  private createSvg(): void {
+  private prepareSvg(): void {
     this.svg = this.d3.select("#scatterDiv")
         .append("svg")
         .attr("viewBox", "0 -20 1000 500")
         .attr("preserveAspectRatio", "xMidYMid meet");
-
+    this.svg.append("rect")
+        .attr("width", this.width - this.margin)
+        .attr("height", this.height)
+        .attr("fill", "rgba(255,255,255,0.2)")
+        .attr("x", this.margin)
+        .attr("y", 0);
     this.svg.append("defs").append("SVG:clipPath")
         .attr("id", "clip")
         .append("SVG:rect")
-        .attr("width", this.width)
+        .attr("width", this.width - this.margin)
         .attr("height", this.height)
         .attr("x", this.margin)
         .attr("y", 0);
-
     this.gPlot = this.svg
         .append("g")
         .attr("clip-path", "url(#clip)")
@@ -112,10 +118,10 @@ export class ScatterPlotComponent implements OnChanges {
 
     this.xRef = this.x.copy();
     this.xAxis = this.svg.append("g")
-        .attr("transform", "translate(" + this.margin + "," + (this.height /*- this.topMargin*/) + ")")
+        .attr("transform", "translate(" + this.margin + "," + this.height + ")")
         .call(d3.axisBottom(this.x));
     this.svg.append("text")
-        .attr("transform", "translate(" + this.width / 2 + "," + ( this.height + 2 * this.margin ) + ")")
+        .attr("transform", "translate(" + this.width / 2 + "," + ( this.height + this.topMargin) + ")")
         .text(this.visualizationDataService.getXLabel());
 
     // Add Y axis
@@ -132,8 +138,9 @@ export class ScatterPlotComponent implements OnChanges {
         .call(d3.axisLeft(this.y));
     this.svg.append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", 0 - this.margin)
-        .attr("x", 0 - this.height / 2 - this.margin)
+        .attr("y", this.margin / 2 - 10)
+        .attr("x", 0 - this.height / 2 + 10)
+        .attr("text-anchor", "middle")
         .text(this.visualizationDataService.getYLabel());
 
     // Set the zoom and Pan features: how much you can zoom, on which part, and what to do when there is a zoom
@@ -150,7 +157,6 @@ export class ScatterPlotComponent implements OnChanges {
         }});
 
     let tooltip = this.tooltip;
-    console.log(tooltip);
 
     // Add scatter
     this.dataPoints = this.gPlot.selectAll("dot")

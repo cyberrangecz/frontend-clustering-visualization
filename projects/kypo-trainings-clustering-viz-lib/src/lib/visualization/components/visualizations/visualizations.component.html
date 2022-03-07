@@ -1,17 +1,19 @@
 <ng-container>
-	<kypo-viz-clustering-scatter-plot
-			[visualizationData]="visualizationData$"
-			[trainingDefinitionId]="trainingDefinitionId"
-			[trainingInstanceId]="trainingInstanceId"
-			[numOfClusters]="numOfClusters"
-	></kypo-viz-clustering-scatter-plot>
 	<kypo-viz-clustering-line-chart
 			[visualizationData]="lineData$"
 			[trainingDefinitionId]="trainingDefinitionId"
 			[trainingInstanceId]="trainingInstanceId"
 			[numOfClusters]="numOfClusters">
 	</kypo-viz-clustering-line-chart>
+	<kypo-viz-clustering-scatter-plot
+			*ngIf="selectedComponent == 0"
+			[visualizationData]="visualizationData$"
+			[trainingDefinitionId]="trainingDefinitionId"
+			[trainingInstanceId]="trainingInstanceId"
+			[numOfClusters]="numOfClusters"
+	></kypo-viz-clustering-scatter-plot>
 	<kypo-viz-clustering-radar-chart
+			*ngIf="selectedComponent == 2"
 			[numOfClusters]="numOfClusters"
 			[visualizationData]="radarChartData$"
 			[isStandalone]="true">

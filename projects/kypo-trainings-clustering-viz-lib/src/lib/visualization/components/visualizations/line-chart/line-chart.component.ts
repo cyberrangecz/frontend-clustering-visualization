@@ -11,7 +11,7 @@ import {SseData} from "../../../models/sse-data";
 })
 export class LineChartComponent implements OnChanges {
 
-  @Input() visualizationData: number[] = []; //SseData = [];
+  @Input() visualizationData: number[] = [];
   @Input() trainingDefinitionId: number;
   @Input() trainingInstanceId: number;
   @Input() numOfClusters: number;

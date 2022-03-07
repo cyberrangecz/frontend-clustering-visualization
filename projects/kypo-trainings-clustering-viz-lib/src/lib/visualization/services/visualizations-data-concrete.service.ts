@@ -26,8 +26,8 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
       super();
     }
 
-    getData(trainingInstanceId: number): Observable<VisualizationData> {
-        return this.visualizationApi.getVisualizationData(trainingInstanceId).pipe(
+    getData(trainingDefinitionId: number): Observable<VisualizationData> {
+        return this.visualizationApi.getVisualizationData(trainingDefinitionId).pipe(
             map((data: any) => ClusterVisualizationDataMapper.fromDTO(data)),
             catchError((error) => {
                 return throwError(this.messageBase + error.message);
@@ -36,8 +36,8 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
 
     }
 
-    getRadarData(trainingInstanceId: number): Observable<VisualizationData> {
-        return this.visualizationApi.getRadarChartData(trainingInstanceId).pipe(
+    getRadarData(trainingDefinitionId: number): Observable<VisualizationData> {
+        return this.visualizationApi.getRadarChartData(trainingDefinitionId).pipe(
             map((data: any) => RadarChartDataMapper.fromDTO(data)),
             catchError((error) => {
                 return throwError(this.messageBase + error.message);
@@ -45,24 +45,24 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
         );
     }
 
-    getLineData(trainingInstanceId: number, numOfClusters: number): Observable<any> {
+    getLineData(trainingDefinitionId: number, numOfClusters: number): Observable<any> {
         switch (this._selectedFeature) {
             case Clusterables.WrongFlags:
-                return this.visualizationApi.getFeatureOneSSE(trainingInstanceId, numOfClusters).pipe(
+                return this.visualizationApi.getFeatureOneSSE(trainingDefinitionId, numOfClusters).pipe(
                     map((data: any) => SseDataMapper.fromDTO(data)),
                     catchError((error) => {
                         return throwError(this.messageBase + error.message);
                     })
                 );
             case Clusterables.TimeAfterHint:
-                return this.visualizationApi.getFeatureTwoSSE(trainingInstanceId, numOfClusters).pipe(
+                return this.visualizationApi.getFeatureTwoSSE(trainingDefinitionId, numOfClusters).pipe(
                     map((data: any) => SseDataMapper.fromDTO(data)),
                     catchError((error) => {
                         return throwError(this.messageBase + error.message);
                     })
                 );
             case Clusterables.NDimensional:
-                return this.visualizationApi.getNDimensionalSSE(trainingInstanceId, numOfClusters).pipe(
+                return this.visualizationApi.getNDimensionalSSE(trainingDefinitionId, numOfClusters).pipe(
                     map((data: any) => SseDataMapper.fromDTO(data)),
                     catchError((error) => {
                         return throwError(this.messageBase + error.message);
@@ -109,11 +109,11 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
     getXLabel(): string {
         switch (this._selectedFeature) {
             case Clusterables.WrongFlags:
-                return "Wrong flags";
+                return "Wrong flags submitted";
             case Clusterables.TimeAfterHint:
                 return "Time spent after using hint";
         }
-        return "X";
+        return "Feature X";
     }
 
     getYLabel(): string {
@@ -123,6 +123,6 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
             case Clusterables.TimeAfterHint:
                 return "Wrong flags after using hint";
         }
-        return "Y";
+        return "Feature Y";
     }
 }

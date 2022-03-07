@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnChanges, ViewEncapsulation,} from '@angular/core';
+import { Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { D3, D3Service } from '@muni-kypo-crp/d3-service';
 import { BaseConfig } from '../../../models/base-config';
 import { AppConfig } from '../../../../app.config';
@@ -13,7 +13,7 @@ import {EuclidianDoublePoint, Point} from "../../../models/eucledian-double-poin
   styleUrls: ['./radar-chart.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class RadarChartComponent implements OnChanges, AfterViewInit {
+export class RadarChartComponent implements OnChanges {
 
   @Input() visualizationData: VisualizationData;
   @Input() isStandalone: boolean;
@@ -50,15 +50,6 @@ export class RadarChartComponent implements OnChanges, AfterViewInit {
     this.smallScale = this.d3.scaleLinear()
         .domain(appConfig.radialScaleDomain)
         .range([0, 80]);
-  }
-
-  ngOnChanges(): void {
-    if (this.visualizationData != undefined) {
-      this.drawChart();
-    }
-  }
-
-  ngAfterViewInit(): void  {
     this.features = this.appConfig.features;
     this.featureTooltips = this.appConfig.featureTooltips;
     this.drawChartBase({
@@ -69,6 +60,12 @@ export class RadarChartComponent implements OnChanges, AfterViewInit {
           }
         }
     );
+  }
+
+  ngOnChanges(): void {
+    if (this.visualizationData != undefined) {
+      this.drawChart();
+    }
   }
 
   drawChart(): void {

@@ -6,22 +6,23 @@
 
                <!--    Choose from available visualizations-->
                <button mat-button>Scatter plot</button>
-                    <div class="row">
-                        <button mat-button
-                                (click)="selectedComponent=0;selectedFeature=0">
-                            Wrong flags per time played
-                        </button>
-                    </div>
-                    <div class="row">
-                        <button mat-button
-                                (click)="selectedComponent=0;selectedFeature=1">
-                            Time spent after using a hint
-                        </button>
-                    </div>
-
-                <div panelClass="bg-dark">
+                <div>
                     <button mat-button
-                            (click)="selectedComponent=2">Radar chart
+                            (click)="selectedComponent=0;selectedFeature=0">
+                        Wrong flags per time played
+                    </button>
+                </div>
+                <div>
+                    <button mat-button
+                            (click)="selectedComponent=0;selectedFeature=1">
+                        Time spent after using a hint
+                    </button>
+                </div>
+
+                <div>
+                    <button mat-button
+                            (click)="selectedComponent=2;selectedFeature=2">
+                        Radar chart
                     </button>
                 </div>
 
@@ -47,20 +48,9 @@
 
            <!-- Main content -->
            <mat-sidenav-content style="margin-left: 235px;">
-
-               <!--<div>
-                   <app-radar-chart *ngIf="selectedComponent==COMPONENTS.RADAR_CHART"
-                   ></app-radar-chart>
-                   <app-scatter *ngIf="selectedComponent==COMPONENTS.SCATTER"
-                                [feature]="selectedFeature"
-                   ></app-scatter>
-                   <app-line-chart
-                           *ngIf="selectedComponent==COMPONENTS.LINE_CHART"
-                           [feature]="selectedFeature"
-                   ></app-line-chart>
-               </div>
-               -->
                <kypo-clustering-visualization
+                        [selectedComponent]="selectedComponent"
+                        [selectedFeature]="selectedFeature"
                         [trainingDefinitionId]="trainingDefinitionId"
                         [trainingInstanceId]="trainingInstanceId"
                         [numOfClusters]="numOfClusters"

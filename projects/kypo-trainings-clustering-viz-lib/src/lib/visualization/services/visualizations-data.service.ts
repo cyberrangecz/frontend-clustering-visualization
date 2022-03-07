@@ -16,11 +16,11 @@ export abstract class VisualizationsDataService {
 
   abstract set selectedFeature(value: Clusterables);
 
-  abstract getData(trainingInstanceId: number);
+  abstract getData(trainingDefinitionId: number);
 
-  abstract getRadarData(trainingInstanceId: number);
+  abstract getRadarData(trainingDefinitionId: number);
 
-  abstract getLineData(trainingInstanceId: number, numOfClusters: number);
+  abstract getLineData(trainingDefinitionId: number, numOfClusters: number);
 
   /* methods to get information based on selected feature */
 
