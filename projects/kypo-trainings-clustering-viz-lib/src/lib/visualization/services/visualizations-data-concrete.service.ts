@@ -8,6 +8,9 @@ import {ClusterVisualizationDataMapper} from "../mappers/cluster-visualization-d
 import {RadarChartDataMapper} from "../mappers/radar-chart-data-mapper";
 import {Clusterables} from "../models/clusterables-enum";
 import {SseDataMapper} from "../mappers/sse-data-mapper";
+import {Clusterable} from "../models/clusterable";
+import {TimeAfterHint} from "../models/time-after-hint";
+import {WrongFlags} from "../models/wrong-flags";
 
 @Injectable()
 export class VisualizationsDataConcreteService extends VisualizationsDataService{
@@ -66,5 +69,60 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
                     })
                 );
         }
+    }
+
+    getOption(point: Clusterable): number {
+        switch (this._selectedFeature) {
+            case Clusterables.TimeAfterHint:
+                return (point as TimeAfterHint).level;
+        }
+        return 0;
+    }
+
+    getX(value: any): number {
+        switch (this._selectedFeature) {
+            case Clusterables.WrongFlags:
+                return (value as WrongFlags).wrongFlagsSubmittedNormalized;
+            case Clusterables.TimeAfterHint:
+                return (value as TimeAfterHint).timeSpentAfterHintNormalized;
+            case Clusterables.NDimensional:
+                break;
+        }
+        const tmp = value as WrongFlags;
+        return tmp.wrongFlagsSubmittedNormalized;
+    }
+
+    getY(value: any): number {
+        switch (this._selectedFeature) {
+            case Clusterables.WrongFlags:
+                return (value as WrongFlags).timePlayedNormalized;
+            case Clusterables.TimeAfterHint:
+                return (value as TimeAfterHint).wrongFlagsAfterHintNormalized;
+            case Clusterables.NDimensional:
+                break;
+
+        }
+        const tmp = value as WrongFlags;
+        return tmp.timePlayedNormalized;
+    }
+
+    getXLabel(): string {
+        switch (this._selectedFeature) {
+            case Clusterables.WrongFlags:
+                return "Wrong flags";
+            case Clusterables.TimeAfterHint:
+                return "Time spent after using hint";
+        }
+        return "X";
+    }
+
+    getYLabel(): string {
+        switch (this._selectedFeature) {
+            case Clusterables.WrongFlags:
+                return "Time played";
+            case Clusterables.TimeAfterHint:
+                return "Wrong flags after using hint";
+        }
+        return "Y";
     }
 }

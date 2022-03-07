@@ -28,7 +28,6 @@ export class LineChartComponent implements OnChanges {
   private yAxis: any;
 
   constructor(d3Service: D3Service,
-              private configService: ConfigService,
               private appConfig: AppConfig) {
     this.d3 = d3Service.getD3();
   }
@@ -71,6 +70,7 @@ export class LineChartComponent implements OnChanges {
         .call(d3.axisBottom(this.x).ticks(this.numOfClusters));
     this.gChart.append("text")
         .attr("transform", "translate(" + this.width / 2 + "," + (this.height + 2 * this.margin) + ")")
+        .attr("text-anchor", "middle")
         .text("Number of clusters");
 
     // Add Y axis
@@ -84,7 +84,8 @@ export class LineChartComponent implements OnChanges {
     this.gChart.append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 0 - this.margin * 2)
-        .attr("x", 0 - this.height / 2 - this.margin)
+        .attr("x", 0 - this.height / 2)
+        .attr("text-anchor", "middle")
         .text("Sum of squared errors");
 
 
@@ -92,7 +93,7 @@ export class LineChartComponent implements OnChanges {
     this.svg.append("path")
         .datum(data)
         .attr("fill", "none")
-        .attr("stroke", "steelblue")
+        .attr("stroke", this.appConfig.lineChartColor)
         .attr("stroke-width", 4)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
@@ -110,8 +111,8 @@ export class LineChartComponent implements OnChanges {
         .attr("cx", (d: number, index: number) => this.x(index + 1))
         .attr("cy", (d: number) => this.y(d))
         .attr("r", 7)
-        .style("opacity", .5)
-        .attr("fill", "red");
+        .style("opacity", .7)
+        .attr("fill", this.appConfig.lineChartColor);
   }
 
   private clear() {

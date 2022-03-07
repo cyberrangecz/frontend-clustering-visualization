@@ -43,7 +43,7 @@ export class UtilsService {
     }
     return null; //this.restService.getFeatureOneClusters(event, numOfClusters);
   }
-
+/*
   getX(value: any): number {
     switch (this._selectedFeature) {
       case Clusterables.WrongFlags:
@@ -89,7 +89,7 @@ export class UtilsService {
         return "Wrong flags after using hint";
     }
     return "";
-  }
+  }*/
 
   /*static getEventIdentification(trainingDefinitionId: number): EventIdentification {
     let res = new EventIdentification();
@@ -108,12 +108,12 @@ export class UtilsService {
   filterLevels(options: Map<number, boolean>, point: Clusterable): string {
     return options.get((point as TimeAfterHint).level) ? "visible" : "hidden";
   }
-
+/*
   getOption(point: Clusterable): number {
     switch (this._selectedFeature) {
       case Clusterables.TimeAfterHint:
         return (point as TimeAfterHint).level;
     }
     return 0;
-  }
+  }*/
 }

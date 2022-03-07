@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import { BehaviorSubject, Observable, of, Subscription, throwError, timer } from 'rxjs';;
 import { VisualizationDataDTO } from '../../DTOs/visualization-data-dto';
 import { VisualizationData } from '../../models/visualization-data';

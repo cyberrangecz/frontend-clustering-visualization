@@ -1,5 +1,6 @@
 export class AppConfig {
 	colors: string[];
+	lineChartColor: string;
 	radarClusterOpacity: number;
 	features: string[];
 	featureTooltips: string[];
@@ -30,6 +31,7 @@ export const VIS_CONFIG: AppConfig = {
 		'#F13A13',
 		'#232C16',
 	],
+	lineChartColor: '#3f51b5',
 	radarClusterOpacity: 0.5,
 	features: ['Maximum time after hint', 'Wrong flags', 'Score total', 'Time played', 'Hints taken'],
 	featureTooltips: [
