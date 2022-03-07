@@ -24,8 +24,8 @@ export class ClusteringOverviewComponent implements OnInit {
   COMPONENTS = Components;
   selectedFeature : Clusterables = Clusterables.NDimensional;
   numOfClusters:number = 6;
-  trainingDefinitionId: number;
-  trainingInstanceId: number = 25;
+  trainingDefinitionId: number = 25;
+  trainingInstanceId: number;
 
   constructor() { }
 

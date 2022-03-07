@@ -24,10 +24,10 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
   /**
    * Sends http request to retrieve all data for visualizations
    */
-  getVisualizationData(trainingInstanceId: number): Observable<VisualizationData> {
+  getVisualizationData(trainingDefinitionId: number): Observable<VisualizationData> {
     return this.http
       .get<VisualizationDataDTO>(
-        this.configService.config.trainingServiceUrl + `visualizations/training-instances/${trainingInstanceId}/progress`
+        this.configService.config.trainingServiceUrl + `visualizations/training-definition/${trainingDefinitionId}/progress`
       )
       .pipe(
         map(
@@ -40,10 +40,10 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
     /**
      * Sends http request to retrieve data for radar chart
      */
-  getRadarChartData(trainingInstanceId: number): Observable<VisualizationData> {
+  getRadarChartData(trainingDefinitionId: number): Observable<VisualizationData> {
     return this.http
         .get<VisualizationDataDTO>(
-            this.configService.config.trainingServiceUrl + `visualizations/training-instances/${trainingInstanceId}/radar-chart`
+            this.configService.config.trainingServiceUrl + `visualizations/training-definition/${trainingDefinitionId}/radar-chart`
         )
         .pipe(
             map(
@@ -53,10 +53,10 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
         );
   }
 
-  getFeatureOneSSE(trainingInstanceId: number, numOfClusters: number): Observable<SseDataMapper> {
+  getFeatureOneSSE(trainingDefinitionId: number, numOfClusters: number): Observable<SseDataMapper> {
       return this.http
           .get<SseDTO>(
-              this.configService.config.trainingServiceUrl + `visualizations/training-instances/${trainingInstanceId}/wrong-flags/sse`
+              this.configService.config.trainingServiceUrl + `visualizations/training-definition/${trainingDefinitionId}/wrong-flags/sse`
           )
           .pipe(
               map(
@@ -66,10 +66,10 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
           );
   }
 
-  getFeatureTwoSSE(trainingInstanceId: number, numOfClusters: number): Observable<SseDataMapper> {
+  getFeatureTwoSSE(trainingDefinitionId: number, numOfClusters: number): Observable<SseDataMapper> {
       return this.http
           .get<SseDTO>(
-              this.configService.config.trainingServiceUrl + `visualizations/training-instances/${trainingInstanceId}/time-after-hint/sse`
+              this.configService.config.trainingServiceUrl + `visualizations/training-definition/${trainingDefinitionId}/time-after-hint/sse`
           )
           .pipe(
               map(
@@ -79,10 +79,10 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
           );
   }
 
-  getNDimensionalSSE(trainingInstanceId: number, numOfClusters: number): Observable<SseDataMapper> {
+  getNDimensionalSSE(trainingDefinitionId: number, numOfClusters: number): Observable<SseDataMapper> {
       return this.http
           .get<SseDTO>(
-              this.configService.config.trainingServiceUrl + `visualizations/training-instances/${trainingInstanceId}/n-dimensional/sse`
+              this.configService.config.trainingServiceUrl + `visualizations/training-definition/${trainingDefinitionId}/n-dimensional/sse`
           )
           .pipe(
               map(

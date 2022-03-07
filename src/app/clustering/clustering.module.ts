@@ -6,7 +6,8 @@ import {CustomConfig} from '../custom-config';
 import {KypoTrainingsClusteringVizLibModule} from '../../../projects/kypo-trainings-clustering-viz-lib/src/public_api';
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatButtonModule} from "@angular/material/button";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [
@@ -18,6 +19,8 @@ import {FormsModule} from "@angular/forms";
     KypoTrainingsClusteringVizLibModule.forRoot(CustomConfig),
     MatSidenavModule,
     MatButtonModule,
+    MatInputModule,
+    ReactiveFormsModule,
     FormsModule
   ],
   exports: [
