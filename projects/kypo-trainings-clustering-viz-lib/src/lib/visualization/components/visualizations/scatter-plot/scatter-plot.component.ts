@@ -28,11 +28,14 @@ export class ScatterPlotComponent implements OnChanges {
   private svg: any;
   private x: d3.ScaleLinear<number, number>;
   private y: any;
+  private newAllowedX;
+  private newAllowedY;
   private xRef: any;
   private yRef: any;
   private xAxis: any;
   private yAxis: any;
   private dataPoints: any;
+  private tooltip: any;
 
   constructor(d3Service: D3Service,
               private visualizationDataService: VisualizationsDataService,
@@ -47,6 +50,7 @@ export class ScatterPlotComponent implements OnChanges {
   }
 
   createScatter(): void {
+    this.createTooltip();
     this.data = [];
     let minX, minY = Number.MAX_VALUE;
     let maxX, maxY = Number.MIN_VALUE;
@@ -62,12 +66,12 @@ export class ScatterPlotComponent implements OnChanges {
         return (v - min) / (max - min);
       });
     });*/
+
     this.visualizationData.clusterData[0].forEach((cluster, index) => {
       cluster.points.forEach(point => {
         point.clusterId = index;
         this.data.push(point);
         this.options.set(this.visualizationDataService.getOption(point), true);
-        // console.log(point);
       })
     });
     this.options = new Map();
@@ -80,12 +84,20 @@ export class ScatterPlotComponent implements OnChanges {
   private createSvg(): void {
     this.svg = this.d3.select("#scatterDiv")
         .append("svg")
-        .attr("width", this.width)
-        .attr("height", this.height + 2 * this.topMargin)
-        .attr("x", this.margin)
-        .attr("y", 10);
+        .attr("viewBox", "0 -20 1000 500")
+        .attr("preserveAspectRatio", "xMidYMid meet");
 
-    this.gPlot = this.svg.append("g");
+    this.svg.append("defs").append("SVG:clipPath")
+        .attr("id", "clip")
+        .append("SVG:rect")
+        .attr("width", this.width)
+        .attr("height", this.height)
+        .attr("x", this.margin)
+        .attr("y", 0);
+
+    this.gPlot = this.svg
+        .append("g")
+        .attr("clip-path", "url(#clip)")
   }
 
   private drawPlot(): void {
@@ -100,7 +112,7 @@ export class ScatterPlotComponent implements OnChanges {
 
     this.xRef = this.x.copy();
     this.xAxis = this.svg.append("g")
-        .attr("transform", "translate(" + this.margin + "," + (this.height + this.topMargin) + ")")
+        .attr("transform", "translate(" + this.margin + "," + (this.height /*- this.topMargin*/) + ")")
         .call(d3.axisBottom(this.x));
     this.svg.append("text")
         .attr("transform", "translate(" + this.width / 2 + "," + ( this.height + 2 * this.margin ) + ")")
@@ -116,7 +128,7 @@ export class ScatterPlotComponent implements OnChanges {
 
     this.yRef = this.y.copy();
     this.yAxis = this.svg.append("g")
-        .attr("transform", "translate(" + this.margin + "," + this.topMargin + ")")
+        .attr("transform", "translate(" + this.margin + ",0)")
         .call(d3.axisLeft(this.y));
     this.svg.append("text")
         .attr("transform", "rotate(-90)")
@@ -128,41 +140,56 @@ export class ScatterPlotComponent implements OnChanges {
     let zoom = d3.zoom()
         .scaleExtent([1, 10])  // This control how much you can unzoom (x0.5) and zoom (x20)
         .extent([[0, 0], [this.width, this.height]])
-        .on("zoom", ((event, d) => this.updateChart(event)));
+        .on("zoom", ((event) => this.updateChart(event)))
+        .filter((event) => event.type === "mousedown" || !event.button && event.ctrlKey)
 
-    this.svg.call(zoom);
+    this.svg.call(zoom)
+        .on("wheel", (event) => {
+          if (event.ctrlKey) {
+          event.preventDefault()
+        }});
 
-    let tooltip = d3.select("#scatterDiv")
-        .append("div")
-        .attr("class", "tooltip")
-        .style("background-color", "white")
-        .style("border", "solid")
-        .style("border-width", "2px")
-        .style("border-radius", "5px")
-        .style("padding", "5px")
-        .style("opacity", 1)
-        .style("visibility", "hidden");
+    let tooltip = this.tooltip;
+    console.log(tooltip);
 
     // Add scatter
     this.dataPoints = this.gPlot.selectAll("dot")
         .data(this.data)
         .enter()
         .append("circle")
-        .attr("cx", (d: any) => this.x(this.visualizationDataService.getX(d)) + this.margin)
+        .attr("cx", (d: any) => this.x(this.visualizationDataService.getX(d)))
         .attr("cy", (d: any) => this.y(this.visualizationDataService.getY(d)))
         .attr("r", 7)
         .style("opacity", .5)
         .style("fill", (d: any) => this.appConfig.colors[d.clusterId])
-        .on("mouseover", function(){return tooltip.style("visibility", "visible");})
+        .on("mouseover", function(event, d){
+          tooltip
+              .transition()
+              .ease(d3.easeLinear,2)
+              .duration(300)
+              .delay(10)
+              .style('opacity', 0.9);
+          tooltip
+              .html("The trainee ID: " + d.userRefId)
+              .style("left", (d3.pointer(event, d3.select("#scatterDiv"))[0]-220) + "px")
+              .style("top", (d3.pointer(event, d3.select("#scatterDiv"))[1]-100) + "px")
+        })
         .on("mousemove", function(event: any, d: any){
-          return tooltip.text("The user represented: " + d.userRefId)
-              .style("left", (d3.pointer(event, d3.select("#scatterDiv"))[0]+20) + "px")
-              .style("top", (d3.pointer(event, d3.select("#scatterDiv"))[1]) + "px");})
-        .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+          return tooltip
+              .style("left", (d3.pointer(event, d3.select("#radar-chart"))[0]-220) + "px")
+              .style("top", (d3.pointer(event, d3.select("#radar-chart"))[1]-100) + "px")
+        })
+        .on("mouseout", function(){
+          tooltip
+              .transition()
+              .duration(0)
+              .style('opacity', 0);
+        });
   }
 
   // A function that updates the chart when the user zoom and thus new boundaries are available
   private updateChart(event: any) {
+    //event.preventDefault();
     const d3: D3 = this.d3;
     // recover the new scale
     const newX = event.transform.rescaleX(this.xRef);
@@ -170,30 +197,43 @@ export class ScatterPlotComponent implements OnChanges {
 
     // update axes with these new boundaries
     this.xAxis
-        .attr("transform", "translate(" + this.margin + "," + (this.height + this.topMargin) + ")")
+        .attr("transform", "translate(" + this.margin + "," + this.height + ")")
         .call(d3.axisBottom(newX));
     this.yAxis.call(d3.axisLeft(newY));
 
     // update circle position
     this.gPlot
         .selectAll("circle")
-        .attr("cx", (d: any) => newX(this.visualizationDataService.getX(d))+ this.margin) //d.wrongFlagsSubmittedNormalized))
-        .attr("cy", (d: any) => newY(this.visualizationDataService.getY(d))); //d.timePlayedNormalized));
+        .attr("cx", (d: any) => newX(this.visualizationDataService.getX(d)) + this.margin)
+        .attr("cy", (d: any) => newY(this.visualizationDataService.getY(d)));
 
     // update text position
     this.gPlot.selectAll("text")
-        .attr("x", (d: any) => newX(this.visualizationDataService.getX(d))+ this.margin) //d.wrongFlagsSubmittedNormalized))
-        .attr("y", (d: any) => newY(this.visualizationDataService.getY(d))); //d.timePlayedNormalized));
+        .attr("x", (d: any) => newX(this.visualizationDataService.getX(d)) + this.margin)
+        .attr("y", (d: any) => newY(this.visualizationDataService.getY(d)));
+  }
+
+  createTooltip() {
+    if (typeof this.tooltip !== 'undefined') this.tooltip.remove();
+
+    this.tooltip = this.d3
+        .select('#scatterDiv')
+        .append('div')
+        .attr('class', 'clustering-scatter-tooltip')
+        .style("opacity", "0")
+        .style("display", "inline-block")
+        .style("position", "absolute")
+        .style("padding", "5px 10px")
+        .style("font-size", "10px")
+        .style("opacity", "0")
+        .style("background", "#5b5c5e")
+        .style("color", "#fff")
+        .style("border-radius", "2px")
+        .style("pointer-events", "none")
+        .style("font-family", "'Roboto', sans-serif")
   }
 
   clear() {
     this.svg.remove();
   }
-/*
-  checkboxChange(option: KeyValue<number, boolean>) {
-    this.options.set(option.key, !option.value);
-    this.dataPoints.style('visibility', (d: any) => this.utilsService.filterPoints(this.options, d))
-    console.log(this.options);
-  }*/
-
 }
