@@ -39,11 +39,11 @@ export class VisualizationsComponent implements OnInit {
   private loadData() {
     this.visualizationDataService.selectedFeature = this.feature;
 
-    const scatterService = this.visualizationDataService.getData(this.trainingInstanceId);
+    const scatterService = this.visualizationDataService.getData(this.trainingDefinitionId);
     scatterService.subscribe((res) => {
       this.visualizationData$ = res;
     });
-    const radarService = this.visualizationDataService.getRadarData(this.trainingInstanceId);
+    const radarService = this.visualizationDataService.getRadarData(this.trainingDefinitionId);
     radarService.subscribe((res) => {
       this.radarChartData$ = res;
     });

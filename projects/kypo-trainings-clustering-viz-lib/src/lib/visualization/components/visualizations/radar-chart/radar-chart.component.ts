@@ -8,7 +8,7 @@ import {VisualizationData} from "../../../models/visualization-data";
 import {EuclidianDoublePoint, Point} from "../../../models/eucledian-double-point";
 
 @Component({
-  selector: 'kypo-viz-radar-chart',
+  selector: 'kypo-viz-clustering-radar-chart',
   templateUrl: './radar-chart.component.html',
   styleUrls: ['./radar-chart.component.css'],
   encapsulation: ViewEncapsulation.None
@@ -17,6 +17,7 @@ export class RadarChartComponent implements OnChanges, AfterViewInit {
 
   @Input() visualizationData: VisualizationData;
   @Input() isStandalone: boolean;
+  @Input() numOfClusters: number;
 
   private readonly d3: D3;
   private readonly radialScale;
@@ -34,8 +35,6 @@ export class RadarChartComponent implements OnChanges, AfterViewInit {
   private height: number = 400;
   private tooltip: any;
 
-  public numOfClusters = 6;
-  public trainingDefinitionId: number = 25;
   public errorMessage: string = null;
   public showInfo: boolean;
 

@@ -1,12 +1,14 @@
 <ng-container>
+	<kypo-viz-clustering-scatter-plot></kypo-viz-clustering-scatter-plot>
 	<kypo-viz-clustering-line-chart
 			[visualizationData]="lineData$"
 			[trainingDefinitionId]="trainingDefinitionId"
 			[trainingInstanceId]="trainingInstanceId"
 			[numOfClusters]="numOfClusters">
 	</kypo-viz-clustering-line-chart>
-	<kypo-viz-radar-chart
+	<kypo-viz-clustering-radar-chart
+			[numOfClusters]="numOfClusters"
 			[visualizationData]="radarChartData$"
 			[isStandalone]="true">
-	</kypo-viz-radar-chart>
+	</kypo-viz-clustering-radar-chart>
 </ng-container>
