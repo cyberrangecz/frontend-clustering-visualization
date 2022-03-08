@@ -9,12 +9,16 @@ import {SseData} from "../../../models/sse-data";
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.css']
 })
-export class LineChartComponent implements OnChanges {
+export class LineChartComponent implements OnChanges, OnInit {
 
   @Input() visualizationData: number[] = [];
   @Input() trainingDefinitionId: number;
   @Input() trainingInstanceId: number;
   @Input() numOfClusters: number;
+  @Input() includeInButtonToggle: boolean = false;
+
+  public showChart: boolean = true;
+  public buttonKeyword: string = "Hide";
 
   private readonly d3: D3;
   private gChart: any;
@@ -30,6 +34,14 @@ export class LineChartComponent implements OnChanges {
   constructor(d3Service: D3Service,
               private appConfig: AppConfig) {
     this.d3 = d3Service.getD3();
+  }
+
+  ngOnInit(): void {
+    // if we want to show the visualization as a suporting component, it only displays on demand
+    if (this.includeInButtonToggle) {
+      this.showChart = false;
+      this.buttonKeyword = "Show";
+    }
   }
 
   ngOnChanges(): void {
@@ -113,6 +125,11 @@ export class LineChartComponent implements OnChanges {
         .attr("r", 7)
         .style("opacity", .7)
         .attr("fill", this.appConfig.lineChartColor);
+  }
+
+  public toggleChartVisibility() {
+    this.showChart = !this.showChart;
+    this.buttonKeyword = this.showChart ? "Hide" : "Show";
   }
 
   private clear() {

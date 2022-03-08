@@ -142,7 +142,8 @@
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/kypo-trainings-clustering-viz-lib/tsconfig.lib.json",
-            "project": "projects/kypo-trainings-clustering-viz-lib/ng-package.json"
+            "project": "projects/kypo-trainings-clustering-viz-lib/ng-package.json",
+            "preserveSymlinks": true
           },
           "configurations": {
             "production": {

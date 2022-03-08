@@ -284,6 +284,968 @@ module.exports = function() {
         }
       }
     ],
+    clusters2: [
+      {
+        "points": [
+          {
+            "userRefId": 42,
+            "level": 61,
+            "timeSpentAfterHint": 314082,
+            "wrongFlagsAfterHint": 4,
+            "timeSpentAfterHintNormalized": -0.3449722176882183,
+            "wrongFlagsAfterHintNormalized": 2.69627882969734
+          },
+          {
+            "userRefId": 41,
+            "level": 62,
+            "timeSpentAfterHint": 576360,
+            "wrongFlagsAfterHint": 4,
+            "timeSpentAfterHintNormalized": -0.342360462922656,
+            "wrongFlagsAfterHintNormalized": 2.69627882969734
+          }
+        ],
+        "center": {
+          "userRefId": 0,
+          "level": 0,
+          "timeSpentAfterHint": -0.34366634030543713,
+          "wrongFlagsAfterHint": 2.69627882969734,
+          "timeSpentAfterHintNormalized": -0.34366634030543713,
+          "wrongFlagsAfterHintNormalized": 2.69627882969734
+        }
+      },
+      {
+        "points": [
+          {
+            "userRefId": 37,
+            "level": 62,
+            "timeSpentAfterHint": 378786,
+            "wrongFlagsAfterHint": 8,
+            "timeSpentAfterHintNormalized": -0.3443278976142855,
+            "wrongFlagsAfterHintNormalized": 5.680509767420609
+          },
+          {
+            "userRefId": 55,
+            "level": 62,
+            "timeSpentAfterHint": 181753,
+            "wrongFlagsAfterHint": 8,
+            "timeSpentAfterHintNormalized": -0.3462899450476312,
+            "wrongFlagsAfterHintNormalized": 5.680509767420609
+          },
+          {
+            "userRefId": 50,
+            "level": 63,
+            "timeSpentAfterHint": 7354,
+            "wrongFlagsAfterHint": 6,
+            "timeSpentAfterHintNormalized": -0.3480266039338485,
+            "wrongFlagsAfterHintNormalized": 4.188394298558975
+          }
+        ],
+        "center": {
+          "userRefId": 0,
+          "level": 0,
+          "timeSpentAfterHint": -0.34621481553192174,
+          "wrongFlagsAfterHint": 5.183137944466731,
+          "timeSpentAfterHintNormalized": -0.34621481553192174,
+          "wrongFlagsAfterHintNormalized": 5.183137944466731
+        }
+      },
+      {
+        "points": [
+          {
+            "userRefId": 40,
+            "level": 64,
+            "timeSpentAfterHint": 450157738,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": 4.134554514694874,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 39,
+            "level": 63,
+            "timeSpentAfterHint": 246056693,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": 2.102123746826438,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 15,
+            "level": 64,
+            "timeSpentAfterHint": 259256078,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": 2.2335627416191457,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 15,
+            "level": 62,
+            "timeSpentAfterHint": 233496867,
+            "wrongFlagsAfterHint": 3,
+            "timeSpentAfterHintNormalized": 1.9770534572476959,
+            "wrongFlagsAfterHintNormalized": 1.9502210952665227
+          },
+          {
+            "userRefId": 15,
+            "level": 63,
+            "timeSpentAfterHint": 233530488,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": 1.9773882539404148,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 52,
+            "level": 64,
+            "timeSpentAfterHint": 343438637,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": 3.071849596198944,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 52,
+            "level": 62,
+            "timeSpentAfterHint": 193507518,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": 1.5788409772742156,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 52,
+            "level": 63,
+            "timeSpentAfterHint": 193675811,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": 1.5805168328349595,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 57,
+            "level": 64,
+            "timeSpentAfterHint": 518615392,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": 4.816253338361807,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 58,
+            "level": 64,
+            "timeSpentAfterHint": 578712223,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": 5.414695391295879,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          }
+        ],
+        "center": {
+          "userRefId": 0,
+          "level": 0,
+          "timeSpentAfterHint": 2.888683885029437,
+          "wrongFlagsAfterHint": -0.0641347876966842,
+          "timeSpentAfterHintNormalized": 2.888683885029437,
+          "wrongFlagsAfterHintNormalized": -0.0641347876966842
+        }
+      },
+      {
+        "points": [
+          {
+            "userRefId": 59,
+            "level": 64,
+            "timeSpentAfterHint": 25109120,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.09806413291252769,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 59,
+            "level": 65,
+            "timeSpentAfterHint": 1465133,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3335100937790255,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 48,
+            "level": 64,
+            "timeSpentAfterHint": 63920231,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": 0.2884154959965604,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 48,
+            "level": 65,
+            "timeSpentAfterHint": 20122706,
+            "wrongFlagsAfterHint": 1,
+            "timeSpentAfterHintNormalized": -0.14771866180006923,
+            "wrongFlagsAfterHintNormalized": 0.45810562640488794
+          },
+          {
+            "userRefId": 48,
+            "level": 66,
+            "timeSpentAfterHint": 622947,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3418965512744688,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 30,
+            "level": 64,
+            "timeSpentAfterHint": 19096434,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.15793824097469755,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 30,
+            "level": 65,
+            "timeSpentAfterHint": 755885,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.34057275951525023,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 30,
+            "level": 66,
+            "timeSpentAfterHint": 49571822,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": 0.14553456208678855,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 30,
+            "level": 62,
+            "timeSpentAfterHint": 889990,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.33923734681256174,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 30,
+            "level": 63,
+            "timeSpentAfterHint": 1661725,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.33155243780760807,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 36,
+            "level": 64,
+            "timeSpentAfterHint": 111287590,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": 0.7600979306664557,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 36,
+            "level": 62,
+            "timeSpentAfterHint": 338445,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3447296118221015,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 36,
+            "level": 63,
+            "timeSpentAfterHint": 832694,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.33980789829247104,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 43,
+            "level": 66,
+            "timeSpentAfterHint": 677464,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3413536729752818,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 43,
+            "level": 62,
+            "timeSpentAfterHint": 210978,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3459989235627047,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 42,
+            "level": 64,
+            "timeSpentAfterHint": 2754037,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3206752347197361,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 42,
+            "level": 65,
+            "timeSpentAfterHint": 1081635,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3373289528868562,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 42,
+            "level": 66,
+            "timeSpentAfterHint": 4608532,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3022082410947981,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 42,
+            "level": 62,
+            "timeSpentAfterHint": 1294823,
+            "wrongFlagsAfterHint": 2,
+            "timeSpentAfterHintNormalized": -0.335206034552262,
+            "wrongFlagsAfterHintNormalized": 1.2041633608357052
+          },
+          {
+            "userRefId": 42,
+            "level": 63,
+            "timeSpentAfterHint": 686139,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.34126728764143277,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 35,
+            "level": 64,
+            "timeSpentAfterHint": 2500334,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.32320159994780495,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 35,
+            "level": 65,
+            "timeSpentAfterHint": 2061483,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3275716622123555,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 35,
+            "level": 66,
+            "timeSpentAfterHint": 2811224,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.32010576865785434,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 35,
+            "level": 62,
+            "timeSpentAfterHint": 1514745,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.33301605929108113,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 35,
+            "level": 63,
+            "timeSpentAfterHint": 1472643,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3334353094727194,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 47,
+            "level": 64,
+            "timeSpentAfterHint": 1385140,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.33430666115776725,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 47,
+            "level": 61,
+            "timeSpentAfterHint": 1932062,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3288604318137473,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 47,
+            "level": 62,
+            "timeSpentAfterHint": 1783747,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3303373471785677,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 47,
+            "level": 63,
+            "timeSpentAfterHint": 1069464,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3374501512612973,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 37,
+            "level": 63,
+            "timeSpentAfterHint": 1561993,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.33254556542898334,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 33,
+            "level": 64,
+            "timeSpentAfterHint": 1133189,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3368155800336859,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 33,
+            "level": 65,
+            "timeSpentAfterHint": 1042536,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3377182993039355,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 33,
+            "level": 66,
+            "timeSpentAfterHint": 718278,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3409472486507038,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 33,
+            "level": 61,
+            "timeSpentAfterHint": 1065690,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.33748773261575793,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 33,
+            "level": 62,
+            "timeSpentAfterHint": 1718835,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3309837385089202,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 33,
+            "level": 63,
+            "timeSpentAfterHint": 839180,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3397433109408463,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 40,
+            "level": 65,
+            "timeSpentAfterHint": 3600589,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.31224530075540696,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 40,
+            "level": 66,
+            "timeSpentAfterHint": 316209,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3449510370997345,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 40,
+            "level": 63,
+            "timeSpentAfterHint": 2334619,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3248517838785012,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 39,
+            "level": 64,
+            "timeSpentAfterHint": 107893595,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": 0.7263006521469282,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 39,
+            "level": 62,
+            "timeSpentAfterHint": 355004,
+            "wrongFlagsAfterHint": 2,
+            "timeSpentAfterHintNormalized": -0.3445647179035763,
+            "wrongFlagsAfterHintNormalized": 1.2041633608357052
+          },
+          {
+            "userRefId": 55,
+            "level": 64,
+            "timeSpentAfterHint": 1422026,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3339393517140376,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 55,
+            "level": 65,
+            "timeSpentAfterHint": 496673,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3431539831645496,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 45,
+            "level": 64,
+            "timeSpentAfterHint": 68239852,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": 0.3314301244906508,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 45,
+            "level": 65,
+            "timeSpentAfterHint": 2813788,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.32008023643929656,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 45,
+            "level": 61,
+            "timeSpentAfterHint": 15399418,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.19475299156895293,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 45,
+            "level": 62,
+            "timeSpentAfterHint": 14872565,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.19999937454236588,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 45,
+            "level": 63,
+            "timeSpentAfterHint": 20926909,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.1397104376343767,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 56,
+            "level": 62,
+            "timeSpentAfterHint": 272634,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.34538495536169084,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 56,
+            "level": 63,
+            "timeSpentAfterHint": 587313,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3422513933478262,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 46,
+            "level": 64,
+            "timeSpentAfterHint": 44310386,
+            "wrongFlagsAfterHint": 1,
+            "timeSpentAfterHintNormalized": 0.09314137414612597,
+            "wrongFlagsAfterHintNormalized": 0.45810562640488794
+          },
+          {
+            "userRefId": 46,
+            "level": 65,
+            "timeSpentAfterHint": 5098953,
+            "wrongFlagsAfterHint": 1,
+            "timeSpentAfterHintNormalized": -0.29732464664966035,
+            "wrongFlagsAfterHintNormalized": 0.45810562640488794
+          },
+          {
+            "userRefId": 46,
+            "level": 66,
+            "timeSpentAfterHint": 2678630,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3214261348776096,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 46,
+            "level": 62,
+            "timeSpentAfterHint": 757544,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3405562392537107,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 46,
+            "level": 63,
+            "timeSpentAfterHint": 7365623,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.27475322939599395,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 54,
+            "level": 62,
+            "timeSpentAfterHint": 914428,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3389939940991782,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 15,
+            "level": 65,
+            "timeSpentAfterHint": 2393402,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.32426642490678403,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 15,
+            "level": 66,
+            "timeSpentAfterHint": 610699,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3420185164121037,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 15,
+            "level": 61,
+            "timeSpentAfterHint": 161761,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3464890246550444,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 51,
+            "level": 64,
+            "timeSpentAfterHint": 5568028,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.2926536148945908,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 51,
+            "level": 65,
+            "timeSpentAfterHint": 2358300,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.32461596934352965,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 51,
+            "level": 66,
+            "timeSpentAfterHint": 305945,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.34505324563767414,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 51,
+            "level": 61,
+            "timeSpentAfterHint": 286865,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3452432435823242,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 51,
+            "level": 62,
+            "timeSpentAfterHint": 98165,
+            "wrongFlagsAfterHint": 1,
+            "timeSpentAfterHintNormalized": -0.34712231130535703,
+            "wrongFlagsAfterHintNormalized": 0.45810562640488794
+          },
+          {
+            "userRefId": 51,
+            "level": 63,
+            "timeSpentAfterHint": 1567832,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3324874208797794,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 62,
+            "level": 64,
+            "timeSpentAfterHint": 53213032,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": 0.18179359856683316,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 62,
+            "level": 65,
+            "timeSpentAfterHint": 0,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.34809983479783996,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 62,
+            "level": 61,
+            "timeSpentAfterHint": 1091042,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.33723527832368416,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 23,
+            "level": 64,
+            "timeSpentAfterHint": 576684,
+            "wrongFlagsAfterHint": 1,
+            "timeSpentAfterHintNormalized": -0.3423572365424638,
+            "wrongFlagsAfterHintNormalized": 0.45810562640488794
+          },
+          {
+            "userRefId": 23,
+            "level": 65,
+            "timeSpentAfterHint": 863341,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3395027165833678,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 57,
+            "level": 61,
+            "timeSpentAfterHint": 875185,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3393847744630095,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 57,
+            "level": 62,
+            "timeSpentAfterHint": 954303,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.33859692030237937,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 57,
+            "level": 63,
+            "timeSpentAfterHint": 2062471,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3275618237443621,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 38,
+            "level": 64,
+            "timeSpentAfterHint": 1327418,
+            "wrongFlagsAfterHint": 1,
+            "timeSpentAfterHintNormalized": -0.33488145473015146,
+            "wrongFlagsAfterHintNormalized": 0.45810562640488794
+          },
+          {
+            "userRefId": 38,
+            "level": 62,
+            "timeSpentAfterHint": 419678,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3439206965685502,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 61,
+            "level": 64,
+            "timeSpentAfterHint": 704644,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3410830155258275,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 61,
+            "level": 65,
+            "timeSpentAfterHint": 232090,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.34578869103610865,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 32,
+            "level": 64,
+            "timeSpentAfterHint": 2131206,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.32687736311933474,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 32,
+            "level": 65,
+            "timeSpentAfterHint": 41496,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.34768661914211674,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 32,
+            "level": 66,
+            "timeSpentAfterHint": 9709,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.34800315292967393,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 32,
+            "level": 63,
+            "timeSpentAfterHint": 199680,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3461114286349613,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 53,
+            "level": 64,
+            "timeSpentAfterHint": 408754,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.34402947736243683,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 53,
+            "level": 62,
+            "timeSpentAfterHint": 714316,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.340986702102313,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 53,
+            "level": 63,
+            "timeSpentAfterHint": 2578639,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3224218416115459,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 58,
+            "level": 62,
+            "timeSpentAfterHint": 764546,
+            "wrongFlagsAfterHint": 1,
+            "timeSpentAfterHintNormalized": -0.340486513592891,
+            "wrongFlagsAfterHintNormalized": 0.45810562640488794
+          },
+          {
+            "userRefId": 63,
+            "level": 64,
+            "timeSpentAfterHint": 756384,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3405677904914357,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 63,
+            "level": 63,
+            "timeSpentAfterHint": 1698202,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.33118920117097284,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 44,
+            "level": 64,
+            "timeSpentAfterHint": 3093732,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3172925642895525,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 44,
+            "level": 65,
+            "timeSpentAfterHint": 2490066,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.32330384831759884,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 44,
+            "level": 66,
+            "timeSpentAfterHint": 4794508,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.30035629886449206,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 44,
+            "level": 61,
+            "timeSpentAfterHint": 516449,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3429570544772645,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 44,
+            "level": 62,
+            "timeSpentAfterHint": 254494,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3455655928205982,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 44,
+            "level": 63,
+            "timeSpentAfterHint": 999856,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3381433051885091,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 7,
+            "level": 64,
+            "timeSpentAfterHint": 347223,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.3446422008180062,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 7,
+            "level": 65,
+            "timeSpentAfterHint": 483641,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.34328375534561245,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 7,
+            "level": 66,
+            "timeSpentAfterHint": 6105,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.34803904143033004,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 7,
+            "level": 61,
+            "timeSpentAfterHint": 715011,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.34097978131764156,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 7,
+            "level": 62,
+            "timeSpentAfterHint": 1558418,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.33258116514869634,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          },
+          {
+            "userRefId": 7,
+            "level": 63,
+            "timeSpentAfterHint": 695287,
+            "wrongFlagsAfterHint": 0,
+            "timeSpentAfterHintNormalized": -0.34117619219082174,
+            "wrongFlagsAfterHintNormalized": -0.2879521080259294
+          }
+        ],
+        "center": {
+          "userRefId": 0,
+          "level": 0,
+          "timeSpentAfterHint": -0.2743521386170479,
+          "wrongFlagsAfterHint": -0.20505680420028335,
+          "timeSpentAfterHintNormalized": -0.2743521386170479,
+          "wrongFlagsAfterHintNormalized": -0.20505680420028335
+        }
+      }
+    ],
     radarChart: [
       {
         "points": [

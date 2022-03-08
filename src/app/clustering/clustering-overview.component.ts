@@ -12,10 +12,11 @@ export class ClusteringOverviewComponent implements OnInit {
 
   title = 'app';
   selectedComponent = 0;
-  selectedFeature : Clusterables = Clusterables.NDimensional;
+  selectedFeature : Clusterables = Clusterables.TimeAfterHint;
   numOfClusters:number = 6;
   trainingDefinitionId: number = 25;
   trainingInstanceId: number;
+  isSubmenuOpen: boolean;
 
   constructor() { }
 

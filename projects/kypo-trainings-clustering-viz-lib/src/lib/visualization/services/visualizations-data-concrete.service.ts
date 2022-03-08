@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { VisualizationDataApi } from '../api/visualization-data-api.service';
-import { VisualizationData } from '../models/visualization-data';
-import { VisualizationsDataService } from './visualizations-data.service';
+import {Injectable} from '@angular/core';
+import {Observable, throwError} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
+import {VisualizationDataApi} from '../api/visualization-data-api.service';
+import {VisualizationData} from '../models/visualization-data';
+import {VisualizationsDataService} from './visualizations-data.service';
 import {ClusterVisualizationDataMapper} from "../mappers/cluster-visualization-data-mapper";
 import {RadarChartDataMapper} from "../mappers/radar-chart-data-mapper";
 import {Clusterables} from "../models/clusterables-enum";
@@ -27,12 +27,25 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
     }
 
     getData(trainingDefinitionId: number): Observable<VisualizationData> {
-        return this.visualizationApi.getVisualizationData(trainingDefinitionId).pipe(
-            map((data: any) => ClusterVisualizationDataMapper.fromDTO(data)),
-            catchError((error) => {
-                return throwError(this.messageBase + error.message);
-            })
-        );
+        console.log(this._selectedFeature)
+        switch (this._selectedFeature) {
+            case Clusterables.WrongFlags:
+                return this.visualizationApi.getVisualizationData(trainingDefinitionId, "wrong-flags").pipe(
+                    map((data: any) => ClusterVisualizationDataMapper.fromDTO(data)),
+                    catchError((error) => {
+                        return throwError(this.messageBase + error.message);
+                    })
+                );
+            case Clusterables.TimeAfterHint:
+                return this.visualizationApi.getVisualizationData(trainingDefinitionId, "time-after-hint").pipe(
+                    map((data: any) => ClusterVisualizationDataMapper.fromDTO(data)),
+                    catchError((error) => {
+                        return throwError(this.messageBase + error.message);
+                    })
+                );
+            default: return new Observable<VisualizationData>();
+
+        }
 
     }
 
@@ -48,21 +61,21 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
     getLineData(trainingDefinitionId: number, numOfClusters: number): Observable<any> {
         switch (this._selectedFeature) {
             case Clusterables.WrongFlags:
-                return this.visualizationApi.getFeatureOneSSE(trainingDefinitionId, numOfClusters).pipe(
+                return this.visualizationApi.getFeatureSSE(trainingDefinitionId, numOfClusters, "wrong-flags").pipe(
                     map((data: any) => SseDataMapper.fromDTO(data)),
                     catchError((error) => {
                         return throwError(this.messageBase + error.message);
                     })
                 );
             case Clusterables.TimeAfterHint:
-                return this.visualizationApi.getFeatureTwoSSE(trainingDefinitionId, numOfClusters).pipe(
+                return this.visualizationApi.getFeatureSSE(trainingDefinitionId, numOfClusters, "time-after-hint").pipe(
                     map((data: any) => SseDataMapper.fromDTO(data)),
                     catchError((error) => {
                         return throwError(this.messageBase + error.message);
                     })
                 );
             case Clusterables.NDimensional:
-                return this.visualizationApi.getNDimensionalSSE(trainingDefinitionId, numOfClusters).pipe(
+                return this.visualizationApi.getFeatureSSE(trainingDefinitionId, numOfClusters, "n-dimensional").pipe(
                     map((data: any) => SseDataMapper.fromDTO(data)),
                     catchError((error) => {
                         return throwError(this.messageBase + error.message);

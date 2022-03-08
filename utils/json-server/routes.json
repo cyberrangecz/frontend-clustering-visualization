@@ -1,5 +1,6 @@
 {
-  "/kypo-rest-training/api/v1/visualizations/training-definition/:id/progress": "/clusters",
+  "/kypo-rest-training/api/v1/visualizations/training-definition/:id/wrong-flags/clusters": "/clusters",
+  "/kypo-rest-training/api/v1/visualizations/training-definition/:id/time-after-hint/clusters": "/clusters2",
   "/kypo-rest-training/api/v1/visualizations/training-definition/:id/radar-chart": "/radarChart",
   "/kypo-rest-training/api/v1/visualizations/training-definition/:id/wrong-flags/sse": "/sse1",
   "/kypo-rest-training/api/v1/visualizations/training-definition/:id/time-after-hint/sse": "/sse2",

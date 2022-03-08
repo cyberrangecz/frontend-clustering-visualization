@@ -43,10 +43,8 @@ export class ScatterPlotComponent implements OnChanges {
   }
 
   ngOnChanges(): void {
-    console.log("change")
-    console.log(this.visualizationData)
+    //console.log(this.visualizationData)
     if (this.visualizationData != undefined) {
-      console.log("create")
       this.createScatter();
     }
   }
@@ -158,6 +156,7 @@ export class ScatterPlotComponent implements OnChanges {
 
     let tooltip = this.tooltip;
 
+    console.log(this.gPlot.selectAll("dot"));
     // Add scatter
     this.dataPoints = this.gPlot.selectAll("dot")
         .data(this.data)
@@ -191,6 +190,7 @@ export class ScatterPlotComponent implements OnChanges {
               .duration(0)
               .style('opacity', 0);
         });
+    console.log(this.dataPoints);
   }
 
   // A function that updates the chart when the user zoom and thus new boundaries are available
@@ -210,12 +210,12 @@ export class ScatterPlotComponent implements OnChanges {
     // update circle position
     this.gPlot
         .selectAll("circle")
-        .attr("cx", (d: any) => newX(this.visualizationDataService.getX(d)) + this.margin)
+        .attr("cx", (d: any) => newX(this.visualizationDataService.getX(d)))
         .attr("cy", (d: any) => newY(this.visualizationDataService.getY(d)));
 
     // update text position
     this.gPlot.selectAll("text")
-        .attr("x", (d: any) => newX(this.visualizationDataService.getX(d)) + this.margin)
+        .attr("x", (d: any) => newX(this.visualizationDataService.getX(d)))
         .attr("y", (d: any) => newY(this.visualizationDataService.getY(d)));
   }
 

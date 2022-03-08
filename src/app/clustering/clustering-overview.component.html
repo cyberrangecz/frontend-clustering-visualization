@@ -5,31 +5,34 @@
            <mat-sidenav mode="side" opened>
 
                <!--    Choose from available visualizations-->
-               <button mat-button>Scatter plot</button>
-                <div>
-                    <button mat-button
+               <mat-list-item>
+                   <div class="title">Visualizations</div>
+                   <mat-divider></mat-divider>
+               <button mat-button class="nav-link" (click)="isSubmenuOpen=!isSubmenuOpen">
+                   <span>Two features comparison</span></button>
+                <div *ngIf="isSubmenuOpen">
+                    <button mat-button class="nav-link"
                             (click)="selectedComponent=0;selectedFeature=0">
-                        Wrong flags per time played
+                        <span>Wrong flags per time played</span>
                     </button>
-                </div>
-                <div>
-                    <button mat-button
+                    <br/>
+                    <button mat-button class="nav-link"
                             (click)="selectedComponent=0;selectedFeature=1">
-                        Time spent after using a hint
+                        <span>Time spent after using a hint</span>
                     </button>
                 </div>
 
                 <div>
-                    <button mat-button
+                    <button mat-button class="nav-link"
                             (click)="selectedComponent=2;selectedFeature=2">
-                        Radar chart
+                        <span>Behaviour correlation chart</span>
                     </button>
                 </div>
+               </mat-list-item>
 
-               <hr/>
-
-               <div style="margin: 15px">
-                   <p>Testing parameters:</p>
+               <mat-list-item>
+                   <div class="title">Testing parameters</div>
+                   <mat-divider></mat-divider>
                    <!-- inputs for testing purposes -->
                    <mat-form-field appearance="fill">
                        <mat-label>Number of clusters:</mat-label>
@@ -42,8 +45,7 @@
                    </mat-form-field>
                    <br/>
                    <button type="submit" mat-flat-button color="primary">Recalculate w/ new data</button>
-
-               </div>
+               </mat-list-item>
             </mat-sidenav>
 
            <!-- Main content -->

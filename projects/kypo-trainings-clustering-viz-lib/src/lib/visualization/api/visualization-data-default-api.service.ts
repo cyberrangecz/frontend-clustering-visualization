@@ -24,10 +24,11 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
   /**
    * Sends http request to retrieve all data for visualizations
    */
-  getVisualizationData(trainingDefinitionId: number): Observable<VisualizationData> {
+  getVisualizationData(trainingDefinitionId: number, featureType: string): Observable<VisualizationData> {
+      console.log(featureType)
     return this.http
       .get<VisualizationDataDTO>(
-        this.configService.config.trainingServiceUrl + `visualizations/training-definition/${trainingDefinitionId}/progress`
+        this.configService.config.trainingServiceUrl + `visualizations/training-definition/${trainingDefinitionId}/${featureType}/clusters`
       )
       .pipe(
         map(
@@ -53,36 +54,10 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
         );
   }
 
-  getFeatureOneSSE(trainingDefinitionId: number, numOfClusters: number): Observable<SseDataMapper> {
+  getFeatureSSE(trainingDefinitionId: number, numOfClusters: number, featureType: string): Observable<SseDataMapper> {
       return this.http
           .get<SseDTO>(
-              this.configService.config.trainingServiceUrl + `visualizations/training-definition/${trainingDefinitionId}/wrong-flags/sse`
-          )
-          .pipe(
-              map(
-                  (response) =>
-                      SseDataMapper.fromDTO(response)
-              )
-          );
-  }
-
-  getFeatureTwoSSE(trainingDefinitionId: number, numOfClusters: number): Observable<SseDataMapper> {
-      return this.http
-          .get<SseDTO>(
-              this.configService.config.trainingServiceUrl + `visualizations/training-definition/${trainingDefinitionId}/time-after-hint/sse`
-          )
-          .pipe(
-              map(
-                  (response) =>
-                      SseDataMapper.fromDTO(response)
-              )
-          );
-  }
-
-  getNDimensionalSSE(trainingDefinitionId: number, numOfClusters: number): Observable<SseDataMapper> {
-      return this.http
-          .get<SseDTO>(
-              this.configService.config.trainingServiceUrl + `visualizations/training-definition/${trainingDefinitionId}/n-dimensional/sse`
+              this.configService.config.trainingServiceUrl + `visualizations/training-definition/${trainingDefinitionId}/${featureType}/sse`
           )
           .pipe(
               map(

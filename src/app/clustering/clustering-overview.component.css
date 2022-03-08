@@ -3,3 +3,32 @@ h1 {
     font-size: 25px;
     font-weight: 400;
 }
+
+button .nav-link {
+    text-align: center;
+}
+
+.mat-sidenav {
+    padding: 15px;
+}
+
+.mat-drawer {
+    text-align: center;
+}
+
+.mat-list-item .title {
+    margin: 10px;
+    margin-top: 20px;
+    color: #919295;
+}
+
+.mat-list-item {
+    margin-top: 30px;
+    font-weight: 500;
+    font-size: 14px;
+    height: 48px;
+}
+
+.mat-divider {
+    margin: 10px 5px;
+}

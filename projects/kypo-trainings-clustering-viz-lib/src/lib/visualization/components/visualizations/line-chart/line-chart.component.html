@@ -1,3 +1,9 @@
-<div id="chartDiv"></div>
+<div class="main-clustering-line-div">
+    <button mat-stroked-button
+    *ngIf="includeInButtonToggle"
+    (click)="toggleChartVisibility()"> {{buttonKeyword}} helper elbow function </button>
+
+    <div [attr.style]="'display: ' + (showChart ? 'block' : 'none')" id="chartDiv"></div>
+</div>
 
 
