@@ -43,7 +43,6 @@ export class ScatterPlotComponent implements OnChanges {
   }
 
   ngOnChanges(): void {
-    //console.log(this.visualizationData)
     if (this.visualizationData != undefined) {
       this.createScatter();
     }
@@ -156,7 +155,6 @@ export class ScatterPlotComponent implements OnChanges {
 
     let tooltip = this.tooltip;
 
-    console.log(this.gPlot.selectAll("dot"));
     // Add scatter
     this.dataPoints = this.gPlot.selectAll("dot")
         .data(this.data)
@@ -190,7 +188,6 @@ export class ScatterPlotComponent implements OnChanges {
               .duration(0)
               .style('opacity', 0);
         });
-    console.log(this.dataPoints);
   }
 
   // A function that updates the chart when the user zoom and thus new boundaries are available

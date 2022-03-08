@@ -9,14 +9,18 @@
                    <div class="title">Visualizations</div>
                    <mat-divider></mat-divider>
                <button mat-button class="nav-link" (click)="isSubmenuOpen=!isSubmenuOpen">
-                   <span>Two features comparison</span></button>
+                   <span>Two features comparison </span>
+                   <mat-icon>{{!isSubmenuOpen ? "expand_more" : "expand_less"}}</mat-icon>
+               </button>
                 <div *ngIf="isSubmenuOpen">
-                    <button mat-button class="nav-link"
+                    <button mat-button class="nav-link sub-item"
+                            [ngClass]="{'opened' : selectedFeature == 0}"
                             (click)="selectedComponent=0;selectedFeature=0">
                         <span>Wrong flags per time played</span>
                     </button>
                     <br/>
-                    <button mat-button class="nav-link"
+                    <button mat-button class="nav-link sub-item"
+                            [ngClass]="{'opened' : selectedFeature == 1}"
                             (click)="selectedComponent=0;selectedFeature=1">
                         <span>Time spent after using a hint</span>
                     </button>
@@ -24,6 +28,7 @@
 
                 <div>
                     <button mat-button class="nav-link"
+                            [ngClass]="{'opened' : selectedFeature == 2}"
                             (click)="selectedComponent=2;selectedFeature=2">
                         <span>Behaviour correlation chart</span>
                     </button>
@@ -49,7 +54,7 @@
             </mat-sidenav>
 
            <!-- Main content -->
-           <mat-sidenav-content style="margin-left: 235px;">
+           <mat-sidenav-content style="margin-left: 255px;">
                <kypo-clustering-visualization
                         [selectedComponent]="selectedComponent"
                         [selectedFeature]="selectedFeature"

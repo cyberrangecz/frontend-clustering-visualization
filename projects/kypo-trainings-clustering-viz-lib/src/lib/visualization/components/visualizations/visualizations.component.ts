@@ -48,12 +48,12 @@ export class VisualizationsComponent implements OnInit, OnChanges {
     lineService.subscribe((res) => {
       this.lineData$ = res;
     });
-    //if (this.selectedFeature == 0 || this.selectedFeature == 1) {
+    if (this.selectedFeature == 0 || this.selectedFeature == 1) {
       const scatterService = this.visualizationDataService.getData(this.trainingDefinitionId);
       scatterService.subscribe((res) => {
         this.visualizationData$ = res;
       });
-   // }
+    }
     if (this.selectedFeature == 2) {
       const radarService = this.visualizationDataService.getRadarData(this.trainingDefinitionId);
       radarService.subscribe((res) => {

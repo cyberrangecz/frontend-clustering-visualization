@@ -25,7 +25,6 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
    * Sends http request to retrieve all data for visualizations
    */
   getVisualizationData(trainingDefinitionId: number, featureType: string): Observable<VisualizationData> {
-      console.log(featureType)
     return this.http
       .get<VisualizationDataDTO>(
         this.configService.config.trainingServiceUrl + `visualizations/training-definition/${trainingDefinitionId}/${featureType}/clusters`

@@ -27,7 +27,6 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
     }
 
     getData(trainingDefinitionId: number): Observable<VisualizationData> {
-        console.log(this._selectedFeature)
         switch (this._selectedFeature) {
             case Clusterables.WrongFlags:
                 return this.visualizationApi.getVisualizationData(trainingDefinitionId, "wrong-flags").pipe(

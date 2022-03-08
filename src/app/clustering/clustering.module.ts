@@ -9,6 +9,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {MatListModule} from "@angular/material/list";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {MatListModule} from "@angular/material/list";
     MatButtonModule,
     MatInputModule,
     MatListModule,
+    MatIconModule,
     ReactiveFormsModule,
     FormsModule
   ],

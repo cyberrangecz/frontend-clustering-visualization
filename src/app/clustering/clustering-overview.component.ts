@@ -16,7 +16,7 @@ export class ClusteringOverviewComponent implements OnInit {
   numOfClusters:number = 6;
   trainingDefinitionId: number = 25;
   trainingInstanceId: number;
-  isSubmenuOpen: boolean;
+  isSubmenuOpen: boolean = true;
 
   constructor() { }
 

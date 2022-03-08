@@ -8,6 +8,10 @@ button .nav-link {
     text-align: center;
 }
 
+button.opened {
+    color: #6138ca !important;
+}
+
 .mat-sidenav {
     padding: 15px;
 }
@@ -27,6 +31,11 @@ button .nav-link {
     font-weight: 500;
     font-size: 14px;
     height: 48px;
+}
+
+.mat-list-item .sub-item {
+    font-size: 13px;
+    color: #4a4a4a;
 }
 
 .mat-divider {
