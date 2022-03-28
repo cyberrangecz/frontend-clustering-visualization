@@ -3,6 +3,8 @@ import {D3, D3Service} from "@muni-kypo-crp/d3-service";
 import {AppConfig} from "../../../../app.config";
 import {VisualizationsDataService} from "../../../services/visualizations-data.service";
 import {Clusterables} from "../../../models/clusterables-enum";
+import {WrongFlags} from "../../../models/wrong-flags";
+import {TimeAfterHint} from "../../../models/time-after-hint";
 
 @Component({
   selector: 'kypo-viz-clustering-scatter-plot',
@@ -48,23 +50,46 @@ export class ScatterPlotComponent implements OnChanges {
     }
   }
 
+  normalizeData() {
+    let minX = Number.MAX_VALUE, minY = Number.MAX_VALUE;
+    let maxX = Number.MIN_VALUE, maxY = Number.MIN_VALUE;
+
+    let xValue: string, yValue: string;
+
+    // find which features will be managed
+    switch (this.visualizationDataService.selectedFeature) {
+      case 0:
+        xValue = "wrongFlagsSubmitted";
+        yValue = "timePlayed";
+        break;
+      case 1:
+        xValue = "timeSpentAfterHint";
+        yValue = "wrongFlagsAfterHint";
+        break;
+      default: break;
+    }
+
+    this.visualizationData.clusterData[0].forEach(function(d) {
+      const xArray = d.points.map(d => d[xValue]);
+      const yArray = d.points.map(d => d[yValue]);
+
+      minX = Math.min(Math.min(...xArray), minX);
+      maxX = Math.max(Math.max(...xArray), maxX);
+      minY = Math.min(Math.min(...yArray), minY);
+      maxY = Math.max(Math.max(...yArray), maxY);
+    });
+
+    this.visualizationData.clusterData[0].forEach(function(d) {
+      d.points.forEach( function (point) {
+        point[xValue + "Normalized"] = (point[xValue] - minX) / (maxX - minX);
+        point[yValue + "Normalized"] = (point[yValue] - minY) / (maxY - minY);
+      })
+    });
+  }
+
   createScatter(): void {
     this.createTooltip();
     this.data = [];
-    let minX, minY = Number.MAX_VALUE;
-    let maxX, maxY = Number.MIN_VALUE;
-    /*processedData.forEach(function(d) {
-      // Normalise the values in the arrays
-      const min = Math.min(d3.min(d.train), d3.min(d.test));
-      const max = Math.max(d3.max(d.train), d3.max(d.test));
-
-      d.trainNormalised = d.train.map(function(v) {
-        return (v - min) / (max - min);
-      });
-      d.testNormalised = d.test.map(function(v) {
-        return (v - min) / (max - min);
-      });
-    });*/
 
     this.visualizationData.clusterData[0].forEach((cluster, index) => {
       cluster.points.forEach(point => {
@@ -76,6 +101,8 @@ export class ScatterPlotComponent implements OnChanges {
     this.options = new Map();
     if (this.options.size == 1) { this.options.clear(); }
     if (this.gPlot != undefined) { this.clear(); }
+
+    this.normalizeData();
     this.prepareSvg();
     this.drawPlot();
   }
@@ -107,9 +134,9 @@ export class ScatterPlotComponent implements OnChanges {
     const d3: D3 = this.d3;
     // Add X axis
     this.x = d3.scaleLinear()
-        .domain(d3.extent(this.data.map(value =>
-            this.visualizationDataService.getX(value))) as [number, number]
-        )
+        /*.domain(d3.extent(this.data.map(value =>
+            this.visualizationDataService.getX(value))) as [number, number])*/
+        .domain([-0.1,1.1])
         .range([0, this.width - this.margin])
         .nice();
 
@@ -123,9 +150,9 @@ export class ScatterPlotComponent implements OnChanges {
 
     // Add Y axis
     this.y = d3.scaleLinear()
-        .domain(d3.extent(this.data.map(value =>
-            this.visualizationDataService.getY(value))) as [number, number]
-        )
+        /*.domain(d3.extent(this.data.map(value =>
+            this.visualizationDataService.getY(value))) as [number, number])*/
+        .domain([-0.1,1.1])
         .range([this.height, 0])
         .nice();
 
@@ -160,7 +187,7 @@ export class ScatterPlotComponent implements OnChanges {
         .data(this.data)
         .enter()
         .append("circle")
-        .attr("cx", (d: any) => this.x(this.visualizationDataService.getX(d)))
+        .attr("cx", (d: any) => this.x(this.visualizationDataService.getX(d)+0.12))
         .attr("cy", (d: any) => this.y(this.visualizationDataService.getY(d)))
         .attr("r", 7)
         .style("opacity", .5)
@@ -207,7 +234,7 @@ export class ScatterPlotComponent implements OnChanges {
     // update circle position
     this.gPlot
         .selectAll("circle")
-        .attr("cx", (d: any) => newX(this.visualizationDataService.getX(d)))
+        .attr("cx", (d: any) => newX(this.visualizationDataService.getX(d)+0.12))
         .attr("cy", (d: any) => newY(this.visualizationDataService.getY(d)));
 
     // update text position

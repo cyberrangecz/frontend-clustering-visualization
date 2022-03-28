@@ -16,6 +16,8 @@ export abstract class VisualizationsDataService {
 
   abstract set selectedFeature(value: Clusterables);
 
+  abstract get selectedFeature();
+
   abstract getData(trainingDefinitionId: number, numOfClusters: number);
 
   abstract getRadarData(trainingDefinitionId: number, numOfClusters: number);

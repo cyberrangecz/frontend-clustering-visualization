@@ -22,6 +22,10 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
         this._selectedFeature = value;
     }
 
+    get selectedFeature() : Clusterables {
+        return this._selectedFeature;
+    }
+
     constructor(private visualizationApi: VisualizationDataApi) {
       super();
     }

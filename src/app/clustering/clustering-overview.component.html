@@ -46,8 +46,18 @@
                    <br/>
                    <mat-form-field appearance="fill">
                        <mat-label>Training definition identification:</mat-label>
+                       <mat-select [(value)]="trainingDefinitionId">
+                           <mat-option [value]="25">25</mat-option>
+                           <mat-option [value]="8">8</mat-option>
+                       </mat-select>
+                   </mat-form-field>
+                   <br/>
+                   <!-- use this input for any input
+                   <mat-form-field appearance="fill">
+                       <mat-label>Training definition identification:</mat-label>
                        <input matInput type="number" min="1" [(ngModel)]="trainingDefinitionId">
                    </mat-form-field>
+                   -->
                    <!--<br/>
                    <button type="submit" mat-flat-button color="primary">Recalculate w/ new data</button>-->
                </mat-list-item>

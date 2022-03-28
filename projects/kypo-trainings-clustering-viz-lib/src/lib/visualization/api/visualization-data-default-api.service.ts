@@ -57,7 +57,7 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
     return this.http
         .get<VisualizationDataDTO>(
 //`visualizations/training-definition/${trainingDefinitionId}/radar-chart`,
-            `http://147.251.83.5:8080/nDimensional/clusters?numberOfClusters=${6}&trainingDefinitionId=${trainingDefinitionId}`,
+            `http://147.251.83.5:8080/nDimensional/clusters?numberOfClusters=${numberOfClusters}&trainingDefinitionId=${trainingDefinitionId}`,
             this.options
         )
         .pipe(
