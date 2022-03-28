@@ -64,6 +64,7 @@ export class RadarChartComponent implements OnChanges {
 
   ngOnChanges(): void {
     if (this.visualizationData != undefined) {
+      console.log(this.visualizationData);
       this.drawChart();
     }
   }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -17,18 +17,31 @@ import {SseDTO} from "../DTOs/sse-dto";
 @Injectable()
 export class VisualizationDataDefaultApi extends VisualizationDataApi {
 
+    /*
+     header('Access-Control-Allow-Origin: *');
+     header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+     header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+     */
+    headers: HttpHeaders = new HttpHeaders({
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Origin': '*'
+    });
+    options = ({ headers: this.headers });
+
   constructor(private http: HttpClient, private configService: ConfigService) {
       super();
     }
 
+    // http://127.0.0.1:8080/wrongFlags/clusters?numberOfClusters=4&trainingDefinitionId=25
+    //147.251.83.5
   /**
    * Sends http request to retrieve all data for visualizations
    */
-  getVisualizationData(trainingDefinitionId: number, featureType: string): Observable<VisualizationData> {
+  getVisualizationData(trainingDefinitionId: number, featureType: string, numberOfClusters: number): Observable<VisualizationData> {
     return this.http
       .get<VisualizationDataDTO>(
-        this.configService.config.trainingServiceUrl + `visualizations/training-definition/${trainingDefinitionId}/${featureType}/clusters`
-      )
+          `http://147.251.83.5:8080/${featureType}/clusters?numberOfClusters=${numberOfClusters}&trainingDefinitionId=${trainingDefinitionId}`,
+      this.options)
       .pipe(
         map(
           (response) =>
@@ -40,10 +53,12 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
     /**
      * Sends http request to retrieve data for radar chart
      */
-  getRadarChartData(trainingDefinitionId: number): Observable<VisualizationData> {
+  getRadarChartData(trainingDefinitionId: number, numberOfClusters: number): Observable<VisualizationData> {
     return this.http
         .get<VisualizationDataDTO>(
-            this.configService.config.trainingServiceUrl + `visualizations/training-definition/${trainingDefinitionId}/radar-chart`
+//`visualizations/training-definition/${trainingDefinitionId}/radar-chart`,
+            `http://147.251.83.5:8080/nDimensional/clusters?numberOfClusters=${6}&trainingDefinitionId=${trainingDefinitionId}`,
+            this.options
         )
         .pipe(
             map(
@@ -53,10 +68,13 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
         );
   }
 
-  getFeatureSSE(trainingDefinitionId: number, numOfClusters: number, featureType: string): Observable<SseDataMapper> {
+    // http://localhost:8080/wrongFlags/sse?numberOfClusters=10&sandboxId=&trainingInstanceId=&trainingDefinitionId=25&trainingRunId=
+  getFeatureSSE(trainingDefinitionId: number, featureType: string, numOfClusters: number): Observable<SseDataMapper> {
       return this.http
           .get<SseDTO>(
-              this.configService.config.trainingServiceUrl + `visualizations/training-definition/${trainingDefinitionId}/${featureType}/sse`
+          //`visualizations/training-definition/${trainingDefinitionId}/${featureType}/sse`
+              `http://147.251.83.5:8080/${featureType}/sse?numberOfClusters=${numOfClusters}&trainingDefinitionId=${trainingDefinitionId}`,
+              this.options
           )
           .pipe(
               map(

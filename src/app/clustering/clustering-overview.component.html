@@ -41,15 +41,15 @@
                    <!-- inputs for testing purposes -->
                    <mat-form-field appearance="fill">
                        <mat-label>Number of clusters:</mat-label>
-                       <input matInput type="number" [(ngModel)]="numOfClusters">
+                       <input matInput type="number" min="1" [(ngModel)]="numOfClusters">
                    </mat-form-field>
                    <br/>
                    <mat-form-field appearance="fill">
                        <mat-label>Training definition identification:</mat-label>
-                       <input matInput type="number" [(ngModel)]="trainingDefinitionId">
+                       <input matInput type="number" min="1" [(ngModel)]="trainingDefinitionId">
                    </mat-form-field>
-                   <br/>
-                   <button type="submit" mat-flat-button color="primary">Recalculate w/ new data</button>
+                   <!--<br/>
+                   <button type="submit" mat-flat-button color="primary">Recalculate w/ new data</button>-->
                </mat-list-item>
             </mat-sidenav>
 

@@ -26,17 +26,17 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
       super();
     }
 
-    getData(trainingDefinitionId: number): Observable<VisualizationData> {
+    getData(trainingDefinitionId: number, numOfClusters: number): Observable<VisualizationData> {
         switch (this._selectedFeature) {
             case Clusterables.WrongFlags:
-                return this.visualizationApi.getVisualizationData(trainingDefinitionId, "wrong-flags").pipe(
+                return this.visualizationApi.getVisualizationData(trainingDefinitionId, "wrongFlags", numOfClusters).pipe(
                     map((data: any) => ClusterVisualizationDataMapper.fromDTO(data)),
                     catchError((error) => {
                         return throwError(this.messageBase + error.message);
                     })
                 );
             case Clusterables.TimeAfterHint:
-                return this.visualizationApi.getVisualizationData(trainingDefinitionId, "time-after-hint").pipe(
+                return this.visualizationApi.getVisualizationData(trainingDefinitionId, "timeAfterHint", numOfClusters).pipe(
                     map((data: any) => ClusterVisualizationDataMapper.fromDTO(data)),
                     catchError((error) => {
                         return throwError(this.messageBase + error.message);
@@ -48,8 +48,8 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
 
     }
 
-    getRadarData(trainingDefinitionId: number): Observable<VisualizationData> {
-        return this.visualizationApi.getRadarChartData(trainingDefinitionId).pipe(
+    getRadarData(trainingDefinitionId: number, numOfClusters: number): Observable<VisualizationData> {
+        return this.visualizationApi.getRadarChartData(trainingDefinitionId, numOfClusters).pipe(
             map((data: any) => RadarChartDataMapper.fromDTO(data)),
             catchError((error) => {
                 return throwError(this.messageBase + error.message);
@@ -60,21 +60,21 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
     getLineData(trainingDefinitionId: number, numOfClusters: number): Observable<any> {
         switch (this._selectedFeature) {
             case Clusterables.WrongFlags:
-                return this.visualizationApi.getFeatureSSE(trainingDefinitionId, numOfClusters, "wrong-flags").pipe(
+                return this.visualizationApi.getFeatureSSE(trainingDefinitionId,"wrongFlags", numOfClusters).pipe(
                     map((data: any) => SseDataMapper.fromDTO(data)),
                     catchError((error) => {
                         return throwError(this.messageBase + error.message);
                     })
                 );
             case Clusterables.TimeAfterHint:
-                return this.visualizationApi.getFeatureSSE(trainingDefinitionId, numOfClusters, "time-after-hint").pipe(
+                return this.visualizationApi.getFeatureSSE(trainingDefinitionId, "timeAfterHint", numOfClusters).pipe(
                     map((data: any) => SseDataMapper.fromDTO(data)),
                     catchError((error) => {
                         return throwError(this.messageBase + error.message);
                     })
                 );
             case Clusterables.NDimensional:
-                return this.visualizationApi.getFeatureSSE(trainingDefinitionId, numOfClusters, "n-dimensional").pipe(
+                return this.visualizationApi.getFeatureSSE(trainingDefinitionId,"nDimensional", numOfClusters).pipe(
                     map((data: any) => SseDataMapper.fromDTO(data)),
                     catchError((error) => {
                         return throwError(this.messageBase + error.message);

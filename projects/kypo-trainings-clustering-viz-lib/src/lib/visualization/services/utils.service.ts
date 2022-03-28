@@ -13,7 +13,7 @@ export class UtilsService {
 
   private _selectedFeature: Clusterables;
 
-  getDataScatter(event: EventIdentification, numOfClusters: number): Observable<ClusterVisualizationData[]> {
+ /* getDataScatter(event: EventIdentification, numOfClusters: number): Observable<ClusterVisualizationData[]> {
     switch (this._selectedFeature) {
       case Clusterables.WrongFlags:
         return null;//this.restService.getFeatureOneClusters(event, numOfClusters);
@@ -35,5 +35,5 @@ export class UtilsService {
 
   filterLevels(options: Map<number, boolean>, point: Clusterable): string {
     return options.get((point as TimeAfterHint).level) ? "visible" : "hidden";
-  }
+  }*/
 }

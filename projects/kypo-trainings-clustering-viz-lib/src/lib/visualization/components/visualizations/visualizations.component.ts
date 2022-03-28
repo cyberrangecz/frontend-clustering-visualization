@@ -35,10 +35,11 @@ export class VisualizationsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    if (this.requestedFeature != this.selectedFeature) {
+    //console.log(this.trainingDefinitionId);
+    //if (this.requestedFeature != this.selectedFeature || ) {
       this.loadData();
       this.requestedFeature = this.selectedFeature;
-    }
+    //}
   }
 
   private loadData() {
@@ -49,13 +50,13 @@ export class VisualizationsComponent implements OnInit, OnChanges {
       this.lineData$ = res;
     });
     if (this.selectedFeature == 0 || this.selectedFeature == 1) {
-      const scatterService = this.visualizationDataService.getData(this.trainingDefinitionId);
+      const scatterService = this.visualizationDataService.getData(this.trainingDefinitionId, this.numOfClusters);
       scatterService.subscribe((res) => {
         this.visualizationData$ = res;
       });
     }
     if (this.selectedFeature == 2) {
-      const radarService = this.visualizationDataService.getRadarData(this.trainingDefinitionId);
+      const radarService = this.visualizationDataService.getRadarData(this.trainingDefinitionId, this.numOfClusters);
       radarService.subscribe((res) => {
         this.radarChartData$ = res;
       });
