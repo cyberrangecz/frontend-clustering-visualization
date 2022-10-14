@@ -18,11 +18,11 @@ export abstract class VisualizationsDataService {
 
   abstract get selectedFeature();
 
-  abstract getData(trainingDefinitionId: number, numOfClusters: number);
+  abstract getData(trainingDefinitionId: number, numOfClusters: number, level: string);
 
-  abstract getRadarData(trainingDefinitionId: number, numOfClusters: number);
+  abstract getRadarData(trainingDefinitionId: number, numOfClusters: number, level: string);
 
-  abstract getLineData(trainingDefinitionId: number, numOfClusters: number);
+  abstract getLineData(trainingDefinitionId: number, numOfClusters: number, level: string);
 
   /* methods to get information based on selected feature */
 

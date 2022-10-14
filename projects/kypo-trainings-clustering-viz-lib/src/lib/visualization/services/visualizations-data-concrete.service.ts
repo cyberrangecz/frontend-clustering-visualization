@@ -30,17 +30,17 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
       super();
     }
 
-    getData(trainingDefinitionId: number, numOfClusters: number): Observable<VisualizationData> {
+    getData(trainingDefinitionId: number, numOfClusters: number, level: string): Observable<VisualizationData> {
         switch (this._selectedFeature) {
             case Clusterables.WrongFlags:
-                return this.visualizationApi.getVisualizationData(trainingDefinitionId, "wrongFlags", numOfClusters).pipe(
+                return this.visualizationApi.getVisualizationData(trainingDefinitionId, "wrongFlags", numOfClusters, level).pipe(
                     map((data: any) => ClusterVisualizationDataMapper.fromDTO(data)),
                     catchError((error) => {
                         return throwError(this.messageBase + error.message);
                     })
                 );
             case Clusterables.TimeAfterHint:
-                return this.visualizationApi.getVisualizationData(trainingDefinitionId, "timeAfterHint", numOfClusters).pipe(
+                return this.visualizationApi.getVisualizationData(trainingDefinitionId, "timeAfterHint", numOfClusters, level).pipe(
                     map((data: any) => ClusterVisualizationDataMapper.fromDTO(data)),
                     catchError((error) => {
                         return throwError(this.messageBase + error.message);
@@ -52,8 +52,8 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
 
     }
 
-    getRadarData(trainingDefinitionId: number, numOfClusters: number): Observable<VisualizationData> {
-        return this.visualizationApi.getRadarChartData(trainingDefinitionId, numOfClusters).pipe(
+    getRadarData(trainingDefinitionId: number, numOfClusters: number, level: string): Observable<VisualizationData> {
+        return this.visualizationApi.getRadarChartData(trainingDefinitionId, numOfClusters, level).pipe(
             map((data: any) => RadarChartDataMapper.fromDTO(data)),
             catchError((error) => {
                 return throwError(this.messageBase + error.message);
@@ -61,24 +61,24 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
         );
     }
 
-    getLineData(trainingDefinitionId: number, numOfClusters: number): Observable<any> {
+    getLineData(trainingDefinitionId: number, numOfClusters: number, level: string): Observable<any> {
         switch (this._selectedFeature) {
             case Clusterables.WrongFlags:
-                return this.visualizationApi.getFeatureSSE(trainingDefinitionId,"wrongFlags", numOfClusters).pipe(
+                return this.visualizationApi.getFeatureSSE(trainingDefinitionId,"wrongFlags", numOfClusters, level).pipe(
                     map((data: any) => SseDataMapper.fromDTO(data)),
                     catchError((error) => {
                         return throwError(this.messageBase + error.message);
                     })
                 );
             case Clusterables.TimeAfterHint:
-                return this.visualizationApi.getFeatureSSE(trainingDefinitionId, "timeAfterHint", numOfClusters).pipe(
+                return this.visualizationApi.getFeatureSSE(trainingDefinitionId, "timeAfterHint", numOfClusters, level).pipe(
                     map((data: any) => SseDataMapper.fromDTO(data)),
                     catchError((error) => {
                         return throwError(this.messageBase + error.message);
                     })
                 );
             case Clusterables.NDimensional:
-                return this.visualizationApi.getFeatureSSE(trainingDefinitionId,"nDimensional", numOfClusters).pipe(
+                return this.visualizationApi.getFeatureSSE(trainingDefinitionId,"nDimensional", numOfClusters, level).pipe(
                     map((data: any) => SseDataMapper.fromDTO(data)),
                     catchError((error) => {
                         return throwError(this.messageBase + error.message);

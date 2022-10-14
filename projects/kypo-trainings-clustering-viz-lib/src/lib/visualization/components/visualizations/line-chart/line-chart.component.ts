@@ -14,7 +14,7 @@ export class LineChartComponent implements OnChanges, OnInit {
   @Input() visualizationData: number[] = [];
   @Input() trainingDefinitionId: number;
   @Input() trainingInstanceId: number;
-  @Input() numOfClusters: number;
+  @Input() elbowNumClusters: number;
   @Input() includeInButtonToggle: boolean = false;
 
   public showChart: boolean = true;
@@ -61,7 +61,7 @@ export class LineChartComponent implements OnChanges, OnInit {
   private createSvg(): void {
     this.svg = this.d3.select("#chartDiv")
         .append("svg")
-        .attr("viewBox", "-50 0 1500 550")
+        .attr("viewBox", "-50 0 1200 550")
         .attr("preserveAspectRatio", "xMidYMid meet")
     this.gChart = this.svg
         .append("g")
@@ -71,15 +71,15 @@ export class LineChartComponent implements OnChanges, OnInit {
   private drawPlot(): void {
     const d3: D3 = this.d3,
     // slicing data to make sure we have a line with specified number of clusters
-    data = this.visualizationData.slice(0, this.numOfClusters);
+    data = this.visualizationData.slice(0, this.elbowNumClusters);
 
     // Add X axis
     this.x = d3.scaleLinear()
-        .domain([1, this.numOfClusters])
+        .domain([1, this.elbowNumClusters])
         .rangeRound([0, this.width]);
     this.xAxis = this.gChart.append("g")
         .attr("transform", "translate(0," + this.height + ")")
-        .call(d3.axisBottom(this.x).ticks(this.numOfClusters));
+        .call(d3.axisBottom(this.x).ticks(this.elbowNumClusters));
     this.gChart.append("text")
         .attr("transform", "translate(" + this.width / 2 + "," + (this.height + 2 * this.margin) + ")")
         .attr("text-anchor", "middle")

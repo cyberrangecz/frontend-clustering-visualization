@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import {Component, Input, OnChanges, OnInit, ViewEncapsulation} from '@angular/core';
 import { D3, D3Service } from '@muni-kypo-crp/d3-service';
 import { BaseConfig } from '../../../models/base-config';
 import { AppConfig } from '../../../../app.config';
@@ -13,15 +13,15 @@ import {EuclidianDoublePoint, Point} from "../../../models/eucledian-double-poin
   styleUrls: ['./radar-chart.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class RadarChartComponent implements OnChanges {
+export class RadarChartComponent implements OnChanges, OnInit {
 
   @Input() visualizationData: VisualizationData;
   @Input() isStandalone: boolean;
   @Input() numOfClusters: number;
 
   private readonly d3: D3;
-  private readonly radialScale;
-  private readonly smallScale;
+  private radialScale;
+  private smallScale;
   private chartArea;
   private features: string[];
   private featureTooltips: string[];
@@ -34,9 +34,11 @@ export class RadarChartComponent implements OnChanges {
   private width: number = 450;
   private height: number = 400;
   private tooltip: any;
+  private globalMin: number = Number.MAX_VALUE;
 
   public errorMessage: string = null;
   public showInfo: boolean;
+  public numberOfParticipants: number;
 
   constructor(
     d3Service: D3Service,
@@ -49,7 +51,7 @@ export class RadarChartComponent implements OnChanges {
         .range(appConfig.radialScaleRange);
     this.smallScale = this.d3.scaleLinear()
         .domain(appConfig.radialScaleDomain)
-        .range([0, 80]);
+        .range([0, 62]);
     this.features = this.appConfig.features;
     this.featureTooltips = this.appConfig.featureTooltips;
     this.drawChartBase({
@@ -62,11 +64,66 @@ export class RadarChartComponent implements OnChanges {
     );
   }
 
+  ngOnInit(): void {
+    this.setBounds();
+  }
+
   ngOnChanges(): void {
     if (this.visualizationData != undefined) {
-      console.log(this.visualizationData);
+      this.numberOfParticipants = this.getNumParticipants();
+      this.normalizeData(); //does not scale the chart too well..
       this.drawChart();
     }
+  }
+
+  getNumParticipants(): number {
+    let participants = 0;
+    this.visualizationData.radarData.forEach(function (data) {
+        participants += data.points.length;
+    });
+    return participants;
+  }
+
+  setBounds() {
+    let min = Number.MAX_VALUE;
+    let max = Number.MIN_VALUE;
+    const radarData = this.visualizationData.radarData;
+
+    radarData.forEach(function(d) {
+      min = Math.min(Math.min(...d.center.point), min);
+      max = Math.max(Math.max(...d.center.point), max);
+    });
+
+    /*this.radialScale = this.d3.scaleLinear()
+        .domain([min, max])
+        .range(this.appConfig.radialScaleRange);
+
+    this.smallScale = this.d3.scaleLinear()
+        .domain([min, max])
+        .range([0, 62]);*/
+  }
+
+  // normalize to fit the chart
+  normalizeData() {
+    let min = Number.MAX_VALUE;
+    let max = Number.MIN_VALUE;
+    const radarData = this.visualizationData.radarData;
+
+    radarData.forEach(function(d) {
+      min = Math.min(Math.min(...d.center.point), min);
+      max = Math.max(Math.max(...d.center.point), max);
+    });
+
+    radarData.forEach((d, i) => {
+      d.center.point.forEach ((p, j) => {
+        /*if (p < this.appConfig.radialScaleDomain[0]) {
+          this.visualizationData.radarData[i].center.point[j] = this.appConfig.radialScaleDomain[0];
+        }
+        if (p > this.appConfig.radialScaleDomain[1]) {
+          this.visualizationData.radarData[i].center.point[j] = this.appConfig.radialScaleDomain[1];
+        }*/
+        this.visualizationData.radarData[i].center.point[j] = ((p-min)/(max-min))*5-1;
+      })})
   }
 
   drawChart(): void {
@@ -102,10 +159,11 @@ export class RadarChartComponent implements OnChanges {
 
      smallChartsClipPath.append("text")
           .text("Cluster with n="+ cluster.points.length)
-          .attr("x", 120)
+          .attr("x", 130)
           .attr("y", 80)
-          .style("font-weight", "bold");
-      let ticks = [-1, -0.5, 0, 0.5, 1, 1.5, 2, 2.5, 3];
+          .style("font-weight", "500");
+      //let ticks = [-0.7, 0, 0.7, 1.4, 2.1, 2.8, 3.5, 4.2];
+      let ticks = [-0.4, 0.4, 1.2, 2, 2.8, 3.6, 4.4];
       ticks.forEach(t =>
           smallChartsClipPath.append("circle")
               .attr("cx", 190)
@@ -119,8 +177,8 @@ export class RadarChartComponent implements OnChanges {
       for (let i = 0; i < this.features.length; i++) {
         let ft_name = this.features[i];
         let angle = (Math.PI / 2) + (2 * Math.PI * i / this.features.length);
-        let line_coordinate = this.angleToCoordinate(angle, 3, radialScaleSmall);
-        let label_coordinate = this.angleToCoordinate(angle, 3.6, radialScaleSmall);
+        let line_coordinate = this.angleToCoordinate(angle, 4.5, radialScaleSmall);
+        let label_coordinate = this.angleToCoordinate(angle, 4.2, radialScaleSmall);
 
         //draw axis line
         smallChartsClipPath.append("line")
@@ -185,8 +243,16 @@ export class RadarChartComponent implements OnChanges {
         .attr("x", 0)
         .attr("y", 0);
 
+    this.gPlot.append("text")
+        .text("Dataset with " + this.numberOfParticipants + " trainees in total")
+        .attr("x", 120)
+        .attr("y", 80)
+        .style("font-weight", "500")
+        .style("font-size", "10px");
+
     // radar circles
-    let ticks = [-1, -0.5, 0, 0.5, 1, 1.5, 2, 2.5, 3];
+    //let ticks = [-1, -0.5, 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4];
+    let ticks = [-0.7, 0, 0.7, 1.4, 2.1, 2.8, 3.5, 4.2];
     ticks.forEach(t =>
         this.gPlot.append("circle")
             .attr("cx", 190)
@@ -203,8 +269,8 @@ export class RadarChartComponent implements OnChanges {
       let ft_name = this.features[i];
       let ft_tooltip = this.featureTooltips[i];
       let angle = (Math.PI / 2) + (2 * Math.PI * i / this.features.length);
-      let line_coordinate = this.angleToCoordinate(angle, 3, this.radialScale);
-      let label_coordinate = this.angleToCoordinate(angle, 3.6, this.radialScale);
+      let line_coordinate = this.angleToCoordinate(angle, 4.5, this.radialScale);
+      let label_coordinate = this.angleToCoordinate(angle, 4.5, this.radialScale);
 
     //draw axis line
     this.gPlot.append("line")

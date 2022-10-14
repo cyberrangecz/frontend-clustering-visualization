@@ -3,7 +3,7 @@
 			[visualizationData]="lineData$"
 			[trainingDefinitionId]="trainingDefinitionId"
 			[trainingInstanceId]="trainingInstanceId"
-			[numOfClusters]="numOfClusters"
+			[elbowNumClusters]="elbowNumClusters"
 			[includeInButtonToggle]="true">
 	</kypo-viz-clustering-line-chart>
 	<kypo-viz-clustering-scatter-plot
@@ -12,6 +12,7 @@
 			[trainingDefinitionId]="trainingDefinitionId"
 			[trainingInstanceId]="trainingInstanceId"
 			[numOfClusters]="numOfClusters"
+			[isStandalone]="true"
 	></kypo-viz-clustering-scatter-plot>
 	<kypo-viz-clustering-radar-chart
 			*ngIf="selectedComponent == 2"

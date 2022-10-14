@@ -12,6 +12,7 @@ import {Components} from "../../models/components-enum";
 })
 export class VisualizationsComponent implements OnInit, OnChanges {
 
+  @Input() level: string = "";
   @Input() trainingDefinitionId: number;
   @Input() trainingInstanceId: number;
   @Input() numOfClusters: number;
@@ -21,6 +22,7 @@ export class VisualizationsComponent implements OnInit, OnChanges {
 
   private requestedFeature: Clusterables;
 
+  elbowNumClusters: number = 15; // this ensures we dont load data after every line chart change (15 clusters should be enough)
   lineData$: Observable<VisualizationData>;
   visualizationData$: Observable<VisualizationData>;
   radarChartData$: Observable<VisualizationData>;
@@ -45,18 +47,18 @@ export class VisualizationsComponent implements OnInit, OnChanges {
   private loadData() {
     this.visualizationDataService.selectedFeature = this.selectedFeature;
 
-    const lineService = this.visualizationDataService.getLineData(this.trainingDefinitionId, this.numOfClusters);
+    const lineService = this.visualizationDataService.getLineData(this.trainingDefinitionId, this.elbowNumClusters, this.level);
     lineService.subscribe((res) => {
       this.lineData$ = res;
     });
     if (this.selectedFeature == 0 || this.selectedFeature == 1) {
-      const scatterService = this.visualizationDataService.getData(this.trainingDefinitionId, this.numOfClusters);
+      const scatterService = this.visualizationDataService.getData(this.trainingDefinitionId, this.numOfClusters, this.level);
       scatterService.subscribe((res) => {
         this.visualizationData$ = res;
       });
     }
     if (this.selectedFeature == 2) {
-      const radarService = this.visualizationDataService.getRadarData(this.trainingDefinitionId, this.numOfClusters);
+      const radarService = this.visualizationDataService.getRadarData(this.trainingDefinitionId, this.numOfClusters, this.level);
       radarService.subscribe((res) => {
         this.radarChartData$ = res;
       });

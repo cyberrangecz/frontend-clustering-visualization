@@ -12,3 +12,20 @@
     pointer-events: none;
     font-family: 'Roboto', sans-serif;
 }
+
+h2 {
+    margin: 20px;
+    font-size: 23px;
+    font-weight: 400;
+    display: inline;
+}
+
+#scatterDiv #show-info {
+    margin-bottom: 10px;
+}
+
+button#show-info {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+}

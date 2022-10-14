@@ -2,9 +2,6 @@ import {Component, Input, OnChanges} from '@angular/core';
 import {D3, D3Service} from "@muni-kypo-crp/d3-service";
 import {AppConfig} from "../../../../app.config";
 import {VisualizationsDataService} from "../../../services/visualizations-data.service";
-import {Clusterables} from "../../../models/clusterables-enum";
-import {WrongFlags} from "../../../models/wrong-flags";
-import {TimeAfterHint} from "../../../models/time-after-hint";
 
 @Component({
   selector: 'kypo-viz-clustering-scatter-plot',
@@ -17,6 +14,7 @@ export class ScatterPlotComponent implements OnChanges {
   @Input() trainingDefinitionId: number;
   @Input() trainingInstanceId: number;
   @Input() numOfClusters: number;
+  @Input() isStandalone: boolean;
 
   private readonly d3: D3;
   private data: any[] = [];
@@ -25,9 +23,6 @@ export class ScatterPlotComponent implements OnChanges {
   private topMargin = 40;
   private width = 660;
   private height = 380;
-  options: Map<number, boolean> = new Map();
-
-
   private svg: any;
   private x: d3.ScaleLinear<number, number>;
   private y: any;
@@ -37,6 +32,9 @@ export class ScatterPlotComponent implements OnChanges {
   private yAxis: any;
   private dataPoints: any;
   private tooltip: any;
+  options: Map<number, boolean> = new Map();
+
+  public showInfo: boolean;
 
   constructor(d3Service: D3Service,
               private visualizationDataService: VisualizationsDataService,
@@ -50,6 +48,9 @@ export class ScatterPlotComponent implements OnChanges {
     }
   }
 
+  /**
+   * A (hopefully) temporal function to **really** show normalized data (in interval <0,1>)
+   */
   normalizeData() {
     let minX = Number.MAX_VALUE, minY = Number.MAX_VALUE;
     let maxX = Number.MIN_VALUE, maxY = Number.MIN_VALUE;
@@ -85,6 +86,8 @@ export class ScatterPlotComponent implements OnChanges {
         point[yValue + "Normalized"] = (point[yValue] - minY) / (maxY - minY);
       })
     });
+
+    console.log(this.visualizationData.clusterData)
   }
 
   createScatter(): void {
@@ -136,9 +139,8 @@ export class ScatterPlotComponent implements OnChanges {
     this.x = d3.scaleLinear()
         /*.domain(d3.extent(this.data.map(value =>
             this.visualizationDataService.getX(value))) as [number, number])*/
-        .domain([-0.1,1.1])
-        .range([0, this.width - this.margin])
-        .nice();
+        .domain([-0.02,1.02])
+        .range([0, this.width - this.margin]);
 
     this.xRef = this.x.copy();
     this.xAxis = this.svg.append("g")
@@ -152,9 +154,8 @@ export class ScatterPlotComponent implements OnChanges {
     this.y = d3.scaleLinear()
         /*.domain(d3.extent(this.data.map(value =>
             this.visualizationDataService.getY(value))) as [number, number])*/
-        .domain([-0.1,1.1])
+        .domain([-0.03,1.03])
         .range([this.height, 0])
-        .nice();
 
     this.yRef = this.y.copy();
     this.yAxis = this.svg.append("g")
@@ -169,8 +170,9 @@ export class ScatterPlotComponent implements OnChanges {
 
     // Set the zoom and Pan features: how much you can zoom, on which part, and what to do when there is a zoom
     let zoom = d3.zoom()
-        .scaleExtent([1, 10])  // This control how much you can unzoom (x0.5) and zoom (x20)
+        .scaleExtent([1, 30])  // This control how much you can unzoom (x0.5) and zoom (x20)
         .extent([[0, 0], [this.width, this.height]])
+        .translateExtent([[0, 0], [this.width, this.height]])
         .on("zoom", ((event) => this.updateChart(event)))
         .filter((event) => event.type === "mousedown" || !event.button && event.ctrlKey)
 
@@ -187,7 +189,7 @@ export class ScatterPlotComponent implements OnChanges {
         .data(this.data)
         .enter()
         .append("circle")
-        .attr("cx", (d: any) => this.x(this.visualizationDataService.getX(d)+0.12))
+        .attr("cx", (d: any) => this.x(this.visualizationDataService.getX(d)+0.05))
         .attr("cy", (d: any) => this.y(this.visualizationDataService.getY(d)))
         .attr("r", 7)
         .style("opacity", .5)
@@ -234,7 +236,7 @@ export class ScatterPlotComponent implements OnChanges {
     // update circle position
     this.gPlot
         .selectAll("circle")
-        .attr("cx", (d: any) => newX(this.visualizationDataService.getX(d)+0.12))
+        .attr("cx", (d: any) => newX(this.visualizationDataService.getX(d)+0.05))
         .attr("cy", (d: any) => newY(this.visualizationDataService.getY(d)));
 
     // update text position
@@ -261,6 +263,10 @@ export class ScatterPlotComponent implements OnChanges {
         .style("border-radius", "2px")
         .style("pointer-events", "none")
         .style("font-family", "'Roboto', sans-serif")
+  }
+
+  toggleInfo() {
+    this.showInfo = !this.showInfo;
   }
 
   clear() {

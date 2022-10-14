@@ -1,1 +1,24 @@
-<div id="scatterDiv"></div>
+<div id="scatterDiv">
+    <div *ngIf="isStandalone">
+        <!-- inputs for testing purposes -->
+        <h2>Scatterplot for identifiing connections</h2>
+        <button
+                mat-mini-fab
+                color="primary"
+                id="show-info"
+                aria-label="help"
+                [attr.style]="showInfo ? 'opacity: 0.5' : 'opacity: 1'"
+                (click)="toggleInfo()">
+            <span>?</span>
+        </button>
+        <mat-card *ngIf="showInfo">Basic information
+            <mat-card-subtitle>
+                The chart shows a relation between two distinct groups of actions or behavior, helps to identify connections between them.
+            </mat-card-subtitle>
+            The elbow function:
+            <mat-card-subtitle>
+                Using the elbow as a cutoff point is used to determine the optimal number of clusters.
+            </mat-card-subtitle>
+        </mat-card>
+    </div>
+</div>

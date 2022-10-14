@@ -41,6 +41,8 @@ export const VIS_CONFIG: AppConfig = {
 		'Total time played',
 		'Hints taken across the whole game'
 	],
-	radialScaleDomain: [-1, 4.5],
-	radialScaleRange: [0, 100],
+	radialScaleDomain: [-1, 4],
+	radialScaleRange: [0, 65],
+	/*radialScaleDomain: [0, 3.15],
+	radialScaleRange: [0, 80],*/
 };

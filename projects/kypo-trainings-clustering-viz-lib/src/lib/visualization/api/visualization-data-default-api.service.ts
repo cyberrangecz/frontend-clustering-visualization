@@ -17,13 +17,10 @@ import {SseDTO} from "../DTOs/sse-dto";
 @Injectable()
 export class VisualizationDataDefaultApi extends VisualizationDataApi {
 
-    /*
-     header('Access-Control-Allow-Origin: *');
-     header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-     header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
-     */
     headers: HttpHeaders = new HttpHeaders({
         'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
         'Access-Control-Allow-Origin': '*'
     });
     options = ({ headers: this.headers });
@@ -32,16 +29,15 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
       super();
     }
 
-    // http://127.0.0.1:8080/wrongFlags/clusters?numberOfClusters=4&trainingDefinitionId=25
-    //147.251.83.5
   /**
    * Sends http request to retrieve all data for visualizations
    */
-  getVisualizationData(trainingDefinitionId: number, featureType: string, numberOfClusters: number): Observable<VisualizationData> {
+  getVisualizationData(trainingDefinitionId: number, featureType: string, numberOfClusters: number, level: string = ""): Observable<VisualizationData> {
     return this.http
       .get<VisualizationDataDTO>(
-          `http://147.251.83.5:8080/${featureType}/clusters?numberOfClusters=${numberOfClusters}&trainingDefinitionId=${trainingDefinitionId}`,
-      this.options)
+          this.configService.config.trainingServiceUrl + `visualizations/training-definitions/${trainingDefinitionId}/${featureType}/clusters`
+          //`${featureType}/clusters?numberOfClusters=${numberOfClusters}&trainingDefinitionId=${trainingDefinitionId}&level=${level}`, this.options
+      )
       .pipe(
         map(
           (response) =>
@@ -53,12 +49,11 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
     /**
      * Sends http request to retrieve data for radar chart
      */
-  getRadarChartData(trainingDefinitionId: number, numberOfClusters: number): Observable<VisualizationData> {
+  getRadarChartData(trainingDefinitionId: number, numberOfClusters: number, level: string = ""): Observable<VisualizationData> {
     return this.http
         .get<VisualizationDataDTO>(
-//`visualizations/training-definition/${trainingDefinitionId}/radar-chart`,
-            `http://147.251.83.5:8080/nDimensional/clusters?numberOfClusters=${numberOfClusters}&trainingDefinitionId=${trainingDefinitionId}`,
-            this.options
+            this.configService.config.trainingServiceUrl + `visualizations/training-definitions/${trainingDefinitionId}/radar-chart`
+            //`nDimensional/clusters?numberOfClusters=${numberOfClusters}&trainingDefinitionId=${trainingDefinitionId}&level=${level}`, this.options
         )
         .pipe(
             map(
@@ -68,13 +63,11 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
         );
   }
 
-    // http://localhost:8080/wrongFlags/sse?numberOfClusters=10&sandboxId=&trainingInstanceId=&trainingDefinitionId=25&trainingRunId=
-  getFeatureSSE(trainingDefinitionId: number, featureType: string, numOfClusters: number): Observable<SseDataMapper> {
+  getFeatureSSE(trainingDefinitionId: number, featureType: string, numOfClusters: number, level: string = ""): Observable<SseDataMapper> {
       return this.http
           .get<SseDTO>(
-          //`visualizations/training-definition/${trainingDefinitionId}/${featureType}/sse`
-              `http://147.251.83.5:8080/${featureType}/sse?numberOfClusters=${numOfClusters}&trainingDefinitionId=${trainingDefinitionId}`,
-              this.options
+              this.configService.config.trainingServiceUrl + `visualizations/training-definitions/${trainingDefinitionId}/${featureType}/sse`
+              //`${featureType}/sse?numberOfClusters=${numOfClusters}&trainingDefinitionId=${trainingDefinitionId}&level=${level}`, this.options
           )
           .pipe(
               map(
