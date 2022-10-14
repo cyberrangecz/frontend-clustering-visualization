@@ -7,11 +7,12 @@ import { Agenda, AgendaContainer } from '@sentinel/layout';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  agendaContainers: AgendaContainer[];
 
   constructor() { }
 
   ngOnInit() {
-    const containers = [new Agenda('walkthrough', 'walkthrough')];
+    const containers = [new Agenda('Clustering', '')];
     this.agendaContainers = [new AgendaContainer('Visualizations', containers)];
   }
 }
