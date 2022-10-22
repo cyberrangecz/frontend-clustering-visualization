@@ -17,6 +17,7 @@ export class ScatterPlotComponent implements OnChanges {
   @Input() isStandalone: boolean;
 
   private readonly d3: D3;
+  private readonly chartId: string = 'scatterDiv';
   private data: any[] = [];
   private gPlot: any;
   private margin = 60;
@@ -40,6 +41,9 @@ export class ScatterPlotComponent implements OnChanges {
               private visualizationDataService: VisualizationsDataService,
               private appConfig: AppConfig) {
     this.d3 = d3Service.getD3();
+    const random = this.d3.randomInt(50, 1)();
+    this.chartId = 'scatterDiv' + random;
+    console.log('x');
   }
 
   ngOnChanges(): void {
@@ -111,7 +115,8 @@ export class ScatterPlotComponent implements OnChanges {
   }
 
   private prepareSvg(): void {
-    this.svg = this.d3.select("#scatterDiv")
+    this.svg = this.d3.select(".scatterDiv")
+        .attr('id', this.chartId)
         .append("svg")
         .attr("viewBox", "0 -20 1000 500")
         .attr("preserveAspectRatio", "xMidYMid meet");
@@ -183,13 +188,14 @@ export class ScatterPlotComponent implements OnChanges {
         }});
 
     let tooltip = this.tooltip;
+    const chartId = this.chartId;
 
     // Add scatter
     this.dataPoints = this.gPlot.selectAll("dot")
         .data(this.data)
         .enter()
         .append("circle")
-        .attr("cx", (d: any) => this.x(this.visualizationDataService.getX(d)+0.05))
+        .attr("cx", (d: any) => this.x(this.visualizationDataService.getX(d)) + this.margin)
         .attr("cy", (d: any) => this.y(this.visualizationDataService.getY(d)))
         .attr("r", 7)
         .style("opacity", .5)
@@ -203,13 +209,13 @@ export class ScatterPlotComponent implements OnChanges {
               .style('opacity', 0.9);
           tooltip
               .html("The trainee ID: " + d.userRefId)
-              .style("left", (d3.pointer(event, d3.select("#scatterDiv"))[0]-220) + "px")
-              .style("top", (d3.pointer(event, d3.select("#scatterDiv"))[1]-100) + "px")
+              .style("left", (d3.pointer(event, d3.select("#" + chartId))[0]-220) + "px")
+              .style("top", (d3.pointer(event, d3.select("#" + chartId))[1]-100) + "px")
         })
         .on("mousemove", function(event: any, d: any){
           return tooltip
-              .style("left", (d3.pointer(event, d3.select("#radar-chart"))[0]-220) + "px")
-              .style("top", (d3.pointer(event, d3.select("#radar-chart"))[1]-100) + "px")
+              .style("left", (d3.pointer(event, d3.select('#' + chartId))[0]-220) + "px")
+              .style("top", (d3.pointer(event, d3.select('#' + chartId))[1]-100) + "px")
         })
         .on("mouseout", function(){
           tooltip
@@ -236,7 +242,7 @@ export class ScatterPlotComponent implements OnChanges {
     // update circle position
     this.gPlot
         .selectAll("circle")
-        .attr("cx", (d: any) => newX(this.visualizationDataService.getX(d)+0.05))
+        .attr("cx", (d: any) => newX(this.visualizationDataService.getX(d)) + this.margin)
         .attr("cy", (d: any) => newY(this.visualizationDataService.getY(d)));
 
     // update text position
@@ -249,7 +255,7 @@ export class ScatterPlotComponent implements OnChanges {
     if (typeof this.tooltip !== 'undefined') this.tooltip.remove();
 
     this.tooltip = this.d3
-        .select('#scatterDiv')
+        .select('#' + this.chartId)
         .append('div')
         .attr('class', 'clustering-scatter-tooltip')
         .style("opacity", "0")

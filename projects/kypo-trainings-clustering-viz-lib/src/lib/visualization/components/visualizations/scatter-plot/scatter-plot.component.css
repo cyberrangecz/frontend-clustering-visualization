@@ -20,7 +20,7 @@ h2 {
     display: inline;
 }
 
-#scatterDiv #show-info {
+.scatterDiv #show-info {
     margin-bottom: 10px;
 }
 

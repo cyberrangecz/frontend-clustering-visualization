@@ -1,8 +1,29 @@
 <kypo-clustering-visualization
-            [selectedComponent]="selectedComponent"
-            [selectedFeature]="selectedFeature"
+            [selectedComponent]="clusterables.NDimensional"
+            [selectedFeature]="clusterables.NDimensional"
             [trainingDefinitionId]="trainingDefinitionId"
             [trainingInstanceId]="trainingInstanceId"
             [numOfClusters]="numOfClusters"
             [level]="level">
 </kypo-clustering-visualization>
+
+<kypo-clustering-visualization
+        [selectedComponent]="clusterables.TimeAfterHint"
+        [selectedFeature]="clusterables.TimeAfterHint"
+        [trainingDefinitionId]="trainingDefinitionId"
+        [trainingInstanceId]="trainingInstanceId"
+        [numOfClusters]="numOfClusters"
+        [level]="level"
+        [isStandalone]="false">
+</kypo-clustering-visualization>
+<!--
+<kypo-clustering-visualization
+        [selectedComponent]="clusterables.WrongFlags"
+        [selectedFeature]="clusterables.WrongFlags"
+        [trainingDefinitionId]="trainingDefinitionId"
+        [trainingInstanceId]="trainingInstanceId"
+        [numOfClusters]="numOfClusters"
+        [level]="level"
+        [isStandalone]="false">
+</kypo-clustering-visualization>
+-->

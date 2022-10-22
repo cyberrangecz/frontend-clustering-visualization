@@ -65,7 +65,7 @@ export class RadarChartComponent implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
-    this.setBounds();
+    if (this.visualizationData != undefined) this.setBounds();
   }
 
   ngOnChanges(): void {
@@ -85,6 +85,7 @@ export class RadarChartComponent implements OnChanges, OnInit {
   }
 
   setBounds() {
+    if (this.visualizationData == undefined) return;
     let min = Number.MAX_VALUE;
     let max = Number.MIN_VALUE;
     const radarData = this.visualizationData.radarData;

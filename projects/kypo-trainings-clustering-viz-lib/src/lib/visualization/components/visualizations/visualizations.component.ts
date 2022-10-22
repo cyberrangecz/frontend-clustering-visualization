@@ -18,11 +18,9 @@ export class VisualizationsComponent implements OnInit, OnChanges {
   @Input() numOfClusters: number;
   @Input() isStandalone: boolean;
   @Input() selectedComponent: Components = Components.SCATTER;
-  @Input() selectedFeature: Clusterables = Clusterables.WrongFlags;
+  @Input() selectedFeature: Clusterables = 2;//Clusterables.WrongFlags; // (wf 1, tah 2, nd 3)
 
-  private requestedFeature: Clusterables;
-
-  elbowNumClusters: number = 15; // this ensures we dont load data after every line chart change (15 clusters should be enough)
+  elbowNumClusters: number = 15; // this ensures we dont load data after every linechart change (15 clusters should be more than enough)
   lineData$: Observable<VisualizationData>;
   visualizationData$: Observable<VisualizationData>;
   radarChartData$: Observable<VisualizationData>;
@@ -32,16 +30,11 @@ export class VisualizationsComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit() {
-    this.requestedFeature = this.selectedFeature;
     this.loadData();
   }
 
   ngOnChanges() {
-    //console.log(this.trainingDefinitionId);
-    //if (this.requestedFeature != this.selectedFeature || ) {
-      this.loadData();
-      this.requestedFeature = this.selectedFeature;
-    //}
+    this.loadData();
   }
 
   private loadData() {

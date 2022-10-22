@@ -11,6 +11,7 @@ import {Clusterables} from "../../../projects/kypo-trainings-clustering-viz-lib/
 export class ClusteringOverviewComponent implements OnInit {
   @ViewChild('sidenav') sidenav: MatSidenav;
 
+  clusterables = Clusterables;
   selectedFeature : Clusterables = Clusterables.NDimensional;
   selectedComponent = this.selectedFeature;
   numOfClusters:number = 6;
