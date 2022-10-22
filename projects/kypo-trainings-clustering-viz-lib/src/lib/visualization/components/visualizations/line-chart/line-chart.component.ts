@@ -1,8 +1,7 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {D3, D3Service} from "@muni-kypo-crp/d3-service";
-import {ConfigService} from "../../../config/config.service";
 import {AppConfig} from "../../../../app.config";
-import {SseData} from "../../../models/sse-data";
+import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'kypo-viz-clustering-line-chart',
@@ -19,6 +18,7 @@ export class LineChartComponent implements OnChanges, OnInit {
 
   public showChart: boolean = true;
   public buttonKeyword: string = "Hide";
+  public id: string;
 
   private readonly d3: D3;
   private gChart: any;
@@ -37,6 +37,7 @@ export class LineChartComponent implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
+    this.id = 'line-' + uuid();
     // if we want to show the visualization as a suporting component, it only displays on demand
     if (this.includeInButtonToggle) {
       this.showChart = false;
@@ -59,7 +60,7 @@ export class LineChartComponent implements OnChanges, OnInit {
   }
 
   private createSvg(): void {
-    this.svg = this.d3.select("#chartDiv")
+    this.svg = this.d3.select("." + this.id + " #chartDiv")
         .append("svg")
         .attr("viewBox", "-50 0 1200 550")
         .attr("preserveAspectRatio", "xMidYMid meet")

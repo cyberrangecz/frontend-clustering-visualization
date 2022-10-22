@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {D3, D3Service} from "@muni-kypo-crp/d3-service";
 import {AppConfig} from "../../../../app.config";
 import {VisualizationsDataService} from "../../../services/visualizations-data.service";
@@ -17,6 +17,8 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
   @Input() numOfClusters: number;
   @Input() isStandalone: boolean;
   @Input() selectedFeature: Clusterables = 0;
+
+  @Output() info = 'The chart shows a relation between two distinct groups of actions or behavior, helps to identify connections between them.';
 
   private readonly d3: D3;
   private data: any[] = [];
@@ -63,7 +65,7 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
     let maxX = Number.MIN_VALUE, maxY = Number.MIN_VALUE;
 
     let xValue: string, yValue: string;
-    
+
     // find which features will be managed
     switch (this.selectedFeature) {
       case 0:

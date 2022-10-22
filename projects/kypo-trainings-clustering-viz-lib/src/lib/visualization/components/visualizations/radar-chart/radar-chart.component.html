@@ -13,7 +13,7 @@
 		</button>
 		<mat-card *ngIf="showInfo">Basic information
 			<mat-card-subtitle>
-				The chart displays overview of trainee groups and their playing behavior. In the small radar charts, 'n' denotes the number of trainees whose playing styles were similar. In this testing GUI, you can choose desired datasets with the input fields below.
+				{{info}}
 			</mat-card-subtitle>
 			The elbow function purpose
 			<mat-card-subtitle>
@@ -21,24 +21,6 @@
 			</mat-card-subtitle>
 		</mat-card>
 	</div>
-	<div *ngIf="!isStandalone">
-		<!-- inputs for testing purposes -->
-		<button
-				mat-mini-fab
-				color="primary"
-				id="show-info"
-				aria-label="help"
-				[attr.style]="showInfo ? 'opacity: 0.5' : 'opacity: 1'"
-				(click)="toggleInfo()">
-			<span>?</span>
-		</button>
-		<mat-card *ngIf="showInfo">Basic information
-			<mat-card-subtitle>
-				The chart displays overview of trainee groups and their playing behavior. In the small radar charts, 'n' denotes the number of trainees whose playing styles were similar.
-			</mat-card-subtitle>
-		</mat-card>
-	</div>
-	<hr style="border-top: 1px solid lightgray;">
 	<div id="radar-chart" (window:resize)="onResize()"></div>
 	<div id="small-radar-charts"></div>
 </div>

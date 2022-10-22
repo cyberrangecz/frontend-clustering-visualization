@@ -1,12 +1,16 @@
+<!-- example of use for inidividual charts rather than a complete app -->
+
+<!-- radar chart use -->
 <kypo-clustering-visualization
         [selectedComponent]="clusterables.NDimensional"
-        [selectedFeature]="clusterables.NDimensional"
+        [selectedFeature]="components.RADAR_CHART"
         [trainingDefinitionId]="trainingDefinitionId"
         [trainingInstanceId]="trainingInstanceId"
         [numOfClusters]="numOfClusters"
         [level]="level">
 </kypo-clustering-visualization>
 
+<!-- scatterplot time after hint use -->
 <kypo-clustering-visualization
         [selectedComponent]="clusterables.TimeAfterHint"
         [selectedFeature]="clusterables.TimeAfterHint"
@@ -17,6 +21,7 @@
         [isStandalone]="false">
 </kypo-clustering-visualization>
 
+<!-- scatterplot wrong flags use -->
 <kypo-clustering-visualization
         [selectedComponent]="clusterables.WrongFlags"
         [selectedFeature]="clusterables.WrongFlags"

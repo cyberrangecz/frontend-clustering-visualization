@@ -1,6 +1,7 @@
-import {Component, OnChanges, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
 import {Clusterables} from "../../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/models/clusterables-enum";
+import {Components} from "../../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/models/components-enum";
 
 @Component({
   selector: 'app-clustering-overview',
@@ -12,8 +13,9 @@ export class ClusteringOverviewComponent implements OnInit {
   @ViewChild('sidenav') sidenav: MatSidenav;
 
   clusterables = Clusterables;
+  components = Components;
   selectedFeature : Clusterables = Clusterables.NDimensional;
-  selectedComponent = this.selectedFeature;
+  selectedComponent: Components = Components.RADAR_CHART;
   numOfClusters:number = 6;
   trainingDefinitionId: number = 25;
   trainingInstanceId: number;

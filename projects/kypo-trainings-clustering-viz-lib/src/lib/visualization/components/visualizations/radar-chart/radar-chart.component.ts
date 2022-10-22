@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import { D3, D3Service } from '@muni-kypo-crp/d3-service';
 import { BaseConfig } from '../../../models/base-config';
 import { AppConfig } from '../../../../app.config';
@@ -18,6 +18,8 @@ export class RadarChartComponent implements OnChanges, OnInit {
   @Input() visualizationData: VisualizationData;
   @Input() isStandalone: boolean;
   @Input() numOfClusters: number;
+
+  @Output() info: string;
 
   private readonly d3: D3;
   private radialScale;
@@ -66,6 +68,7 @@ export class RadarChartComponent implements OnChanges, OnInit {
 
   ngOnInit(): void {
     if (this.visualizationData != undefined) this.setBounds();
+    this.info = 'The chart displays overview of trainee groups and their playing behavior. In the small radar charts, \'n\' denotes the number of trainees whose playing styles were similar. In this testing GUI, you can choose desired datasets with the input fields below.';
   }
 
   ngOnChanges(): void {
