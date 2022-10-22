@@ -1,23 +1,24 @@
-import {Component, Input, OnChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {D3, D3Service} from "@muni-kypo-crp/d3-service";
 import {AppConfig} from "../../../../app.config";
 import {VisualizationsDataService} from "../../../services/visualizations-data.service";
+import {Clusterables} from "../../../models/clusterables-enum";
 
 @Component({
   selector: 'kypo-viz-clustering-scatter-plot',
   templateUrl: './scatter-plot.component.html',
   styleUrls: ['./scatter-plot.component.css']
 })
-export class ScatterPlotComponent implements OnChanges {
+export class ScatterPlotComponent implements OnChanges, OnInit {
 
   @Input() visualizationData: {clusterData: any[]};
   @Input() trainingDefinitionId: number;
   @Input() trainingInstanceId: number;
   @Input() numOfClusters: number;
   @Input() isStandalone: boolean;
+  @Input() selectedFeature: Clusterables = 0;
 
   private readonly d3: D3;
-  private readonly chartId: string = 'scatterDiv';
   private data: any[] = [];
   private gPlot: any;
   private margin = 60;
@@ -35,15 +36,17 @@ export class ScatterPlotComponent implements OnChanges {
   private tooltip: any;
   options: Map<number, boolean> = new Map();
 
+  public chartClass: string;
   public showInfo: boolean;
 
   constructor(d3Service: D3Service,
               private visualizationDataService: VisualizationsDataService,
               private appConfig: AppConfig) {
     this.d3 = d3Service.getD3();
-    const random = this.d3.randomInt(50, 1)();
-    this.chartId = 'scatterDiv' + random;
-    console.log('x');
+  }
+
+  ngOnInit(): void {
+    this.chartClass = 'scatter-' + this.selectedFeature;
   }
 
   ngOnChanges(): void {
@@ -60,9 +63,9 @@ export class ScatterPlotComponent implements OnChanges {
     let maxX = Number.MIN_VALUE, maxY = Number.MIN_VALUE;
 
     let xValue: string, yValue: string;
-
+    
     // find which features will be managed
-    switch (this.visualizationDataService.selectedFeature) {
+    switch (this.selectedFeature) {
       case 0:
         xValue = "wrongFlagsSubmitted";
         yValue = "timePlayed";
@@ -90,8 +93,6 @@ export class ScatterPlotComponent implements OnChanges {
         point[yValue + "Normalized"] = (point[yValue] - minY) / (maxY - minY);
       })
     });
-
-    console.log(this.visualizationData.clusterData)
   }
 
   createScatter(): void {
@@ -102,7 +103,7 @@ export class ScatterPlotComponent implements OnChanges {
       cluster.points.forEach(point => {
         point.clusterId = index;
         this.data.push(point);
-        this.options.set(this.visualizationDataService.getOption(point), true);
+        this.options.set(this.visualizationDataService.getOption(point, this.selectedFeature), true);
       })
     });
     this.options = new Map();
@@ -115,8 +116,7 @@ export class ScatterPlotComponent implements OnChanges {
   }
 
   private prepareSvg(): void {
-    this.svg = this.d3.select(".scatterDiv")
-        .attr('id', this.chartId)
+    this.svg = this.d3.select('.' + this.chartClass)
         .append("svg")
         .attr("viewBox", "0 -20 1000 500")
         .attr("preserveAspectRatio", "xMidYMid meet");
@@ -153,7 +153,7 @@ export class ScatterPlotComponent implements OnChanges {
         .call(d3.axisBottom(this.x));
     this.svg.append("text")
         .attr("transform", "translate(" + this.width / 2 + "," + ( this.height + this.topMargin) + ")")
-        .text(this.visualizationDataService.getXLabel());
+        .text(this.visualizationDataService.getXLabel(this.selectedFeature));
 
     // Add Y axis
     this.y = d3.scaleLinear()
@@ -171,7 +171,7 @@ export class ScatterPlotComponent implements OnChanges {
         .attr("y", this.margin / 2 - 10)
         .attr("x", 0 - this.height / 2 + 10)
         .attr("text-anchor", "middle")
-        .text(this.visualizationDataService.getYLabel());
+        .text(this.visualizationDataService.getYLabel(this.selectedFeature));
 
     // Set the zoom and Pan features: how much you can zoom, on which part, and what to do when there is a zoom
     let zoom = d3.zoom()
@@ -188,15 +188,15 @@ export class ScatterPlotComponent implements OnChanges {
         }});
 
     let tooltip = this.tooltip;
-    const chartId = this.chartId;
+    const chartClass = this.chartClass;
 
     // Add scatter
     this.dataPoints = this.gPlot.selectAll("dot")
         .data(this.data)
         .enter()
         .append("circle")
-        .attr("cx", (d: any) => this.x(this.visualizationDataService.getX(d)) + this.margin)
-        .attr("cy", (d: any) => this.y(this.visualizationDataService.getY(d)))
+        .attr("cx", (d: any) => this.x(this.visualizationDataService.getX(d, this.selectedFeature)) + this.margin)
+        .attr("cy", (d: any) => this.y(this.visualizationDataService.getY(d, this.selectedFeature)))
         .attr("r", 7)
         .style("opacity", .5)
         .style("fill", (d: any) => this.appConfig.colors[d.clusterId])
@@ -209,13 +209,13 @@ export class ScatterPlotComponent implements OnChanges {
               .style('opacity', 0.9);
           tooltip
               .html("The trainee ID: " + d.userRefId)
-              .style("left", (d3.pointer(event, d3.select("#" + chartId))[0]-220) + "px")
-              .style("top", (d3.pointer(event, d3.select("#" + chartId))[1]-100) + "px")
+              .style("left", (d3.pointer(event, d3.select("." + chartClass))[0]-220) + "px")
+              .style("top", (d3.pointer(event, d3.select("." + chartClass))[1]-100) + "px")
         })
         .on("mousemove", function(event: any, d: any){
           return tooltip
-              .style("left", (d3.pointer(event, d3.select('#' + chartId))[0]-220) + "px")
-              .style("top", (d3.pointer(event, d3.select('#' + chartId))[1]-100) + "px")
+              .style("left", (d3.pointer(event, d3.select('#' + chartClass))[0]-220) + "px")
+              .style("top", (d3.pointer(event, d3.select('#' + chartClass))[1]-100) + "px")
         })
         .on("mouseout", function(){
           tooltip
@@ -242,20 +242,20 @@ export class ScatterPlotComponent implements OnChanges {
     // update circle position
     this.gPlot
         .selectAll("circle")
-        .attr("cx", (d: any) => newX(this.visualizationDataService.getX(d)) + this.margin)
-        .attr("cy", (d: any) => newY(this.visualizationDataService.getY(d)));
+        .attr("cx", (d: any) => newX(this.visualizationDataService.getX(d, this.selectedFeature)) + this.margin)
+        .attr("cy", (d: any) => newY(this.visualizationDataService.getY(d, this.selectedFeature)));
 
     // update text position
     this.gPlot.selectAll("text")
-        .attr("x", (d: any) => newX(this.visualizationDataService.getX(d)))
-        .attr("y", (d: any) => newY(this.visualizationDataService.getY(d)));
+        .attr("x", (d: any) => newX(this.visualizationDataService.getX(d, this.selectedFeature)))
+        .attr("y", (d: any) => newY(this.visualizationDataService.getY(d, this.selectedFeature)));
   }
 
   createTooltip() {
     if (typeof this.tooltip !== 'undefined') this.tooltip.remove();
 
     this.tooltip = this.d3
-        .select('#' + this.chartId)
+        .select('.' + this.chartClass)
         .append('div')
         .attr('class', 'clustering-scatter-tooltip')
         .style("opacity", "0")

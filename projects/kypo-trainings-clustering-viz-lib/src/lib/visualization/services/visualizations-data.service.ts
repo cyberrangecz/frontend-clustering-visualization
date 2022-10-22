@@ -26,13 +26,13 @@ export abstract class VisualizationsDataService {
 
   /* methods to get information based on selected feature */
 
-  abstract getOption(point: Clusterable): number;
+  abstract getOption(point: Clusterable, feature: Clusterables): number;
 
-  abstract getX(value: any): number;
+  abstract getX(value: any, feature: Clusterables): number;
 
-  abstract getY(value: any): number;
+  abstract getY(value: any, feature: Clusterables): number;
 
-  abstract getXLabel(): string;
+  abstract getXLabel(feature: Clusterables): string;
 
-  abstract getYLabel(): string;
+  abstract getYLabel(feature: Clusterables): string;
 }

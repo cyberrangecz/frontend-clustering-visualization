@@ -18,7 +18,7 @@ export class VisualizationsComponent implements OnInit, OnChanges {
   @Input() numOfClusters: number;
   @Input() isStandalone: boolean;
   @Input() selectedComponent: Components = Components.SCATTER;
-  @Input() selectedFeature: Clusterables = 2;//Clusterables.WrongFlags; // (wf 1, tah 2, nd 3)
+  @Input() selectedFeature: Clusterables = Clusterables.WrongFlags; // (wf 1, tah 2, nd 3)
 
   elbowNumClusters: number = 15; // this ensures we dont load data after every linechart change (15 clusters should be more than enough)
   lineData$: Observable<VisualizationData>;

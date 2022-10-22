@@ -87,16 +87,16 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
         }
     }
 
-    getOption(point: Clusterable): number {
-        switch (this._selectedFeature) {
+    getOption(point: Clusterable, feature = this._selectedFeature): number {
+        switch (feature) {
             case Clusterables.TimeAfterHint:
                 return (point as TimeAfterHint).level;
         }
         return 0;
     }
 
-    getX(value: any): number {
-        switch (this._selectedFeature) {
+    getX(value: any, feature = this._selectedFeature): number {
+        switch (feature) {
             case Clusterables.WrongFlags:
                 return (value as WrongFlags).wrongFlagsSubmittedNormalized;
             case Clusterables.TimeAfterHint:
@@ -108,8 +108,8 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
         return tmp.wrongFlagsSubmittedNormalized;
     }
 
-    getY(value: any): number {
-        switch (this._selectedFeature) {
+    getY(value: any, feature = this._selectedFeature): number {
+        switch (feature) {
             case Clusterables.WrongFlags:
                 return (value as WrongFlags).timePlayedNormalized;
             case Clusterables.TimeAfterHint:
@@ -122,8 +122,8 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
         return tmp.timePlayedNormalized;
     }
 
-    getXLabel(): string {
-        switch (this._selectedFeature) {
+    getXLabel(feature = this._selectedFeature): string {
+        switch (feature) {
             case Clusterables.WrongFlags:
                 return "Wrong flags submitted";
             case Clusterables.TimeAfterHint:
@@ -132,8 +132,8 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
         return "Feature X";
     }
 
-    getYLabel(): string {
-        switch (this._selectedFeature) {
+    getYLabel(feature = this._selectedFeature): string {
+        switch (feature) {
             case Clusterables.WrongFlags:
                 return "Time played";
             case Clusterables.TimeAfterHint:
