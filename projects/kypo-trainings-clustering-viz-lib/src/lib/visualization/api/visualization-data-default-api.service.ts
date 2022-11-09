@@ -32,12 +32,12 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
   /**
    * Sends http request to retrieve all data for visualizations
    */
-  getVisualizationData(trainingDefinitionId: number, featureType: string, numberOfClusters: number, level: string = ""): Observable<VisualizationData> {
+  getVisualizationData(trainingDefinitionId: number, featureType: string, numberOfClusters: number, instanceIds: number[], level: number): Observable<VisualizationData> {
     return this.http
       .get<VisualizationDataDTO>(
-          this.configService.config.trainingServiceUrl + `visualizations/training-definitions/${trainingDefinitionId}/${featureType}/clusters`
-          //`${featureType}/clusters?numberOfClusters=${numberOfClusters}&trainingDefinitionId=${trainingDefinitionId}&level=${level}`, this.options
-      )
+          this.configService.config.trainingServiceUrl + `visualizations/training-definitions/${trainingDefinitionId}/${featureType}`, {
+              params: this.addParams(instanceIds, level)
+          })
       .pipe(
         map(
           (response) =>
@@ -49,12 +49,12 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
     /**
      * Sends http request to retrieve data for radar chart
      */
-  getRadarChartData(trainingDefinitionId: number, numberOfClusters: number, level: string = ""): Observable<VisualizationData> {
+  getRadarChartData(trainingDefinitionId: number, numberOfClusters: number, instanceIds: number[], level: number): Observable<VisualizationData> {
     return this.http
         .get<VisualizationDataDTO>(
-            this.configService.config.trainingServiceUrl + `visualizations/training-definitions/${trainingDefinitionId}/radar-chart`
-            //`nDimensional/clusters?numberOfClusters=${numberOfClusters}&trainingDefinitionId=${trainingDefinitionId}&level=${level}`, this.options
-        )
+            this.configService.config.trainingServiceUrl + `visualizations/training-definitions/${trainingDefinitionId}/radar-chart`, {
+                params: this.addParams(instanceIds, level)
+            })
         .pipe(
             map(
                 (response) =>
@@ -63,17 +63,22 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
         );
   }
 
-  getFeatureSSE(trainingDefinitionId: number, featureType: string, numOfClusters: number, level: string = ""): Observable<SseDataMapper> {
+  getFeatureSSE(trainingDefinitionId: number, featureType: string, numOfClusters: number, instanceIds: number[], level: number): Observable<SseDataMapper> {
       return this.http
           .get<SseDTO>(
-              this.configService.config.trainingServiceUrl + `visualizations/training-definitions/${trainingDefinitionId}/${featureType}/sse`
-              //`${featureType}/sse?numberOfClusters=${numOfClusters}&trainingDefinitionId=${trainingDefinitionId}&level=${level}`, this.options
-          )
+              this.configService.config.trainingServiceUrl + `visualizations/training-definitions/${trainingDefinitionId}/${featureType}/sse`, {
+                  params: this.addParams(instanceIds, level)
+              })
           .pipe(
               map(
                   (response) =>
                       SseDataMapper.fromDTO(response)
               )
           );
+  }
+
+  private addParams(instanceIds: number[], level: number) {
+      if ((!level || level == 0) && !instanceIds) return null;
+      return (level && level !== 0) ? {instanceIds: instanceIds, levelId: level} : {instanceIds: instanceIds};
   }
 }

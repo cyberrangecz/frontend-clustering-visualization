@@ -5,9 +5,10 @@
         [selectedComponent]="clusterables.NDimensional"
         [selectedFeature]="components.RADAR_CHART"
         [trainingDefinitionId]="trainingDefinitionId"
-        [trainingInstanceId]="trainingInstanceId"
+        [trainingInstanceIds]="trainingInstanceIds"
         [numOfClusters]="numOfClusters"
-        [level]="level">
+        [level]="level"
+        (viewOpen)="toggleView($event)">
 </kypo-clustering-visualization>
 
 <!-- scatterplot time after hint use -->
@@ -15,7 +16,7 @@
         [selectedComponent]="clusterables.TimeAfterHint"
         [selectedFeature]="clusterables.TimeAfterHint"
         [trainingDefinitionId]="trainingDefinitionId"
-        [trainingInstanceId]="trainingInstanceId"
+        [trainingInstanceIds]="trainingInstanceIds"
         [numOfClusters]="numOfClusters"
         [level]="level"
         [isStandalone]="false">
@@ -26,7 +27,7 @@
         [selectedComponent]="clusterables.WrongFlags"
         [selectedFeature]="clusterables.WrongFlags"
         [trainingDefinitionId]="trainingDefinitionId"
-        [trainingInstanceId]="trainingInstanceId"
+        [trainingInstanceIds]="trainingInstanceIds"
         [numOfClusters]="numOfClusters"
         [level]="level"
         [isStandalone]="false">

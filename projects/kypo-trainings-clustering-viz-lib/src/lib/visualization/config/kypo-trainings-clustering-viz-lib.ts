@@ -1,4 +1,3 @@
 export class ClusteringVisualizationConfig {
-  trainingServiceUrl: string;
-  elasticSearchServiceUrl: string
+  trainingServiceUrl: string
 }

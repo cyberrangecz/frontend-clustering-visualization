@@ -18,8 +18,8 @@ export class ClusteringOverviewComponent implements OnInit {
   selectedComponent: Components = Components.RADAR_CHART;
   numOfClusters:number = 6;
   trainingDefinitionId: number = 25;
-  trainingInstanceId: number;
-  level: string = "";
+  trainingInstanceIds: number[];
+  level: number = 0;
   isSubmenuOpen: boolean = true;
 
   // for analysis with standalone backend
@@ -64,6 +64,10 @@ export class ClusteringOverviewComponent implements OnInit {
   }
 
   selectionChange() {
-    this.level = "";
+    this.level = 0;
+  }
+
+  toggleView(isOpen: boolean) {
+    console.log(isOpen);
   }
 }

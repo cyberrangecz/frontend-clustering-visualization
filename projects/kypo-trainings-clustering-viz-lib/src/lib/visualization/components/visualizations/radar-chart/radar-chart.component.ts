@@ -19,9 +19,8 @@ export class RadarChartComponent implements OnChanges, OnInit {
   @Input() isStandalone: boolean;
   @Input() numOfClusters: number;
 
-  @Output() info: string;
-
   private readonly d3: D3;
+
   private radialScale;
   private smallScale;
   private chartArea;
@@ -30,14 +29,15 @@ export class RadarChartComponent implements OnChanges, OnInit {
   private svg: any;
   private smallSvgs: any[] = [];
   private gPlot: any;
-
   private wrapperWidth: number;
+
   private wrapperHeight: number;
   private width: number = 450;
   private height: number = 400;
   private tooltip: any;
   private globalMin: number = Number.MAX_VALUE;
 
+  public info: string;
   public errorMessage: string = null;
   public showInfo: boolean;
   public numberOfParticipants: number;

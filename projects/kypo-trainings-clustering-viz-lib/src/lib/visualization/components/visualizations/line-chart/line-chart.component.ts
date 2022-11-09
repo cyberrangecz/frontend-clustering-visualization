@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {D3, D3Service} from "@muni-kypo-crp/d3-service";
 import {AppConfig} from "../../../../app.config";
 import { v4 as uuid } from 'uuid';
@@ -16,7 +16,9 @@ export class LineChartComponent implements OnChanges, OnInit {
   @Input() elbowNumClusters: number;
   @Input() includeInButtonToggle: boolean = false;
 
-  public showChart: boolean = true;
+  @Output() viewOpen: EventEmitter<boolean> = new EventEmitter();
+
+  public showChart = true;
   public buttonKeyword: string = "Hide";
   public id: string;
 
@@ -62,7 +64,7 @@ export class LineChartComponent implements OnChanges, OnInit {
   private createSvg(): void {
     this.svg = this.d3.select("." + this.id + " #chartDiv")
         .append("svg")
-        .attr("viewBox", "-50 0 1200 550")
+        .attr("viewBox", "-50 0 900 550")
         .attr("preserveAspectRatio", "xMidYMid meet")
     this.gChart = this.svg
         .append("g")
@@ -131,6 +133,7 @@ export class LineChartComponent implements OnChanges, OnInit {
   public toggleChartVisibility() {
     this.showChart = !this.showChart;
     this.buttonKeyword = this.showChart ? "Hide" : "Show";
+    this.viewOpen.emit(this.showChart);
   }
 
   private clear() {

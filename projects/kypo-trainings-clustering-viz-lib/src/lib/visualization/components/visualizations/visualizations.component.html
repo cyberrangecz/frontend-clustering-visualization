@@ -3,16 +3,17 @@
 	<kypo-viz-clustering-line-chart
 			[visualizationData]="lineData$"
 			[trainingDefinitionId]="trainingDefinitionId"
-			[trainingInstanceId]="trainingInstanceId"
+			[trainingInstanceId]="trainingInstanceIds"
 			[elbowNumClusters]="elbowNumClusters"
-			[includeInButtonToggle]="true">
-	</kypo-viz-clustering-line-chart>
+			[includeInButtonToggle]="true"
+			(viewOpen)="toggleView($event)"
+	></kypo-viz-clustering-line-chart>
 
 	<kypo-viz-clustering-scatter-plot
 			*ngIf="selectedComponent != 2"
 			[visualizationData]="visualizationData$"
 			[trainingDefinitionId]="trainingDefinitionId"
-			[trainingInstanceId]="trainingInstanceId"
+			[trainingInstanceId]="trainingInstanceIds"
 			[numOfClusters]="numOfClusters"
 			[isStandalone]="isStandalone"
 			[selectedFeature]="selectedFeature"

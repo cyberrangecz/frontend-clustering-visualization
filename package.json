@@ -34,7 +34,7 @@
     "@angular/platform-browser": "^14.2.6",
     "@angular/platform-browser-dynamic": "^14.2.6",
     "@angular/router": "^14.2.6",
-    "@muni-kypo-crp/d3-service": "~13.0.0",
+    "@muni-kypo-crp/d3-service": "~14.0.0",
     "@sentinel/auth": "~14.0.0",
     "@sentinel/common": "~14.0.1",
     "@sentinel/layout": "~14.0.0",

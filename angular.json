@@ -4,24 +4,24 @@
   "newProjectRoot": "projects",
   "projects": {
     "example-app": {
-      "root": "projects/kypo-trainings-clustering-viz-lib",
-      "sourceRoot": "projects/kypo-trainings-clustering-viz-lib/src",
+      "root": "",
+      "sourceRoot": "src",
       "projectType": "application",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/example-app",
-            "index": "projects/kypo-trainings-clustering-viz-lib/src/index.html",
-            "main": "projects/kypo-trainings-clustering-viz-lib/src/main.ts",
-            "tsConfig": "projects/kypo-trainings-clustering-viz-lib/src/tsconfig.app.json",
-            "polyfills": "projects/kypo-trainings-clustering-viz-lib/src/polyfills.ts",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "polyfills": "src/polyfills.ts",
             "assets": [
-              "projects/kypo-trainings-clustering-viz-lib/src/assets",
-              "projects/kypo-trainings-clustering-viz-lib/src/favicon.ico"
+              "src/assets",
+              "src/favicon.ico"
             ],
             "styles": [
-              "projects/kypo-trainings-clustering-viz-lib/src/styles.css"
+              "src/styles.css"
             ],
             "scripts": [],
             "vendorChunk": true,
@@ -35,14 +35,8 @@
             "production": {
               "budgets": [
                 {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "maximumWarning": "6kb"
                 }
               ],
               "optimization": true,
@@ -54,8 +48,8 @@
               "buildOptimizer": true,
               "fileReplacements": [
                 {
-                  "replace": "projects/kypo-trainings-clustering-viz-lib/src/environments/environment.ts",
-                  "with": "projects/kypo-trainings-clustering-viz-lib/src/environments/environment.prod.ts"
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
                 }
               ]
             },
@@ -68,8 +62,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "projects/kypo-trainings-clustering-viz-lib/src/environments/environment.ts",
-                  "with": "projects/kypo-trainings-clustering-viz-lib/src/environments/environment.local.ts"
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
                 }
               ]
             }
@@ -99,17 +93,17 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/kypo-trainings-clustering-viz-lib/src/test.ts",
+            "main": "src/test.ts",
             "karmaConfig": "./karma.conf.js",
-            "polyfills": "projects/kypo-trainings-clustering-viz-lib/src/polyfills.ts",
-            "tsConfig": "projects/kypo-trainings-clustering-viz-lib/src/tsconfig.spec.json",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
-              "projects/kypo-trainings-clustering-viz-lib/src/styles.css"
+              "src/styles.css"
             ],
             "assets": [
-              "projects/kypo-trainings-clustering-viz-lib/src/assets",
-              "projects/kypo-trainings-clustering-viz-lib/src/favicon.ico"
+              "src/assets",
+              "src/favicon.ico"
             ]
           }
         },
@@ -117,8 +111,8 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "projects/kypo-trainings-clustering-viz-lib/src/**/*.ts",
-              "projects/kypo-trainings-clustering-viz-lib/src/**/*.component.html"
+              "src/**/*.ts",
+              "src/**/*.component.html"
             ]
           }
         }

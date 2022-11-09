@@ -1,4 +1,4 @@
-module.exports = function() {
+clusteringDB = function() {
   return {
     clusters: [
       {
@@ -1670,3 +1670,5 @@ module.exports = function() {
     ]
   }
 };
+module.exports = clusteringDB;
+module.exports.get = clusteringDB();
