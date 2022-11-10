@@ -64,7 +64,7 @@ export class LineChartComponent implements OnChanges, OnInit {
   private createSvg(): void {
     this.svg = this.d3.select("." + this.id + " #chartDiv")
         .append("svg")
-        .attr("viewBox", "-50 0 900 550")
+        .attr("viewBox", "-50 0 1000 550")
         .attr("preserveAspectRatio", "xMidYMid meet")
     this.gChart = this.svg
         .append("g")
@@ -82,6 +82,7 @@ export class LineChartComponent implements OnChanges, OnInit {
         .rangeRound([0, this.width]);
     this.xAxis = this.gChart.append("g")
         .attr("transform", "translate(0," + this.height + ")")
+        .style("font-size", "15px")
         .call(d3.axisBottom(this.x).ticks(this.elbowNumClusters));
     this.gChart.append("text")
         .attr("transform", "translate(" + this.width / 2 + "," + (this.height + 2 * this.margin) + ")")
@@ -95,6 +96,7 @@ export class LineChartComponent implements OnChanges, OnInit {
         .nice();
 
     this.yAxis = this.gChart.append("g")
+        .style("font-size", "15px")
         .call(d3.axisLeft(this.y));
     this.gChart.append("text")
         .attr("transform", "rotate(-90)")

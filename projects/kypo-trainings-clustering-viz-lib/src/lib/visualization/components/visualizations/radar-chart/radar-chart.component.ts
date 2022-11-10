@@ -162,8 +162,8 @@ export class RadarChartComponent implements OnChanges, OnInit {
           .attr("clip-path", "url(#clip)")
 
      smallChartsClipPath.append("text")
-          .text("Cluster with n="+ cluster.points.length)
-          .attr("x", 130)
+          .text("Cluster with "+ cluster.points.length + " trainees")
+          .attr("x", 110)
           .attr("y", 80)
           .style("font-weight", "500");
       //let ticks = [-0.7, 0, 0.7, 1.4, 2.1, 2.8, 3.5, 4.2];

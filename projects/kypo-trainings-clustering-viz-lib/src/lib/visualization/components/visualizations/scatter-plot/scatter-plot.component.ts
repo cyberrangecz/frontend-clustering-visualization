@@ -120,7 +120,7 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
   private prepareSvg(): void {
     this.svg = this.d3.select('.' + this.chartClass)
         .append("svg")
-        .attr("viewBox", "0 -20 1000 500")
+        .attr("viewBox", "0 -20 750 500")
         .attr("preserveAspectRatio", "xMidYMid meet");
     this.svg.append("rect")
         .attr("width", this.width - this.margin)
@@ -211,13 +211,13 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
               .style('opacity', 0.9);
           tooltip
               .html("The trainee ID: " + d.userRefId)
-              .style("left", (d3.pointer(event, d3.select("." + chartClass))[0]-220) + "px")
-              .style("top", (d3.pointer(event, d3.select("." + chartClass))[1]-100) + "px")
+              .style("left", (d3.pointer(event, d3.select("." + chartClass))[0]) + "px")
+              .style("top", (d3.pointer(event, d3.select("." + chartClass))[1]) + "px")
         })
         .on("mousemove", function(event: any, d: any){
           return tooltip
-              .style("left", (d3.pointer(event, d3.select('#' + chartClass))[0]-220) + "px")
-              .style("top", (d3.pointer(event, d3.select('#' + chartClass))[1]-100) + "px")
+              .style("left", (d3.pointer(event, d3.select('#' + chartClass))[0]) + "px")
+              .style("top", (d3.pointer(event, d3.select('#' + chartClass))[1]) + "px")
         })
         .on("mouseout", function(){
           tooltip
