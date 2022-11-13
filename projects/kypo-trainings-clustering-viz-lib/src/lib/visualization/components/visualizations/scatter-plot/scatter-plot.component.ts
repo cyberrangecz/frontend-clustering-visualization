@@ -203,6 +203,8 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
         .style("opacity", .5)
         .style("fill", (d: any) => this.appConfig.colors[d.clusterId])
         .on("mouseover", function(event, d){
+          const vizBox = document.querySelector('#scatterClustersSvgPlaceholder kypo-clustering-visualization').getBoundingClientRect();
+
           tooltip
               .transition()
               .ease(d3.easeLinear,2)
@@ -211,13 +213,15 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
               .style('opacity', 0.9);
           tooltip
               .html("The trainee ID: " + d.userRefId)
-              .style("left", (d3.pointer(event, d3.select("." + chartClass))[0]) + "px")
-              .style("top", (d3.pointer(event, d3.select("." + chartClass))[1]) + "px")
+              .style("left", (event.clientX - vizBox.x) + "px")
+              .style("top", (event.clientY - vizBox.y - 10) + "px")
         })
         .on("mousemove", function(event: any, d: any){
+          const vizBox = document.querySelector('#scatterClustersSvgPlaceholder kypo-clustering-visualization').getBoundingClientRect();
+
           return tooltip
-              .style("left", (d3.pointer(event, d3.select('#' + chartClass))[0]) + "px")
-              .style("top", (d3.pointer(event, d3.select('#' + chartClass))[1]) + "px")
+              .style("left", (event.clientX - vizBox.x) + "px")
+              .style("top", (event.clientY - vizBox.y - 10) + "px")
         })
         .on("mouseout", function(){
           tooltip

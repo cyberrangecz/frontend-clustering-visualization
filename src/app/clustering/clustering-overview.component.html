@@ -1,35 +1,41 @@
 <!-- example of use for inidividual charts rather than a complete app -->
 
 <!-- radar chart use -->
-<kypo-clustering-visualization
-        [selectedComponent]="clusterables.NDimensional"
-        [selectedFeature]="components.RADAR_CHART"
-        [trainingDefinitionId]="trainingDefinitionId"
-        [trainingInstanceIds]="trainingInstanceIds"
-        [numOfClusters]="numOfClusters"
-        [level]="level"
-        (viewOpen)="toggleView($event)">
-</kypo-clustering-visualization>
+<div id="radarchartPlaceholder">
+    <kypo-clustering-visualization
+            [selectedComponent]="clusterables.NDimensional"
+            [selectedFeature]="components.RADAR_CHART"
+            [trainingDefinitionId]="trainingDefinitionId"
+            [trainingInstanceIds]="trainingInstanceIds"
+            [numOfClusters]="numOfClusters"
+            [level]="level"
+            (viewOpen)="toggleView($event)">
+    </kypo-clustering-visualization>
+</div>
 
 <!-- scatterplot time after hint use -->
-<kypo-clustering-visualization
-        [selectedComponent]="clusterables.TimeAfterHint"
-        [selectedFeature]="clusterables.TimeAfterHint"
-        [trainingDefinitionId]="trainingDefinitionId"
-        [trainingInstanceIds]="trainingInstanceIds"
-        [numOfClusters]="numOfClusters"
-        [level]="level"
-        [isStandalone]="false">
-</kypo-clustering-visualization>
+<div id="scatterClustersSvgPlaceholder" class="tAH">
+    <kypo-clustering-visualization
+            [selectedComponent]="clusterables.TimeAfterHint"
+            [selectedFeature]="clusterables.TimeAfterHint"
+            [trainingDefinitionId]="trainingDefinitionId"
+            [trainingInstanceIds]="trainingInstanceIds"
+            [numOfClusters]="numOfClusters"
+            [level]="level"
+            [isStandalone]="false">
+    </kypo-clustering-visualization>
+</div>
 
 <!-- scatterplot wrong flags use -->
-<kypo-clustering-visualization
-        [selectedComponent]="clusterables.WrongFlags"
-        [selectedFeature]="clusterables.WrongFlags"
-        [trainingDefinitionId]="trainingDefinitionId"
-        [trainingInstanceIds]="trainingInstanceIds"
-        [numOfClusters]="numOfClusters"
-        [level]="level"
-        [isStandalone]="false">
-</kypo-clustering-visualization>
+<div id="scatterClustersSvgPlaceholder_" class="wF">
+    <kypo-clustering-visualization
+            [selectedComponent]="clusterables.WrongFlags"
+            [selectedFeature]="clusterables.WrongFlags"
+            [trainingDefinitionId]="trainingDefinitionId"
+            [trainingInstanceIds]="trainingInstanceIds"
+            [numOfClusters]="numOfClusters"
+            [level]="level"
+            [isStandalone]="false">
+    </kypo-clustering-visualization>
+</div>
 

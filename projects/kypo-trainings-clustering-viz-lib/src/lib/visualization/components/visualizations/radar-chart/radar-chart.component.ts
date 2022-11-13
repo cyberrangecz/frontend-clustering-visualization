@@ -346,13 +346,13 @@ export class RadarChartComponent implements OnChanges, OnInit {
           .attr("clusterNum", (d, i) => i)
           .on("mouseover", function(event, d) {
             const clusterSize = data[d3.select(this).attr("clusterNum")].points.length;
+            const vizBox = document.querySelector('#radarchartPlaceholder kypo-clustering-visualization').getBoundingClientRect();
             tooltip
-                .style("left", (d3.pointer(event, d3.select("#radar-chart"))[0]-200) + "px")
-                .style("top", (d3.pointer(event, d3.select("#radar-chart"))[1]-100) + "px")
+                .style("left", (event.clientX - vizBox.x) + "px")
+                .style("top", (event.clientY - vizBox.y - 20) + "px")
                 .text("Cluster of " + clusterSize + " trainees")
                 .transition("ease")
                 .style('opacity', 1);
-
             let z = "path#" + d3.select(this).attr("id");
             d3.selectAll(".cluster")
                 .transition("ease")
@@ -362,9 +362,10 @@ export class RadarChartComponent implements OnChanges, OnInit {
                 .style("fill-opacity", .6);
           })
           .on("mousemove", function(event) {
+            const vizBox = document.querySelector('#radarchartPlaceholder kypo-clustering-visualization').getBoundingClientRect();
             tooltip
-                .style("left", (d3.pointer(event, d3.select("#radar-chart"))[0]-200) + "px")
-                .style("top", (d3.pointer(event, d3.select("#radar-chart"))[1]-100) + "px");
+                .style("left", (event.clientX - vizBox.x) + "px")
+                .style("top", (event.clientY - vizBox.y - 20) + "px")
           })
           .on('mouseout', function(){
               tooltip

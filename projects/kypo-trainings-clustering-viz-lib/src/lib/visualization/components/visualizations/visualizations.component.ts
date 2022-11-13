@@ -38,6 +38,7 @@ export class VisualizationsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
+    console.log(this.level);
     this.loadData();
   }
 
