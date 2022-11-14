@@ -19,7 +19,7 @@ export class ClusteringOverviewComponent {
   numOfClusters = 6;
   trainingDefinitionId = 25;
   trainingInstanceIds: number[];
-  level: number = 0;
+  level = 0;
   isSubmenuOpen = true;
 
   // for analysis with standalone backend
