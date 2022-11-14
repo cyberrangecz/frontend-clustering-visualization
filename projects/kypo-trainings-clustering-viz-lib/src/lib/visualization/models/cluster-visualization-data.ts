@@ -1,6 +1,6 @@
-import {Clusterable} from './clusterable';
+import { Clusterable } from "./clusterable";
 
 export class ClusterVisualizationData {
-	points: Clusterable[];
-	center: Clusterable[];
+  points: Clusterable[];
+  center: Clusterable[];
 }

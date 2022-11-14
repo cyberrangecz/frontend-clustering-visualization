@@ -1,6 +1,6 @@
 export class trainingDataset {
-    playerId: number;
-    events: Event[];
-    eventsGroups;
-    totalTime: number;
+  playerId: number;
+  events: Event[];
+  eventsGroups;
+  totalTime: number;
 }

@@ -1,4 +1,4 @@
 export class Clusterable {
-    userRefId: number;
-    clusterId: number;
+  userRefId: number;
+  clusterId: number;
 }

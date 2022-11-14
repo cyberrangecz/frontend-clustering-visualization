@@ -1,26 +1,42 @@
-import { Observable, ReplaySubject } from 'rxjs';
-import { filter } from 'rxjs/operators';
-import {VisualizationData} from '../models/visualization-data';
-import {Clusterables} from '../models/clusterables-enum';
-import {Clusterable} from '../models/clusterable';
+import { Observable, ReplaySubject } from "rxjs";
+import { filter } from "rxjs/operators";
+import { VisualizationData } from "../models/visualization-data";
+import { Clusterables } from "../models/clusterables-enum";
+import { Clusterable } from "../models/clusterable";
 
 export abstract class VisualizationsDataService {
+  protected visualizationDataSubject$: ReplaySubject<VisualizationData> =
+    new ReplaySubject();
 
-  protected visualizationDataSubject$: ReplaySubject<VisualizationData> = new ReplaySubject();
-
-  visualizationData$: Observable<VisualizationData> = this.visualizationDataSubject$
-    .asObservable()
-    .pipe(filter((vd) => vd !== undefined && vd !== null));
+  visualizationData$: Observable<VisualizationData> =
+    this.visualizationDataSubject$
+      .asObservable()
+      .pipe(filter((vd) => vd !== undefined && vd !== null));
 
   abstract set selectedFeature(value: Clusterables);
 
   abstract get selectedFeature();
 
-  abstract getData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number);
+  abstract getData(
+    trainingDefinitionId: number,
+    numOfClusters: number,
+    instanceIds: number[],
+    level: number
+  );
 
-  abstract getRadarData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number);
+  abstract getRadarData(
+    trainingDefinitionId: number,
+    numOfClusters: number,
+    instanceIds: number[],
+    level: number
+  );
 
-  abstract getLineData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number);
+  abstract getLineData(
+    trainingDefinitionId: number,
+    numOfClusters: number,
+    instanceIds: number[],
+    level: number
+  );
 
   /* methods to get information based on selected feature */
 

@@ -1,18 +1,31 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
-import {BehaviorSubject, Observable, of, Subscription, throwError, timer} from 'rxjs';
-import {VisualizationData} from '../../models/visualization-data';
-import {VisualizationsDataService} from '../../services/visualizations-data.service';
-import {Clusterables} from '../../models/clusterables-enum';
-import {Components} from '../../models/components-enum';
-import {RadarChartComponent} from './radar-chart/radar-chart.component';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from "@angular/core";
+import {
+  BehaviorSubject,
+  Observable,
+  of,
+  Subscription,
+  throwError,
+  timer,
+} from "rxjs";
+import { VisualizationData } from "../../models/visualization-data";
+import { VisualizationsDataService } from "../../services/visualizations-data.service";
+import { Clusterables } from "../../models/clusterables-enum";
+import { Components } from "../../models/components-enum";
+import { RadarChartComponent } from "./radar-chart/radar-chart.component";
 
 @Component({
-  selector: 'kypo-clustering-visualization',
-  templateUrl: './visualizations.component.html',
-  styleUrls: ['./visualizations.component.css']
+  selector: "kypo-clustering-visualization",
+  templateUrl: "./visualizations.component.html",
+  styleUrls: ["./visualizations.component.css"],
 })
 export class VisualizationsComponent implements OnInit, OnChanges {
-
   @Input() level: number;
   @Input() trainingDefinitionId: number;
   @Input() trainingInstanceIds: number[];
@@ -29,9 +42,7 @@ export class VisualizationsComponent implements OnInit, OnChanges {
   visualizationData$: Observable<VisualizationData>;
   radarChartData$: Observable<VisualizationData>;
 
-  constructor(
-    private visualizationDataService: VisualizationsDataService
-  ) {}
+  constructor(private visualizationDataService: VisualizationsDataService) {}
 
   ngOnInit() {
     this.loadData();
@@ -50,14 +61,20 @@ export class VisualizationsComponent implements OnInit, OnChanges {
     console.log(this.level);
 
     const lineService = this.visualizationDataService.getLineData(
-        this.trainingDefinitionId, this.elbowNumClusters, this.trainingInstanceIds, this.level
+      this.trainingDefinitionId,
+      this.elbowNumClusters,
+      this.trainingInstanceIds,
+      this.level
     );
     lineService.subscribe((res) => {
       this.lineData$ = res;
     });
     if (this.selectedFeature == 0 || this.selectedFeature == 1) {
       const scatterService = this.visualizationDataService.getData(
-          this.trainingDefinitionId, this.numOfClusters, this.trainingInstanceIds, this.level
+        this.trainingDefinitionId,
+        this.numOfClusters,
+        this.trainingInstanceIds,
+        this.level
       );
       scatterService.subscribe((res) => {
         this.visualizationData$ = res;
@@ -65,7 +82,10 @@ export class VisualizationsComponent implements OnInit, OnChanges {
     }
     if (this.selectedFeature == 2) {
       const radarService = this.visualizationDataService.getRadarData(
-          this.trainingDefinitionId, this.numOfClusters, this.trainingInstanceIds, this.level
+        this.trainingDefinitionId,
+        this.numOfClusters,
+        this.trainingInstanceIds,
+        this.level
       );
       radarService.subscribe((res) => {
         this.radarChartData$ = res;

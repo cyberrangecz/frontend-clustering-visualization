@@ -1,15 +1,14 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RadarChartComponent } from './radar-chart.component';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { RadarChartComponent } from "./radar-chart.component";
 
-describe('TrainingAnalysisComponent', () => {
+describe("TrainingAnalysisComponent", () => {
   let component: RadarChartComponent;
   let fixture: ComponentFixture<RadarChartComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ RadarChartComponent ]
-    })
-    .compileComponents();
+      declarations: [RadarChartComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -18,7 +17,7 @@ describe('TrainingAnalysisComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

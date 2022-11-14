@@ -1,20 +1,29 @@
-import {Component, Input, OnChanges, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import { D3, D3Service } from '@muni-kypo-crp/d3-service';
-import { BaseConfig } from '../../../models/base-config';
-import { AppConfig } from '../../../../app.config';
-import { ConfigService } from '../../../config/config.service';
-import { Subscription } from 'rxjs';
-import {VisualizationData} from '../../../models/visualization-data';
-import {EuclidianDoublePoint, Point} from '../../../models/eucledian-double-point';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from "@angular/core";
+import { D3, D3Service } from "@muni-kypo-crp/d3-service";
+import { BaseConfig } from "../../../models/base-config";
+import { AppConfig } from "../../../../app.config";
+import { ConfigService } from "../../../config/config.service";
+import { Subscription } from "rxjs";
+import { VisualizationData } from "../../../models/visualization-data";
+import {
+  EuclidianDoublePoint,
+  Point,
+} from "../../../models/eucledian-double-point";
 
 @Component({
-  selector: 'kypo-viz-clustering-radar-chart',
-  templateUrl: './radar-chart.component.html',
-  styleUrls: ['./radar-chart.component.css'],
-  encapsulation: ViewEncapsulation.None
+  selector: "kypo-viz-clustering-radar-chart",
+  templateUrl: "./radar-chart.component.html",
+  styleUrls: ["./radar-chart.component.css"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class RadarChartComponent implements OnChanges, OnInit {
-
   @Input() visualizationData: VisualizationData;
   @Input() isStandalone: boolean;
   @Input() numOfClusters: number;
@@ -45,32 +54,34 @@ export class RadarChartComponent implements OnChanges, OnInit {
   constructor(
     d3Service: D3Service,
     private configService: ConfigService,
-    private appConfig: AppConfig,
+    private appConfig: AppConfig
   ) {
     this.d3 = d3Service.getD3();
-    this.radialScale = this.d3.scaleLinear()
-        .domain(appConfig.radialScaleDomain)
-        .range(appConfig.radialScaleRange);
-    this.smallScale = this.d3.scaleLinear()
-        .domain(appConfig.radialScaleDomain)
-        .range([0, 62]);
+    this.radialScale = this.d3
+      .scaleLinear()
+      .domain(appConfig.radialScaleDomain)
+      .range(appConfig.radialScaleRange);
+    this.smallScale = this.d3
+      .scaleLinear()
+      .domain(appConfig.radialScaleDomain)
+      .range([0, 62]);
     this.features = this.appConfig.features;
     this.featureTooltips = this.appConfig.featureTooltips;
     this.drawChartBase({
-          element: 'main-radar',
-          padding: {
-            top: 10,
-            bottom: 40
-          }
-        }
-    );
+      element: "main-radar",
+      padding: {
+        top: 10,
+        bottom: 40,
+      },
+    });
   }
 
   ngOnInit(): void {
     if (this.visualizationData != undefined) this.setBounds();
-    this.info = 'The chart displays overview of trainee groups and their playing behavior. ' +
-        'In the small radar charts, \'n\' denotes the number of trainees whose playing styles' +
-        ' were similar. In this testing GUI, you can choose desired datasets with the input fields below.';
+    this.info =
+      "The chart displays overview of trainee groups and their playing behavior. " +
+      "In the small radar charts, 'n' denotes the number of trainees whose playing styles" +
+      " were similar. In this testing GUI, you can choose desired datasets with the input fields below.";
   }
 
   ngOnChanges(): void {
@@ -84,7 +95,7 @@ export class RadarChartComponent implements OnChanges, OnInit {
   getNumParticipants(): number {
     let participants = 0;
     this.visualizationData.radarData.forEach(function (data) {
-        participants += data.points.length;
+      participants += data.points.length;
     });
     return participants;
   }
@@ -95,7 +106,7 @@ export class RadarChartComponent implements OnChanges, OnInit {
     let max = Number.MIN_VALUE;
     const radarData = this.visualizationData.radarData;
 
-    radarData.forEach(function(d) {
+    radarData.forEach(function (d) {
       min = Math.min(Math.min(...d.center.point), min);
       max = Math.max(Math.max(...d.center.point), max);
     });
@@ -115,158 +126,195 @@ export class RadarChartComponent implements OnChanges, OnInit {
     let max = Number.MIN_VALUE;
     const radarData = this.visualizationData.radarData;
 
-    radarData.forEach(function(d) {
+    radarData.forEach(function (d) {
       min = Math.min(Math.min(...d.center.point), min);
       max = Math.max(Math.max(...d.center.point), max);
     });
 
     radarData.forEach((d, i) => {
-      d.center.point.forEach ((p, j) => {
+      d.center.point.forEach((p, j) => {
         /*if (p < this.appConfig.radialScaleDomain[0]) {
           this.visualizationData.radarData[i].center.point[j] = this.appConfig.radialScaleDomain[0];
         }
         if (p > this.appConfig.radialScaleDomain[1]) {
           this.visualizationData.radarData[i].center.point[j] = this.appConfig.radialScaleDomain[1];
         }*/
-        this.visualizationData.radarData[i].center.point[j] = ((p-min)/(max-min))*5-1;
-      })})
+        this.visualizationData.radarData[i].center.point[j] =
+          ((p - min) / (max - min)) * 5 - 1;
+      });
+    });
   }
 
   drawChart(): void {
-    this.clearSelection('#radar-chart');
-    this.clearSelection('#small-radar-charts');
+    this.clearSelection("#radar-chart");
+    this.clearSelection("#small-radar-charts");
     this.createTooltip();
     this.createChart();
     this.createSmallCharts();
   }
 
-  createSmallCharts(data: EuclidianDoublePoint[] = this.visualizationData.radarData) {
+  createSmallCharts(
+    data: EuclidianDoublePoint[] = this.visualizationData.radarData
+  ) {
     const radialScaleSmall = this.smallScale;
 
     data.forEach((cluster, i) => {
-      const smallChartsSvg = this.d3.select('#small-radar-charts').append('svg')
-          .attr('viewBox', '090 60 200 200')
-          .attr('width', 240)
-          .attr('height', 200)
-          .attr('preserveAspectRatio', 'xMidYMid meet');
+      const smallChartsSvg = this.d3
+        .select("#small-radar-charts")
+        .append("svg")
+        .attr("viewBox", "090 60 200 200")
+        .attr("width", 240)
+        .attr("height", 200)
+        .attr("preserveAspectRatio", "xMidYMid meet");
       this.smallSvgs.push(smallChartsSvg);
 
-      const clip = smallChartsSvg.append('defs').append('SVG:clipPath')
-          .attr('id', 'clip')
-          .append('SVG:rect')
-          .attr('width', 200)
-          .attr('height', 200)
-          .attr('x', 0)
-          .attr('y', 0);
+      const clip = smallChartsSvg
+        .append("defs")
+        .append("SVG:clipPath")
+        .attr("id", "clip")
+        .append("SVG:rect")
+        .attr("width", 200)
+        .attr("height", 200)
+        .attr("x", 0)
+        .attr("y", 0);
 
       const smallChartsClipPath = smallChartsSvg
-          .append('g')
-          .attr('clip-path', 'url(#clip)')
+        .append("g")
+        .attr("clip-path", "url(#clip)");
 
-     smallChartsClipPath.append('text')
-          .text('Cluster with '+ cluster.points.length + ' trainees')
-          .attr('x', 110)
-          .attr('y', 80)
-          .style('font-weight', '500');
+      smallChartsClipPath
+        .append("text")
+        .text("Cluster with " + cluster.points.length + " trainees")
+        .attr("x", 110)
+        .attr("y", 80)
+        .style("font-weight", "500");
       //let ticks = [-0.7, 0, 0.7, 1.4, 2.1, 2.8, 3.5, 4.2];
       const ticks = [-0.4, 0.4, 1.2, 2, 2.8, 3.6, 4.4];
-      ticks.forEach(t =>
-          smallChartsClipPath.append('circle')
-              .attr('cx', 190)
-              .attr('cy', 190)
-              .attr('fill', 'none')
-              .attr('stroke-width', '1.2')
-              .attr('stroke', 'lightGray')
-              .attr('r', radialScaleSmall(t))
+      ticks.forEach((t) =>
+        smallChartsClipPath
+          .append("circle")
+          .attr("cx", 190)
+          .attr("cy", 190)
+          .attr("fill", "none")
+          .attr("stroke-width", "1.2")
+          .attr("stroke", "lightGray")
+          .attr("r", radialScaleSmall(t))
       );
 
       for (let i = 0; i < this.features.length; i++) {
         const ft_name = this.features[i];
-        const angle = (Math.PI / 2) + (2 * Math.PI * i / this.features.length);
-        const line_coordinate = this.angleToCoordinate(angle, 4.5, radialScaleSmall);
-        const label_coordinate = this.angleToCoordinate(angle, 4.2, radialScaleSmall);
+        const angle = Math.PI / 2 + (2 * Math.PI * i) / this.features.length;
+        const line_coordinate = this.angleToCoordinate(
+          angle,
+          4.5,
+          radialScaleSmall
+        );
+        const label_coordinate = this.angleToCoordinate(
+          angle,
+          4.2,
+          radialScaleSmall
+        );
 
         //draw axis line
-        smallChartsClipPath.append('line')
-            .attr('x1', 190)
-            .attr('y1', 190)
-            .attr('x2', line_coordinate.x)
-            .attr('y2', line_coordinate.y)
-            .attr('stroke-width', '0.8')
-            .attr('stroke', 'gray');
+        smallChartsClipPath
+          .append("line")
+          .attr("x1", 190)
+          .attr("y1", 190)
+          .attr("x2", line_coordinate.x)
+          .attr("y2", line_coordinate.y)
+          .attr("stroke-width", "0.8")
+          .attr("stroke", "gray");
 
         //draw axis label
-        smallChartsClipPath.append('text')
-            .attr('x', label_coordinate.x)
-            .attr('y', label_coordinate.y)
-            .attr('text-anchor', 'middle')
-            .style('font-size','14')
-            .text(ft_name);
+        smallChartsClipPath
+          .append("text")
+          .attr("x", label_coordinate.x)
+          .attr("y", label_coordinate.y)
+          .attr("text-anchor", "middle")
+          .style("font-size", "14")
+          .text(ft_name);
       }
 
-      const line = this.d3.line<{ x: number, y: number }>()
-          .x(d => d.x)
-          .y(d => d.y);
+      const line = this.d3
+        .line<{ x: number; y: number }>()
+        .x((d) => d.x)
+        .y((d) => d.y);
 
       const d = cluster;
       const color = this.appConfig.colors[i];
       const coordinates = this.getPathCoordinates(d.center, radialScaleSmall);
 
       //draw the path element
-      smallChartsClipPath.append('path')
-          .datum(coordinates)
-          .attr('d', line)
-          .attr('stroke-width', 1)
-          .attr('stroke', color)
-          .attr('fill', color)
-          .attr('stroke-opacity', 1)
-          .attr('fill-opacity', 0.5);
+      smallChartsClipPath
+        .append("path")
+        .datum(coordinates)
+        .attr("d", line)
+        .attr("stroke-width", 1)
+        .attr("stroke", color)
+        .attr("fill", color)
+        .attr("stroke-opacity", 1)
+        .attr("fill-opacity", 0.5);
     });
   }
 
   createChart(data: EuclidianDoublePoint[] = this.visualizationData.radarData) {
     const d3: D3 = this.d3,
-        radarOpacity: number = this.appConfig.radarClusterOpacity;
+      radarOpacity: number = this.appConfig.radarClusterOpacity;
 
-    this.svg = d3.select('#radar-chart').append('svg')
-        .attr('width', this.width)
-        .attr('height', this.height)
-        .attr('viewBox', this.width/6 + ' ' + this.height/6 + ' ' + this.width/1.8 + ' ' + this.height/1.8)
-        .attr('preserveAspectRatio', 'xMidYMid meet');
+    this.svg = d3
+      .select("#radar-chart")
+      .append("svg")
+      .attr("width", this.width)
+      .attr("height", this.height)
+      .attr(
+        "viewBox",
+        this.width / 6 +
+          " " +
+          this.height / 6 +
+          " " +
+          this.width / 1.8 +
+          " " +
+          this.height / 1.8
+      )
+      .attr("preserveAspectRatio", "xMidYMid meet");
 
-    const clip = this.svg.append('defs').append('SVG:clipPath')
-        .attr('id', 'clip')
-        .append('SVG:rect')
-        .attr('width', this.width)
-        .attr('height', this.height)
-        .attr('x', 0)
-        .attr('y', 0);
+    const clip = this.svg
+      .append("defs")
+      .append("SVG:clipPath")
+      .attr("id", "clip")
+      .append("SVG:rect")
+      .attr("width", this.width)
+      .attr("height", this.height)
+      .attr("x", 0)
+      .attr("y", 0);
 
     this.gPlot = this.svg
-        .append('g')
-        .attr('width', this.width)
-        .attr('height', this.height)
-        .attr('x', 0)
-        .attr('y', 0);
+      .append("g")
+      .attr("width", this.width)
+      .attr("height", this.height)
+      .attr("x", 0)
+      .attr("y", 0);
 
-    this.gPlot.append('text')
-        .text('Dataset with ' + this.numberOfParticipants + ' trainees in total')
-        .attr('x', 120)
-        .attr('y', 80)
-        .style('font-weight', '500')
-        .style('font-size', '10px');
+    this.gPlot
+      .append("text")
+      .text("Dataset with " + this.numberOfParticipants + " trainees in total")
+      .attr("x", 120)
+      .attr("y", 80)
+      .style("font-weight", "500")
+      .style("font-size", "10px");
 
     // radar circles
     //let ticks = [-1, -0.5, 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4];
     const ticks = [-0.7, 0, 0.7, 1.4, 2.1, 2.8, 3.5, 4.2];
-    ticks.forEach(t =>
-        this.gPlot.append('circle')
-            .attr('cx', 190)
-            .attr('cy', 190)
-            .attr('fill', 'none')
-            .attr('stroke', '#919191')
-            .attr('stroke-width', '0.5')
-            .attr('r', this.radialScale(t))
+    ticks.forEach((t) =>
+      this.gPlot
+        .append("circle")
+        .attr("cx", 190)
+        .attr("cy", 190)
+        .attr("fill", "none")
+        .attr("stroke", "#919191")
+        .attr("stroke-width", "0.5")
+        .attr("r", this.radialScale(t))
     );
 
     const tooltip = this.tooltip;
@@ -274,56 +322,75 @@ export class RadarChartComponent implements OnChanges, OnInit {
     for (let i = 0; i < this.features.length; i++) {
       const ft_name = this.features[i];
       const ft_tooltip = this.featureTooltips[i];
-      const angle = (Math.PI / 2) + (2 * Math.PI * i / this.features.length);
-      const line_coordinate = this.angleToCoordinate(angle, 4.5, this.radialScale);
-      const label_coordinate = this.angleToCoordinate(angle, 4.5, this.radialScale);
+      const angle = Math.PI / 2 + (2 * Math.PI * i) / this.features.length;
+      const line_coordinate = this.angleToCoordinate(
+        angle,
+        4.5,
+        this.radialScale
+      );
+      const label_coordinate = this.angleToCoordinate(
+        angle,
+        4.5,
+        this.radialScale
+      );
 
-    //draw axis line
-    this.gPlot.append('line')
-          .attr('x1', 190)
-          .attr('y1', 190)
-          .attr('x2', line_coordinate.x)
-          .attr('y2', line_coordinate.y)
-          .attr('stroke-width', '0.5')
-          .attr('stroke', 'gray');
+      //draw axis line
+      this.gPlot
+        .append("line")
+        .attr("x1", 190)
+        .attr("y1", 190)
+        .attr("x2", line_coordinate.x)
+        .attr("y2", line_coordinate.y)
+        .attr("stroke-width", "0.5")
+        .attr("stroke", "gray");
 
-    //draw axis label
-    this.gPlot.append('text')
-          .attr('id', 'label'+i)
-          .attr('x', label_coordinate.x)
-          .attr('y', label_coordinate.y)
-          .attr('text-anchor', 'middle')
-          .style('font-size','9')
-          .text(ft_name)
-          .on('mouseover', function(event, d){
-            tooltip
-                .transition()
-                .ease(d3.easeLinear,2)
-                .duration(300)
-                .delay(10)
-                .style('opacity', 0.9);
-            tooltip
-                .html(ft_tooltip)
-                .style('left', (d3.pointer(event, d3.select('#radar-chart'))[0]-200) + 'px')
-                .style('top', (d3.pointer(event, d3.select('#radar-chart'))[1]-100) + 'px')
-          })
-        .on('mousemove', function(event, d){
+      //draw axis label
+      this.gPlot
+        .append("text")
+        .attr("id", "label" + i)
+        .attr("x", label_coordinate.x)
+        .attr("y", label_coordinate.y)
+        .attr("text-anchor", "middle")
+        .style("font-size", "9")
+        .text(ft_name)
+        .on("mouseover", function (event, d) {
           tooltip
-              .style('left', (d3.pointer(event, d3.select('#radar-chart'))[0]-200) + 'px')
-              .style('top', (d3.pointer(event, d3.select('#radar-chart'))[1]-100) + 'px')
+            .transition()
+            .ease(d3.easeLinear, 2)
+            .duration(300)
+            .delay(10)
+            .style("opacity", 0.9);
+          tooltip
+            .html(ft_tooltip)
+            .style(
+              "left",
+              d3.pointer(event, d3.select("#radar-chart"))[0] - 200 + "px"
+            )
+            .style(
+              "top",
+              d3.pointer(event, d3.select("#radar-chart"))[1] - 100 + "px"
+            );
         })
-          .on('mouseout', function(){
-            tooltip
-                .transition()
-                .duration(0)
-                .style('opacity', 0);
-          });
-
+        .on("mousemove", function (event, d) {
+          tooltip
+            .style(
+              "left",
+              d3.pointer(event, d3.select("#radar-chart"))[0] - 200 + "px"
+            )
+            .style(
+              "top",
+              d3.pointer(event, d3.select("#radar-chart"))[1] - 100 + "px"
+            );
+        })
+        .on("mouseout", function () {
+          tooltip.transition().duration(0).style("opacity", 0);
+        });
     }
 
-    const line = d3.line<{ x: number, y: number }>()
-        .x(d => d.x)
-        .y(d => d.y);
+    const line = d3
+      .line<{ x: number; y: number }>()
+      .x((d) => d.x)
+      .y((d) => d.y);
 
     for (let i = 0; i < data.length; i++) {
       const d = data[i];
@@ -331,52 +398,59 @@ export class RadarChartComponent implements OnChanges, OnInit {
       const coordinates = this.getPathCoordinates(d.center, this.radialScale);
 
       //draw the path element
-      this.gPlot.append('path')
-          .datum(coordinates)
-          .attr('class', 'cluster')
-          .attr('d', line)
-          .attr('cx', 100)
-          .attr('cy', 100)
-          .attr('stroke-width', 1)
-          .attr('stroke', color)
-          .attr('fill', color)
-          .attr('stroke-opacity', 0.7)
-          .attr('fill-opacity', radarOpacity)
+      this.gPlot
+        .append("path")
+        .datum(coordinates)
+        .attr("class", "cluster")
+        .attr("d", line)
+        .attr("cx", 100)
+        .attr("cy", 100)
+        .attr("stroke-width", 1)
+        .attr("stroke", color)
+        .attr("fill", color)
+        .attr("stroke-opacity", 0.7)
+        .attr("fill-opacity", radarOpacity);
 
-      this.gPlot.selectAll('.cluster')
-          .attr('id', (d, i) => 'c-' + i)
-          .attr('clusterNum', (d, i) => i)
-          .on('mouseover', function(event, d) {
-            const clusterSize = data[d3.select(this).attr('clusterNum')].points.length;
-            const vizBox = document.querySelector('#radarchartPlaceholder kypo-clustering-visualization').getBoundingClientRect();
-            tooltip
-                .style('left', (event.clientX - vizBox.x) + 'px')
-                .style('top', (event.clientY - vizBox.y - 20) + 'px')
-                .text('Cluster of ' + clusterSize + ' trainees')
-                .transition('ease')
-                .style('opacity', 1);
-            const z = 'path#' + d3.select(this).attr('id');
-            d3.selectAll('.cluster')
-                .transition('ease')
-                .style('fill-opacity', 0.1);
-            d3.select(z)
-                .transition('ease')
-                .style('fill-opacity', .6);
-          })
-          .on('mousemove', function(event) {
-            const vizBox = document.querySelector('#radarchartPlaceholder kypo-clustering-visualization').getBoundingClientRect();
-            tooltip
-                .style('left', (event.clientX - vizBox.x) + 'px')
-                .style('top', (event.clientY - vizBox.y - 20) + 'px')
-          })
-          .on('mouseout', function(){
-              tooltip
-                  .transition('ease')
-                  .style('opacity', 0);
-              d3.selectAll('.cluster')
-                  .transition('ease')
-                  .style('fill-opacity', radarOpacity);
-          })
+      this.gPlot
+        .selectAll(".cluster")
+        .attr("id", (d, i) => "c-" + i)
+        .attr("clusterNum", (d, i) => i)
+        .on("mouseover", function (event, d) {
+          const clusterSize =
+            data[d3.select(this).attr("clusterNum")].points.length;
+          const vizBox = document
+            .querySelector(
+              "#radarchartPlaceholder kypo-clustering-visualization"
+            )
+            .getBoundingClientRect();
+          tooltip
+            .style("left", event.clientX - vizBox.x + "px")
+            .style("top", event.clientY - vizBox.y - 20 + "px")
+            .text("Cluster of " + clusterSize + " trainees")
+            .transition("ease")
+            .style("opacity", 1);
+          const z = "path#" + d3.select(this).attr("id");
+          d3.selectAll(".cluster")
+            .transition("ease")
+            .style("fill-opacity", 0.1);
+          d3.select(z).transition("ease").style("fill-opacity", 0.6);
+        })
+        .on("mousemove", function (event) {
+          const vizBox = document
+            .querySelector(
+              "#radarchartPlaceholder kypo-clustering-visualization"
+            )
+            .getBoundingClientRect();
+          tooltip
+            .style("left", event.clientX - vizBox.x + "px")
+            .style("top", event.clientY - vizBox.y - 20 + "px");
+        })
+        .on("mouseout", function () {
+          tooltip.transition("ease").style("opacity", 0);
+          d3.selectAll(".cluster")
+            .transition("ease")
+            .style("fill-opacity", radarOpacity);
+        });
     }
   }
 
@@ -384,19 +458,19 @@ export class RadarChartComponent implements OnChanges, OnInit {
    * A tooltip to clarify the labels
    */
   createTooltip() {
-    if (typeof this.tooltip !== 'undefined') this.tooltip.remove();
+    if (typeof this.tooltip !== "undefined") this.tooltip.remove();
 
     this.tooltip = this.d3
-        .select('#radar-chart')
-        .append('div')
-        .attr('class', 'clustering-radar-tooltip')
-        .style('opacity', '0');
+      .select("#radar-chart")
+      .append("div")
+      .attr("class", "clustering-radar-tooltip")
+      .style("opacity", "0");
   }
 
   angleToCoordinate(angle: number, value: number, radialScale: any) {
     const x = Math.cos(angle) * radialScale(value);
     const y = Math.sin(angle) * radialScale(value);
-    return {'x': 190 + x, 'y': 190 - y};
+    return { x: 190 + x, y: 190 - y };
   }
 
   /**
@@ -409,9 +483,13 @@ export class RadarChartComponent implements OnChanges, OnInit {
     // to close the path
     let lastCoordinate = {};
     for (let i = 0; i < this.features.length; i++) {
-      const angle = (Math.PI / 2) + (2 * Math.PI * i / this.features.length);
-      const newCoordinate = this.angleToCoordinate(angle, data_point.point[i], radialScale);
-      lastCoordinate = (i === 0) ? newCoordinate : lastCoordinate;
+      const angle = Math.PI / 2 + (2 * Math.PI * i) / this.features.length;
+      const newCoordinate = this.angleToCoordinate(
+        angle,
+        data_point.point[i],
+        radialScale
+      );
+      lastCoordinate = i === 0 ? newCoordinate : lastCoordinate;
       coordinates.push(newCoordinate);
     }
     coordinates.push(lastCoordinate);
@@ -429,14 +507,14 @@ export class RadarChartComponent implements OnChanges, OnInit {
 
   drawChartBase(baseConfig: BaseConfig): void {
     const d3: D3 = this.d3,
-    padding = baseConfig.padding,
-    element = baseConfig.element;
+      padding = baseConfig.padding,
+      element = baseConfig.element;
 
     // create svg
     // calculate the height first, width can change when the scrollbar is added
     this.wrapperWidth = Math.max(
       document.getElementById(element)?.getBoundingClientRect().width, // original (standalone) size
-      window.innerWidth - (window.innerWidth) * 0.37
+      window.innerWidth - window.innerWidth * 0.37
     ); // get width in the dashboard as a 75% piece of a halfpage
     const maxHeight: number = Math.min(
       this.wrapperWidth * 0.7,
@@ -446,17 +524,17 @@ export class RadarChartComponent implements OnChanges, OnInit {
     this.wrapperHeight = Math.max(maxHeight, minHeight);
 
     this.chartArea = d3
-      .select('#' + element)
-      .attr('height', this.wrapperHeight)
-      .attr('width', this.wrapperWidth)
-      .attr('style', 'padding: 10px 15px')
+      .select("#" + element)
+      .attr("height", this.wrapperHeight)
+      .attr("width", this.wrapperWidth)
+      .attr("style", "padding: 10px 15px");
   }
 
   /**
    * Clear the specified HTML when needed (e.g., resize)
    */
   clearSelection(selection: string): void {
-    this.d3.select(selection).html('');
+    this.d3.select(selection).html("");
   }
 
   toggleInfo() {

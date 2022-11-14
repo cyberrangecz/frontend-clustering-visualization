@@ -1,3 +1,3 @@
 export class ClusteringVisualizationConfig {
-  trainingServiceUrl: string
+  trainingServiceUrl: string;
 }
