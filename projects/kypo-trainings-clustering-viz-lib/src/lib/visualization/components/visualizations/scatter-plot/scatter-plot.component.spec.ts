@@ -8,9 +8,8 @@ describe('ScatterPlotComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ScatterPlotComponent ]
-    })
-    .compileComponents();
+      declarations: [ScatterPlotComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

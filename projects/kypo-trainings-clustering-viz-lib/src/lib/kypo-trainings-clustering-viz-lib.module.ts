@@ -15,19 +15,13 @@ import { VisualizationsDataConcreteService } from './visualization/services/visu
 import { VisualizationsComponent } from './visualization/components/visualizations/visualizations.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
-import {RadarChartComponent} from "./visualization/components/visualizations/radar-chart/radar-chart.component";
-import {ClusteringVisualizationConfig} from "./visualization/config/kypo-trainings-clustering-viz-lib";
+import { RadarChartComponent } from './visualization/components/visualizations/radar-chart/radar-chart.component';
+import { ClusteringVisualizationConfig } from './visualization/config/kypo-trainings-clustering-viz-lib';
 import { LineChartComponent } from './visualization/components/visualizations/line-chart/line-chart.component';
 import { ScatterPlotComponent } from './visualization/components/visualizations/scatter-plot/scatter-plot.component';
 
-
 @NgModule({
-  declarations: [
-    RadarChartComponent,
-    VisualizationsComponent,
-    LineChartComponent,
-    ScatterPlotComponent
-  ],
+  declarations: [RadarChartComponent, VisualizationsComponent, LineChartComponent, ScatterPlotComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -43,29 +37,24 @@ import { ScatterPlotComponent } from './visualization/components/visualizations/
     ConfigService,
     { provide: AppConfig, useValue: VIS_CONFIG },
     { provide: VisualizationDataApi, useClass: VisualizationDataDefaultApi },
-    { provide: VisualizationsDataService, useClass: VisualizationsDataConcreteService }
+    {
+      provide: VisualizationsDataService,
+      useClass: VisualizationsDataConcreteService,
+    },
   ],
-  exports: [
-    RadarChartComponent,
-    LineChartComponent,
-    ScatterPlotComponent,
-    VisualizationsComponent
-  ]
+  exports: [RadarChartComponent, LineChartComponent, ScatterPlotComponent, VisualizationsComponent],
 })
 export class KypoTrainingsClusteringVizLibModule {
   constructor(@Optional() @SkipSelf() parentModule: KypoTrainingsClusteringVizLibModule) {
     if (parentModule) {
-      throw new Error(
-        'KypoTrainingsClusteringVizLibModule is already loaded. Import it in the main module only');
+      throw new Error('KypoTrainingsClusteringVizLibModule is already loaded. Import it in the main module only');
     }
   }
 
   static forRoot(config: ClusteringVisualizationConfig): ModuleWithProviders<KypoTrainingsClusteringVizLibModule> {
     return {
       ngModule: KypoTrainingsClusteringVizLibModule,
-      providers: [
-        {provide: ClusteringVisualizationConfig, useValue: config}
-      ]
+      providers: [{ provide: ClusteringVisualizationConfig, useValue: config }],
     };
   }
 }

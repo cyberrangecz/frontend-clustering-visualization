@@ -1,70 +1,45 @@
-<div>
-   <h1>Cluster analysis and visualization</h1>
-   <div>
-       <mat-sidenav-container class="sidenav accordion-flush">
-           <mat-sidenav mode="side" opened>
+<!-- example of use for inidividual charts rather than a complete app -->
+<mat-form-field class="cluster-input" appearance="fill">
+    <mat-label>Number of clusters:</mat-label>
+    <input matInput type="number" min="1" placeholder="" (change)="clusterChange($event)" class="input-field" [value]="numOfClusters">
+</mat-form-field>
 
-               <!--    Choose from available visualizations-->
-               <mat-list-item>
-                   <div class="title">Visualizations</div>
-                   <mat-divider></mat-divider>
-               <button mat-button class="nav-link" (click)="isSubmenuOpen=!isSubmenuOpen">
-                   <span>Two features comparison </span>
-                   <mat-icon>{{!isSubmenuOpen ? "expand_more" : "expand_less"}}</mat-icon>
-               </button>
-                <div *ngIf="isSubmenuOpen">
-                    <button mat-button class="nav-link sub-item"
-                            [ngClass]="{'opened' : selectedFeature == 0}"
-                            (click)="selectedComponent=0;selectedFeature=0">
-                        <span>Wrong flags per time played</span>
-                    </button>
-                    <br/>
-                    <button mat-button class="nav-link sub-item"
-                            [ngClass]="{'opened' : selectedFeature == 1}"
-                            (click)="selectedComponent=0;selectedFeature=1">
-                        <span>Time spent after using a hint</span>
-                    </button>
-                </div>
-
-                <div>
-                    <button mat-button class="nav-link"
-                            [ngClass]="{'opened' : selectedFeature == 2}"
-                            (click)="selectedComponent=2;selectedFeature=2">
-                        <span>Behaviour correlation chart</span>
-                    </button>
-                </div>
-               </mat-list-item>
-
-               <mat-list-item>
-                   <div class="title">Testing parameters</div>
-                   <mat-divider></mat-divider>
-                   <!-- inputs for testing purposes -->
-                   <mat-form-field appearance="fill">
-                       <mat-label>Number of clusters:</mat-label>
-                       <input matInput type="number" [(ngModel)]="numOfClusters">
-                   </mat-form-field>
-                   <br/>
-                   <mat-form-field appearance="fill">
-                       <mat-label>Training definition identification:</mat-label>
-                       <input matInput type="number" [(ngModel)]="trainingDefinitionId">
-                   </mat-form-field>
-                   <br/>
-                   <button type="submit" mat-flat-button color="primary">Recalculate w/ new data</button>
-               </mat-list-item>
-            </mat-sidenav>
-
-           <!-- Main content -->
-           <mat-sidenav-content style="margin-left: 255px;">
-               <kypo-clustering-visualization
-                        [selectedComponent]="selectedComponent"
-                        [selectedFeature]="selectedFeature"
-                        [trainingDefinitionId]="trainingDefinitionId"
-                        [trainingInstanceId]="trainingInstanceId"
-                        [numOfClusters]="numOfClusters"
-                        [isStandalone]="true"
-               >
-               </kypo-clustering-visualization>
-            </mat-sidenav-content>
-        </mat-sidenav-container>
-    </div>
+<!-- radar chart use -->
+<div id="radarchartPlaceholder">
+    <kypo-clustering-visualization
+            [selectedComponent]="clusterables.NDimensional"
+            [selectedFeature]="components.RADAR_CHART"
+            [trainingDefinitionId]="trainingDefinitionId"
+            [trainingInstanceIds]="trainingInstanceIds"
+            [numOfClusters]="numOfClusters"
+            [level]="level"
+            (viewOpen)="toggleView($event)">
+    </kypo-clustering-visualization>
 </div>
+
+<!-- scatterplot time after hint use -->
+<div id="scatterClustersSvgPlaceholder" class="tAH">
+    <kypo-clustering-visualization
+            [selectedComponent]="clusterables.TimeAfterHint"
+            [selectedFeature]="clusterables.TimeAfterHint"
+            [trainingDefinitionId]="trainingDefinitionId"
+            [trainingInstanceIds]="trainingInstanceIds"
+            [numOfClusters]="numOfClusters"
+            [level]="level"
+            [isStandalone]="false">
+    </kypo-clustering-visualization>
+</div>
+
+<!-- scatterplot wrong flags use -->
+<div id="scatterClustersSvgPlaceholder_" class="wF">
+    <kypo-clustering-visualization
+            [selectedComponent]="clusterables.WrongFlags"
+            [selectedFeature]="clusterables.WrongFlags"
+            [trainingDefinitionId]="trainingDefinitionId"
+            [trainingInstanceIds]="trainingInstanceIds"
+            [numOfClusters]="numOfClusters"
+            [level]="level"
+            [isStandalone]="false">
+    </kypo-clustering-visualization>
+</div>
+

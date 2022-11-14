@@ -11,9 +11,8 @@ describe('VisualizationsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ VisualizationsComponent ]
-    })
-    .compileComponents();
+      declarations: [VisualizationsComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

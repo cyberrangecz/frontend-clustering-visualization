@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OAuthService, JwksValidationHandler } from 'angular-oauth2-oidc';
+import { Agenda, AgendaContainer } from '@sentinel/layout';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +7,10 @@ import { OAuthService, JwksValidationHandler } from 'angular-oauth2-oidc';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  agendaContainers: AgendaContainer[];
 
-  constructor() { }
-
-  ngOnInit() { }
+  ngOnInit() {
+    const containers = [new Agenda('Clustering', '')];
+    this.agendaContainers = [new AgendaContainer('Visualizations', containers)];
+  }
 }

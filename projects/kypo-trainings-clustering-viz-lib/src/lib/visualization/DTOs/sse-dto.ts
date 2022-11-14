@@ -1,3 +1,3 @@
 export class SseDTO {
-    [index: number | string ]: number
+  [index: number | string]: number;
 }

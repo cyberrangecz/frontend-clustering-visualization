@@ -1,15 +1,17 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
     "downlevelIteration": true,
     "importHelpers": true,
+    "module": "esnext",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es2018",
+    "target": "es2020",
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -17,8 +19,6 @@
       "es2018",
       "dom"
     ],
-    "module": "esnext",
-    "baseUrl": "./",
     "paths": {
       "kypo2-trainings-clustering-viz-lib": [
         "dist/kypo2-trainings-clustering-viz-lib"

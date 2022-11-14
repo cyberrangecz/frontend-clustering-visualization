@@ -5,9 +5,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
+import { SentinelLayout1Module } from '@sentinel/layout/layout1';
 import {SentinelAuthModule} from '@sentinel/auth';
 import {SentinelAuthGuardWithLogin, SentinelNegativeAuthGuard} from '@sentinel/auth/guards';
-import {MatSidenavModule} from "@angular/material/sidenav";
 
 @NgModule({
   declarations: [
@@ -18,6 +18,7 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    SentinelLayout1Module,
     SentinelAuthModule.forRoot(environment.authConfig)
   ],
   providers: [

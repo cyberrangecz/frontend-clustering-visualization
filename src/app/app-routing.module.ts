@@ -5,23 +5,23 @@ import {SentinelAuthGuardWithLogin, SentinelNegativeAuthGuard} from '@sentinel/a
 
 const routes: Routes = [
   {
-    path: 'clustering',
+    path: '',
     loadChildren: () => import('./clustering/clustering.module').then(m => m.ClusteringModule),
     //canActivate: [SentinelAuthGuardWithLogin],
   },
   {
     path: '',
-    redirectTo: 'clustering',
+    redirectTo: '',
     pathMatch: 'full'
   },
-  /*{
+  {
     path: 'login',
     component: SentinelAuthProviderListComponent,
     canActivate: [SentinelNegativeAuthGuard]
-  },*/
+  },
   {
     path: '**',
-    redirectTo: 'clustering'
+    redirectTo: ''
   }
 ];
 

@@ -1,13 +1,10 @@
 import { Observable, ReplaySubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import {VisualizationData} from "../models/visualization-data";
-import {Clusterables} from "../models/clusterables-enum";
-import {Clusterable} from "../models/clusterable";
-import {WrongFlags} from "../models/wrong-flags";
-import {TimeAfterHint} from "../models/time-after-hint";
+import { VisualizationData } from '../models/visualization-data';
+import { Clusterables } from '../models/clusterables-enum';
+import { Clusterable } from '../models/clusterable';
 
 export abstract class VisualizationsDataService {
-
   protected visualizationDataSubject$: ReplaySubject<VisualizationData> = new ReplaySubject();
 
   visualizationData$: Observable<VisualizationData> = this.visualizationDataSubject$
@@ -16,21 +13,23 @@ export abstract class VisualizationsDataService {
 
   abstract set selectedFeature(value: Clusterables);
 
-  abstract getData(trainingDefinitionId: number);
+  abstract get selectedFeature();
 
-  abstract getRadarData(trainingDefinitionId: number);
+  abstract getData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number);
 
-  abstract getLineData(trainingDefinitionId: number, numOfClusters: number);
+  abstract getRadarData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number);
+
+  abstract getLineData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number);
 
   /* methods to get information based on selected feature */
 
-  abstract getOption(point: Clusterable): number;
+  abstract getOption(point: Clusterable, feature: Clusterables): number;
 
-  abstract getX(value: any): number;
+  abstract getX(value: any, feature: Clusterables): number;
 
-  abstract getY(value: any): number;
+  abstract getY(value: any, feature: Clusterables): number;
 
-  abstract getXLabel(): string;
+  abstract getXLabel(feature: Clusterables): string;
 
-  abstract getYLabel(): string;
+  abstract getYLabel(feature: Clusterables): string;
 }

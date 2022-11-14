@@ -1,22 +1,28 @@
 <ng-container>
+	<!-- the line chart is available for every graph type (it can be hidden in the form of a button) -->
 	<kypo-viz-clustering-line-chart
 			[visualizationData]="lineData$"
 			[trainingDefinitionId]="trainingDefinitionId"
-			[trainingInstanceId]="trainingInstanceId"
-			[numOfClusters]="numOfClusters"
-			[includeInButtonToggle]="true">
-	</kypo-viz-clustering-line-chart>
+			[trainingInstanceId]="trainingInstanceIds"
+			[elbowNumClusters]="elbowNumClusters"
+			[includeInButtonToggle]="true"
+			(viewOpen)="toggleView($event)"
+	></kypo-viz-clustering-line-chart>
+
 	<kypo-viz-clustering-scatter-plot
-			*ngIf="selectedComponent == 0"
+			*ngIf="selectedComponent !== 2"
 			[visualizationData]="visualizationData$"
 			[trainingDefinitionId]="trainingDefinitionId"
-			[trainingInstanceId]="trainingInstanceId"
+			[trainingInstanceId]="trainingInstanceIds"
 			[numOfClusters]="numOfClusters"
+			[isStandalone]="isStandalone"
+			[selectedFeature]="selectedFeature"
 	></kypo-viz-clustering-scatter-plot>
+
 	<kypo-viz-clustering-radar-chart
-			*ngIf="selectedComponent == 2"
+			*ngIf="selectedComponent === 2"
 			[numOfClusters]="numOfClusters"
 			[visualizationData]="radarChartData$"
-			[isStandalone]="true">
+			[isStandalone]="isStandalone">
 	</kypo-viz-clustering-radar-chart>
 </ng-container>

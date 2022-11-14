@@ -1,3 +1,3 @@
 export class SseData {
-    [index: number ]: number
+  [index: number]: number;
 }

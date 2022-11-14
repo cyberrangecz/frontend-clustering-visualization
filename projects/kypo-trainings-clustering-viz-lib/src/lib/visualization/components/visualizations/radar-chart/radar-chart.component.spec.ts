@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
 import { RadarChartComponent } from './radar-chart.component';
 
 describe('TrainingAnalysisComponent', () => {
@@ -8,9 +7,8 @@ describe('TrainingAnalysisComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ RadarChartComponent ]
-    })
-    .compileComponents();
+      declarations: [RadarChartComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
