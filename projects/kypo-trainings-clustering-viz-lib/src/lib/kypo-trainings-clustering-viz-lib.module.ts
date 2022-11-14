@@ -15,8 +15,8 @@ import { VisualizationsDataConcreteService } from './visualization/services/visu
 import { VisualizationsComponent } from './visualization/components/visualizations/visualizations.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
-import {RadarChartComponent} from "./visualization/components/visualizations/radar-chart/radar-chart.component";
-import {ClusteringVisualizationConfig} from "./visualization/config/kypo-trainings-clustering-viz-lib";
+import {RadarChartComponent} from './visualization/components/visualizations/radar-chart/radar-chart.component';
+import {ClusteringVisualizationConfig} from './visualization/config/kypo-trainings-clustering-viz-lib';
 import { LineChartComponent } from './visualization/components/visualizations/line-chart/line-chart.component';
 import { ScatterPlotComponent } from './visualization/components/visualizations/scatter-plot/scatter-plot.component';
 

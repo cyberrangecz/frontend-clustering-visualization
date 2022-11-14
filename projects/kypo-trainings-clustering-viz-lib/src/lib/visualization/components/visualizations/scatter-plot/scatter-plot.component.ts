@@ -1,8 +1,8 @@
 import {Component, Input, OnChanges, OnInit, Output} from '@angular/core';
-import {D3, D3Service} from "@muni-kypo-crp/d3-service";
-import {AppConfig} from "../../../../app.config";
-import {VisualizationsDataService} from "../../../services/visualizations-data.service";
-import {Clusterables} from "../../../models/clusterables-enum";
+import {D3, D3Service} from '@muni-kypo-crp/d3-service';
+import {AppConfig} from '../../../../app.config';
+import {VisualizationsDataService} from '../../../services/visualizations-data.service';
+import {Clusterables} from '../../../models/clusterables-enum';
 
 @Component({
   selector: 'kypo-viz-clustering-scatter-plot',
@@ -18,7 +18,8 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
   @Input() isStandalone: boolean;
   @Input() selectedFeature: Clusterables = 0;
 
-  @Output() info = 'The chart shows a relation between two distinct groups of actions or behavior, helps to identify connections between them.';
+  @Output() info = 'The chart shows a relation between two distinct groups ' +
+      'of actions or behavior, helps to identify connections between them.';
 
   private readonly d3: D3;
   private data: any[] = [];
@@ -69,12 +70,12 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
     // find which features will be managed
     switch (this.selectedFeature) {
       case 0:
-        xValue = "wrongFlagsSubmitted";
-        yValue = "timePlayed";
+        xValue = 'wrongFlagsSubmitted';
+        yValue = 'timePlayed';
         break;
       case 1:
-        xValue = "timeSpentAfterHint";
-        yValue = "wrongFlagsAfterHint";
+        xValue = 'timeSpentAfterHint';
+        yValue = 'wrongFlagsAfterHint';
         break;
       default: break;
     }
@@ -91,8 +92,8 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
 
     this.visualizationData.clusterData[0].forEach(function(d) {
       d.points.forEach( function (point) {
-        point[xValue + "Normalized"] = (point[xValue] - minX) / (maxX - minX);
-        point[yValue + "Normalized"] = (point[yValue] - minY) / (maxY - minY);
+        point[xValue + 'Normalized'] = (point[xValue] - minX) / (maxX - minX);
+        point[yValue + 'Normalized'] = (point[yValue] - minY) / (maxY - minY);
       })
     });
   }
@@ -119,25 +120,25 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
 
   private prepareSvg(): void {
     this.svg = this.d3.select('.' + this.chartClass)
-        .append("svg")
-        .attr("viewBox", "0 -20 750 500")
-        .attr("preserveAspectRatio", "xMidYMid meet");
-    this.svg.append("rect")
-        .attr("width", this.width - this.margin)
-        .attr("height", this.height)
-        .attr("fill", "rgba(255,255,255,0.2)")
-        .attr("x", this.margin)
-        .attr("y", 0);
-    this.svg.append("defs").append("SVG:clipPath")
-        .attr("id", "clip")
-        .append("SVG:rect")
-        .attr("width", this.width - this.margin)
-        .attr("height", this.height)
-        .attr("x", this.margin)
-        .attr("y", 0);
+        .append('svg')
+        .attr('viewBox', '0 -20 750 500')
+        .attr('preserveAspectRatio', 'xMidYMid meet');
+    this.svg.append('rect')
+        .attr('width', this.width - this.margin)
+        .attr('height', this.height)
+        .attr('fill', 'rgba(255,255,255,0.2)')
+        .attr('x', this.margin)
+        .attr('y', 0);
+    this.svg.append('defs').append('SVG:clipPath')
+        .attr('id', 'clip')
+        .append('SVG:rect')
+        .attr('width', this.width - this.margin)
+        .attr('height', this.height)
+        .attr('x', this.margin)
+        .attr('y', 0);
     this.gPlot = this.svg
-        .append("g")
-        .attr("clip-path", "url(#clip)")
+        .append('g')
+        .attr('clip-path', 'url(#clip)')
   }
 
   private drawPlot(): void {
@@ -150,11 +151,11 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
         .range([0, this.width - this.margin]);
 
     this.xRef = this.x.copy();
-    this.xAxis = this.svg.append("g")
-        .attr("transform", "translate(" + this.margin + "," + this.height + ")")
+    this.xAxis = this.svg.append('g')
+        .attr('transform', 'translate(' + this.margin + ',' + this.height + ')')
         .call(d3.axisBottom(this.x));
-    this.svg.append("text")
-        .attr("transform", "translate(" + this.width / 2 + "," + ( this.height + this.topMargin) + ")")
+    this.svg.append('text')
+        .attr('transform', 'translate(' + this.width / 2 + ',' + ( this.height + this.topMargin) + ')')
         .text(this.visualizationDataService.getXLabel(this.selectedFeature));
 
     // Add Y axis
@@ -165,44 +166,44 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
         .range([this.height, 0])
 
     this.yRef = this.y.copy();
-    this.yAxis = this.svg.append("g")
-        .attr("transform", "translate(" + this.margin + ",0)")
+    this.yAxis = this.svg.append('g')
+        .attr('transform', 'translate(' + this.margin + ',0)')
         .call(d3.axisLeft(this.y));
-    this.svg.append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", this.margin / 2 - 10)
-        .attr("x", 0 - this.height / 2 + 10)
-        .attr("text-anchor", "middle")
+    this.svg.append('text')
+        .attr('transform', 'rotate(-90)')
+        .attr('y', this.margin / 2 - 10)
+        .attr('x', 0 - this.height / 2 + 10)
+        .attr('text-anchor', 'middle')
         .text(this.visualizationDataService.getYLabel(this.selectedFeature));
 
     // Set the zoom and Pan features: how much you can zoom, on which part, and what to do when there is a zoom
-    let zoom = d3.zoom()
+    const zoom = d3.zoom()
         .scaleExtent([1, 30])  // This control how much you can unzoom (x0.5) and zoom (x20)
         .extent([[0, 0], [this.width, this.height]])
         .translateExtent([[0, 0], [this.width, this.height]])
-        .on("zoom", ((event) => this.updateChart(event)))
-        .filter((event) => event.type === "mousedown" || !event.button && event.ctrlKey)
+        .on('zoom', ((event) => this.updateChart(event)))
+        .filter((event) => event.type === 'mousedown' || !event.button && event.ctrlKey)
 
     this.svg.call(zoom)
-        .on("wheel", (event) => {
+        .on('wheel', (event) => {
           if (event.ctrlKey) {
           event.preventDefault()
         }});
 
-    let tooltip = this.tooltip;
+    const tooltip = this.tooltip;
     const chartClass = this.chartClass;
 
     // Add scatter
-    this.dataPoints = this.gPlot.selectAll("dot")
+    this.dataPoints = this.gPlot.selectAll('dot')
         .data(this.data)
         .enter()
-        .append("circle")
-        .attr("cx", (d: any) => this.x(this.visualizationDataService.getX(d, this.selectedFeature)) + this.margin)
-        .attr("cy", (d: any) => this.y(this.visualizationDataService.getY(d, this.selectedFeature)))
-        .attr("r", 7)
-        .style("opacity", .5)
-        .style("fill", (d: any) => this.appConfig.colors[d.clusterId])
-        .on("mouseover", function(event, d){
+        .append('circle')
+        .attr('cx', (d: any) => this.x(this.visualizationDataService.getX(d, this.selectedFeature)) + this.margin)
+        .attr('cy', (d: any) => this.y(this.visualizationDataService.getY(d, this.selectedFeature)))
+        .attr('r', 7)
+        .style('opacity', .5)
+        .style('fill', (d: any) => this.appConfig.colors[d.clusterId])
+        .on('mouseover', function(event, d){
           const vizBox = document.querySelector('#scatterClustersSvgPlaceholder kypo-clustering-visualization').getBoundingClientRect();
 
           tooltip
@@ -212,18 +213,18 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
               .delay(10)
               .style('opacity', 0.9);
           tooltip
-              .html("The trainee ID: " + d.userRefId)
-              .style("left", (event.clientX - vizBox.x) + "px")
-              .style("top", (event.clientY - vizBox.y - 10) + "px")
+              .html('The trainee ID: ' + d.userRefId)
+              .style('left', (event.clientX - vizBox.x) + 'px')
+              .style('top', (event.clientY - vizBox.y - 10) + 'px')
         })
-        .on("mousemove", function(event: any, d: any){
+        .on('mousemove', function(event: any, d: any){
           const vizBox = document.querySelector('#scatterClustersSvgPlaceholder kypo-clustering-visualization').getBoundingClientRect();
 
           return tooltip
-              .style("left", (event.clientX - vizBox.x) + "px")
-              .style("top", (event.clientY - vizBox.y - 10) + "px")
+              .style('left', (event.clientX - vizBox.x) + 'px')
+              .style('top', (event.clientY - vizBox.y - 10) + 'px')
         })
-        .on("mouseout", function(){
+        .on('mouseout', function(){
           tooltip
               .transition()
               .duration(0)
@@ -241,20 +242,20 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
 
     // update axes with these new boundaries
     this.xAxis
-        .attr("transform", "translate(" + this.margin + "," + this.height + ")")
+        .attr('transform', 'translate(' + this.margin + ',' + this.height + ')')
         .call(d3.axisBottom(newX));
     this.yAxis.call(d3.axisLeft(newY));
 
     // update circle position
     this.gPlot
-        .selectAll("circle")
-        .attr("cx", (d: any) => newX(this.visualizationDataService.getX(d, this.selectedFeature)) + this.margin)
-        .attr("cy", (d: any) => newY(this.visualizationDataService.getY(d, this.selectedFeature)));
+        .selectAll('circle')
+        .attr('cx', (d: any) => newX(this.visualizationDataService.getX(d, this.selectedFeature)) + this.margin)
+        .attr('cy', (d: any) => newY(this.visualizationDataService.getY(d, this.selectedFeature)));
 
     // update text position
-    this.gPlot.selectAll("text")
-        .attr("x", (d: any) => newX(this.visualizationDataService.getX(d, this.selectedFeature)))
-        .attr("y", (d: any) => newY(this.visualizationDataService.getY(d, this.selectedFeature)));
+    this.gPlot.selectAll('text')
+        .attr('x', (d: any) => newX(this.visualizationDataService.getX(d, this.selectedFeature)))
+        .attr('y', (d: any) => newY(this.visualizationDataService.getY(d, this.selectedFeature)));
   }
 
   createTooltip() {
@@ -264,17 +265,17 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
         .select('.' + this.chartClass)
         .append('div')
         .attr('class', 'clustering-scatter-tooltip')
-        .style("opacity", "0")
-        .style("display", "inline-block")
-        .style("position", "absolute")
-        .style("padding", "5px 10px")
-        .style("font-size", "10px")
-        .style("opacity", "0")
-        .style("background", "#5b5c5e")
-        .style("color", "#fff")
-        .style("border-radius", "2px")
-        .style("pointer-events", "none")
-        .style("font-family", "'Roboto', sans-serif")
+        .style('opacity', '0')
+        .style('display', 'inline-block')
+        .style('position', 'absolute')
+        .style('padding', '5px 10px')
+        .style('font-size', '10px')
+        .style('opacity', '0')
+        .style('background', '#5b5c5e')
+        .style('color', '#fff')
+        .style('border-radius', '2px')
+        .style('pointer-events', 'none')
+        .style('font-family', '\'Roboto\', sans-serif')
   }
 
   toggleInfo() {

@@ -8,7 +8,6 @@ import { environment } from '../environments/environment';
 import { SentinelLayout1Module } from '@sentinel/layout/layout1';
 import {SentinelAuthModule} from '@sentinel/auth';
 import {SentinelAuthGuardWithLogin, SentinelNegativeAuthGuard} from '@sentinel/auth/guards';
-import {MatSidenavModule} from "@angular/material/sidenav";
 
 @NgModule({
   declarations: [

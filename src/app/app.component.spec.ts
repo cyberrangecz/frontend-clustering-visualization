@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 // import { AppConfig, CTF_PROGRESS_CONFIG } from './app.config';
 // import { D3Service } from 'd3-ng2-service';
-import {RadarChartComponent} from "../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/components/visualizations/radar-chart/radar-chart.component";
+import {RadarChartComponent} from '../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/components/visualizations/radar-chart/radar-chart.component';
 
 
 

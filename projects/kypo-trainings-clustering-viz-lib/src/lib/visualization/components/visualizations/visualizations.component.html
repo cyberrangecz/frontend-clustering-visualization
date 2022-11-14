@@ -10,7 +10,7 @@
 	></kypo-viz-clustering-line-chart>
 
 	<kypo-viz-clustering-scatter-plot
-			*ngIf="selectedComponent != 2"
+			*ngIf="selectedComponent !== 2"
 			[visualizationData]="visualizationData$"
 			[trainingDefinitionId]="trainingDefinitionId"
 			[trainingInstanceId]="trainingInstanceIds"
@@ -20,7 +20,7 @@
 	></kypo-viz-clustering-scatter-plot>
 
 	<kypo-viz-clustering-radar-chart
-			*ngIf="selectedComponent == 2"
+			*ngIf="selectedComponent === 2"
 			[numOfClusters]="numOfClusters"
 			[visualizationData]="radarChartData$"
 			[isStandalone]="isStandalone">

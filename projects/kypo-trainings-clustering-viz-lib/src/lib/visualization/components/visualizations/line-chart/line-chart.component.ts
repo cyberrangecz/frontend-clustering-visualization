@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
-import {D3, D3Service} from "@muni-kypo-crp/d3-service";
-import {AppConfig} from "../../../../app.config";
+import {D3, D3Service} from '@muni-kypo-crp/d3-service';
+import {AppConfig} from '../../../../app.config';
 import { v4 as uuid } from 'uuid';
 
 @Component({
@@ -14,20 +14,20 @@ export class LineChartComponent implements OnChanges, OnInit {
   @Input() trainingDefinitionId: number;
   @Input() trainingInstanceId: number;
   @Input() elbowNumClusters: number;
-  @Input() includeInButtonToggle: boolean = false;
+  @Input() includeInButtonToggle = false;
 
   @Output() viewOpen: EventEmitter<boolean> = new EventEmitter();
 
   public showChart = true;
-  public buttonKeyword: string = "Hide";
+  public buttonKeyword = 'Hide';
   public id: string;
 
   private readonly d3: D3;
   private gChart: any;
   private svg: any;
-  private height: number = 450;
-  private width: number = 910;
-  private margin: number = 25;
+  private height = 450;
+  private width = 910;
+  private margin = 25;
   private x: any;
   private y: any;
   private xAxis: any;
@@ -43,7 +43,7 @@ export class LineChartComponent implements OnChanges, OnInit {
     // if we want to show the visualization as a suporting component, it only displays on demand
     if (this.includeInButtonToggle) {
       this.showChart = false;
-      this.buttonKeyword = "Show";
+      this.buttonKeyword = 'Show';
     }
   }
 
@@ -62,13 +62,13 @@ export class LineChartComponent implements OnChanges, OnInit {
   }
 
   private createSvg(): void {
-    this.svg = this.d3.select("." + this.id + " #chartDiv")
-        .append("svg")
-        .attr("viewBox", "-50 0 1000 550")
-        .attr("preserveAspectRatio", "xMidYMid meet")
+    this.svg = this.d3.select('.' + this.id + ' #chartDiv')
+        .append('svg')
+        .attr('viewBox', '-50 0 1000 550')
+        .attr('preserveAspectRatio', 'xMidYMid meet')
     this.gChart = this.svg
-        .append("g")
-        .attr("transform", "translate(" + this.margin + "," + this.margin + ")");
+        .append('g')
+        .attr('transform', 'translate(' + this.margin + ',' + this.margin + ')');
   }
 
   private drawPlot(): void {
@@ -80,14 +80,14 @@ export class LineChartComponent implements OnChanges, OnInit {
     this.x = d3.scaleLinear()
         .domain([1, this.elbowNumClusters])
         .rangeRound([0, this.width]);
-    this.xAxis = this.gChart.append("g")
-        .attr("transform", "translate(0," + this.height + ")")
-        .style("font-size", "15px")
+    this.xAxis = this.gChart.append('g')
+        .attr('transform', 'translate(0,' + this.height + ')')
+        .style('font-size', '15px')
         .call(d3.axisBottom(this.x).ticks(this.elbowNumClusters));
-    this.gChart.append("text")
-        .attr("transform", "translate(" + this.width / 2 + "," + (this.height + 2 * this.margin) + ")")
-        .attr("text-anchor", "middle")
-        .text("Number of clusters");
+    this.gChart.append('text')
+        .attr('transform', 'translate(' + this.width / 2 + ',' + (this.height + 2 * this.margin) + ')')
+        .attr('text-anchor', 'middle')
+        .text('Number of clusters');
 
     // Add Y axis
     this.y = d3.scaleLinear()
@@ -95,46 +95,46 @@ export class LineChartComponent implements OnChanges, OnInit {
         .range([this.height, 0])
         .nice();
 
-    this.yAxis = this.gChart.append("g")
-        .style("font-size", "15px")
+    this.yAxis = this.gChart.append('g')
+        .style('font-size', '15px')
         .call(d3.axisLeft(this.y));
-    this.gChart.append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 0 - this.margin * 2)
-        .attr("x", 0 - this.height / 2)
-        .attr("text-anchor", "middle")
-        .text("Sum of squared errors");
+    this.gChart.append('text')
+        .attr('transform', 'rotate(-90)')
+        .attr('y', 0 - this.margin * 2)
+        .attr('x', 0 - this.height / 2)
+        .attr('text-anchor', 'middle')
+        .text('Sum of squared errors');
 
 
     // add the line connecting all data points
-    this.svg.append("path")
+    this.svg.append('path')
         .datum(data)
-        .attr("fill", "none")
-        .attr("stroke", this.appConfig.lineChartColor)
-        .attr("stroke-width", 4)
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .attr("transform", "translate(" + this.margin + "," + this.margin + ")")
-        .attr("d", d3.line()
+        .attr('fill', 'none')
+        .attr('stroke', this.appConfig.lineChartColor)
+        .attr('stroke-width', 4)
+        .attr('stroke-linejoin', 'round')
+        .attr('stroke-linecap', 'round')
+        .attr('transform', 'translate(' + this.margin + ',' + this.margin + ')')
+        .attr('d', d3.line()
                   .x((d, index) => this.x(index + 1))
                   .y(d => this.y(d))
         );
 
     // Add the dots
-    this.gChart.selectAll("dot")
+    this.gChart.selectAll('dot')
         .data(data)
         .enter()
-        .append("circle")
-        .attr("cx", (d: number, index: number) => this.x(index + 1))
-        .attr("cy", (d: number) => this.y(d))
-        .attr("r", 7)
-        .style("opacity", .7)
-        .attr("fill", this.appConfig.lineChartColor);
+        .append('circle')
+        .attr('cx', (d: number, index: number) => this.x(index + 1))
+        .attr('cy', (d: number) => this.y(d))
+        .attr('r', 7)
+        .style('opacity', .7)
+        .attr('fill', this.appConfig.lineChartColor);
   }
 
   public toggleChartVisibility() {
     this.showChart = !this.showChart;
-    this.buttonKeyword = this.showChart ? "Hide" : "Show";
+    this.buttonKeyword = this.showChart ? 'Hide' : 'Show';
     this.viewOpen.emit(this.showChart);
   }
 

@@ -1,4 +1,4 @@
-import {Clusterable} from "./clusterable";
+import {Clusterable} from './clusterable';
 
 export interface TimeAfterHint extends Clusterable {
     level: number;

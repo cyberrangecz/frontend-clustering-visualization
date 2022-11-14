@@ -1,10 +1,8 @@
 import { Observable, ReplaySubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import {VisualizationData} from "../models/visualization-data";
-import {Clusterables} from "../models/clusterables-enum";
-import {Clusterable} from "../models/clusterable";
-import {WrongFlags} from "../models/wrong-flags";
-import {TimeAfterHint} from "../models/time-after-hint";
+import {VisualizationData} from '../models/visualization-data';
+import {Clusterables} from '../models/clusterables-enum';
+import {Clusterable} from '../models/clusterable';
 
 export abstract class VisualizationsDataService {
 

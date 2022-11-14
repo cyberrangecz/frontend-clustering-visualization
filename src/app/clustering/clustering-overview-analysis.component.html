@@ -14,13 +14,13 @@
                </button>
                 <div *ngIf="isSubmenuOpen">
                     <button mat-button class="nav-link sub-item"
-                            [ngClass]="{'opened' : selectedFeature == 0}"
+                            [ngClass]="{'opened' : selectedFeature === 0}"
                             (click)="selectedComponent=0;selectedFeature=0">
                         <span>Wrong flags per time played</span>
                     </button>
                     <br/>
                     <button mat-button class="nav-link sub-item"
-                            [ngClass]="{'opened' : selectedFeature == 1}"
+                            [ngClass]="{'opened' : selectedFeature === 1}"
                             (click)="selectedComponent=0;selectedFeature=1">
                         <span>Time spent after using a hint</span>
                     </button>
@@ -28,7 +28,7 @@
 
                 <div>
                     <button mat-button class="nav-link"
-                            [ngClass]="{'opened' : selectedFeature == 2}"
+                            [ngClass]="{'opened' : selectedFeature === 2}"
                             (click)="selectedComponent=2;selectedFeature=2">
                         <span>Behavior correlation chart</span>
                     </button>
@@ -59,7 +59,8 @@
                        <mat-label>Level selection:</mat-label>
                        <mat-select [(value)]="level">
                            <mat-option [value]="''">All levels</mat-option>
-                           <mat-option *ngFor="let l of trainingLevels[trainingDefinitionId]  | keyvalue" [(value)]="l.value">{{l.key}}</mat-option>
+                           <mat-option *ngFor="let l of trainingLevels[trainingDefinitionId]  |
+                           keyvalue" [(value)]="l.value">{{l.key}}</mat-option>
                        </mat-select>
                    </mat-form-field>
 
