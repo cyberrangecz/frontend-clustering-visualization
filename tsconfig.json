@@ -1,8 +1,10 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
     "downlevelIteration": true,
     "importHelpers": true,
+    "module": "esnext",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -17,8 +19,6 @@
       "es2018",
       "dom"
     ],
-    "module": "esnext",
-    "baseUrl": "./",
     "paths": {
       "kypo2-trainings-clustering-viz-lib": [
         "dist/kypo2-trainings-clustering-viz-lib"
