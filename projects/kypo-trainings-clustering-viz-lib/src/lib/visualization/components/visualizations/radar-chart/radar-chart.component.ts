@@ -60,7 +60,7 @@ export class RadarChartComponent implements OnChanges, OnInit {
     if (this.visualizationData != undefined) this.setBounds();
     this.info =
       'The chart displays overview of trainee groups and their playing behavior. ' +
-      "In the small radar charts, 'n' denotes the number of trainees whose playing styles" +
+      'In the small radar charts, 'n' denotes the number of trainees whose playing styles' +
       ' were similar. In this testing GUI, you can choose desired datasets with the input fields below.';
   }
 
