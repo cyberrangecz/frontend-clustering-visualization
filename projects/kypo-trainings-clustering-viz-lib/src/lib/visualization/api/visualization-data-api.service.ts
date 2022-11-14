@@ -1,5 +1,5 @@
-import { Observable } from "rxjs";
-import { VisualizationData } from "../models/visualization-data";
+import { Observable } from 'rxjs';
+import { VisualizationData } from '../models/visualization-data';
 
 /**
  * Service abstracting http communication with visualization data endpoints.

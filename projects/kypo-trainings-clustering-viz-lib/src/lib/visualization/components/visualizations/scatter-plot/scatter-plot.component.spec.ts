@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ScatterPlotComponent } from "./scatter-plot.component";
+import { ScatterPlotComponent } from './scatter-plot.component';
 
-describe("ScatterPlotComponent", () => {
+describe('ScatterPlotComponent', () => {
   let component: ScatterPlotComponent;
   let fixture: ComponentFixture<ScatterPlotComponent>;
 
@@ -18,7 +18,7 @@ describe("ScatterPlotComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
