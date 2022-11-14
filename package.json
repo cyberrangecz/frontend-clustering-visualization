@@ -16,7 +16,7 @@
     "build-and-pack": "npm install && npm run build-library && npm run create-package",
     "ci-update-version": "cd ./projects/kypo-trainings-clustering-viz-lib/ && npm version $TAG_VERSION",
     "ci-build-and-pack": "npm ci --cache .nnpm ERR! Cannot read property '@angular/animations' of undefinedpm --prefer-offline && npm run build-library && npm run create-package",
-    "ci-publish-package": "cd dist/kypo-trainings-clustering-viz-lib && npm publish --allow-same-version"
+    "ci-publish-package": "cd dist/kypo-trainings-clustering-viz-lib && npm publish"
   },
   "husky": {
     "hooks": {
