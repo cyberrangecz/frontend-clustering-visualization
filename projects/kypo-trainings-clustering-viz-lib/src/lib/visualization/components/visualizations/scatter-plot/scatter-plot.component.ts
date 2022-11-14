@@ -295,7 +295,7 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
       .style('color', '#fff')
       .style('border-radius', '2px')
       .style('pointer-events', 'none')
-      .style('font-family', '\'Roboto\', sans-serif');
+      .style('font-family', 'Roboto, sans-serif');
   }
 
   toggleInfo() {
