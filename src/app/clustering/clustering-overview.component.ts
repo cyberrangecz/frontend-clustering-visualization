@@ -67,6 +67,10 @@ export class ClusteringOverviewComponent implements OnInit {
     this.level = 0;
   }
 
+  clusterChange(change) {
+    this.numOfClusters = change.target.value;
+  }
+
   toggleView(isOpen: boolean) {
     console.log(isOpen);
   }

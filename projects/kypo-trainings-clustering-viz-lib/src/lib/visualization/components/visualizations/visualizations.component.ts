@@ -38,7 +38,6 @@ export class VisualizationsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    console.log(this.level);
     this.loadData();
   }
 
@@ -48,6 +47,7 @@ export class VisualizationsComponent implements OnInit, OnChanges {
 
   private loadData() {
     this.visualizationDataService.selectedFeature = this.selectedFeature;
+    console.log(this.level);
 
     const lineService = this.visualizationDataService.getLineData(this.trainingDefinitionId, this.elbowNumClusters, this.trainingInstanceIds, this.level);
     lineService.subscribe((res) => {

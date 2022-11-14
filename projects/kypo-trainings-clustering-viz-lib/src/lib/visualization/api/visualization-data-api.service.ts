@@ -12,5 +12,5 @@ export abstract class VisualizationDataApi {
 
     abstract getRadarChartData(trainingDefinitionId: number, numberOfClusters: number, instanceIds: number[], level: number): Observable<VisualizationData>;
 
-    abstract getFeatureSSE(trainingDefinitionId: number, featureType: string, numOfClusters: number, instanceIds: number[], level: number): Observable<VisualizationData>;
+    abstract getFeatureSSE(trainingDefinitionId: number, featureType: string, numberOfClusters: number, instanceIds: number[], level: number): Observable<VisualizationData>;
   }

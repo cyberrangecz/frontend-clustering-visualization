@@ -36,7 +36,7 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
     return this.http
       .get<VisualizationDataDTO>(
           this.configService.config.trainingServiceUrl + `visualizations/training-definitions/${trainingDefinitionId}/${featureType}`, {
-              params: this.addParams(instanceIds, level)
+              params: this.addParams(numberOfClusters, instanceIds, level)
           })
       .pipe(
         map(
@@ -53,7 +53,7 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
     return this.http
         .get<VisualizationDataDTO>(
             this.configService.config.trainingServiceUrl + `visualizations/training-definitions/${trainingDefinitionId}/radar-chart`, {
-                params: this.addParams(instanceIds, level)
+                params: this.addParams(numberOfClusters, instanceIds, level)
             })
         .pipe(
             map(
@@ -63,11 +63,11 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
         );
   }
 
-  getFeatureSSE(trainingDefinitionId: number, featureType: string, numOfClusters: number, instanceIds: number[], level: number): Observable<SseDataMapper> {
+  getFeatureSSE(trainingDefinitionId: number, featureType: string, numberOfClusters: number, instanceIds: number[], level: number): Observable<SseDataMapper> {
       return this.http
           .get<SseDTO>(
               this.configService.config.trainingServiceUrl + `visualizations/training-definitions/${trainingDefinitionId}/${featureType}/sse`, {
-                  params: this.addParams(instanceIds, level)
+                  params: this.addParams(numberOfClusters, instanceIds, level)
               })
           .pipe(
               map(
@@ -77,8 +77,11 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
           );
   }
 
-  private addParams(instanceIds: number[], level: number) {
-      if ((!level || level == 0) && !instanceIds) return null;
-      return (level && level !== 0) ? {instanceIds: instanceIds, levelId: level} : {instanceIds: instanceIds};
+  private addParams(numberOfClusters: number, instanceIds: number[], level: number) {
+      let params = {};
+      params['numberOfClusters'] = numberOfClusters;
+      if (instanceIds !== undefined && instanceIds.length !== 0) params['instanceIds'] = instanceIds;
+      if (level) params['levelId'] = level;
+      return params;
   }
 }
