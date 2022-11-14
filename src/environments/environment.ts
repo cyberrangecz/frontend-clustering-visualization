@@ -2,41 +2,43 @@
 // `ng build --configuration production` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-const HOME_URL = 'https://localhost:4200'
+const HOME_URL = 'https://localhost:4200';
 
 export const environment = {
   production: false,
-  trainingServiceUrl: 'https://172.19.0.22/kypo-rest-training/api/v1/',
-  // URL of the SPA to redirect the user after silent refresh
-  silentRefreshRedirectUri: HOME_URL,
-  // URL of the SPA to redirect the user to after login
-  redirectUri: HOME_URL,
-  sessionChecksEnabled: false,
+
+  statisticalVizConfig: {
+    trainingServiceUrl: 'https://172.19.0.22/kypo-rest-training/api/v1/',
+  },
   authConfig: {
     guardMainPageRedirect: 'visualization',
     guardLoginPageRedirect: 'login',
-    interceptorAllowedUrls: [
-      'https://172.19.0.22'
-    ],
+    interceptorAllowedUrls: ['https://172.19.0.22'],
     authorizationStrategyConfig: {
-      authorizationUrl: 'https://172.19.0.22/kypo-rest-user-and-group/api/v1/users/info'
+      authorizationUrl: 'https://172.19.0.22/kypo-rest-user-and-group/api/v1/users/info',
     },
+    // OIDC SETTINGS
     providers: [
       {
         label: 'Login with MUNI',
         textColor: 'white',
         backgroundColor: '#002776',
         oidcConfig: {
-          issuer: 'https://172.19.0.22:8443/csirtmu-dummy-issuer-server/',
+          // Url of the Identity Provider
+          issuer: 'https://172.19.0.22:443/csirtmu-dummy-issuer-server/',
+          // The SPA's id. The SPA is registered with this id at the config-server
           clientId: '4bfa4a2a-51a0-43ca-96e1-d73fd78f36c9',
+          // URL of the SPA to redirect the user after silent refresh
           redirectUri: HOME_URL,
+          // set the scope for the permissions the client should request
           scope: 'openid email profile',
           logoutUrl: 'https://172.19.0.22/csirtmu-dummy-issuer-server/endsession',
+          // URL of the SPA to redirect the user to after login
           postLogoutRedirectUri: HOME_URL,
-          clearHashAfterLogin: true
+          clearHashAfterLogin: true,
         },
       },
-    ]
+    ],
   },
 };
 
