@@ -38,7 +38,7 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
     switch (this._selectedFeature) {
       case Clusterables.WrongFlags:
         return this.visualizationApi
-          .getVisualizationData(trainingDefinitionId, 'wrong-flags', numOfClusters, instanceIds, level)
+          .getVisualizationData(trainingDefinitionId, 'wrong-answers', numOfClusters, instanceIds, level)
           .pipe(
             map((data: any) => ClusterVisualizationDataMapper.fromDTO(data)),
             catchError((error) => {
@@ -47,7 +47,7 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
           );
       case Clusterables.TimeAfterHint:
         return this.visualizationApi
-          .getVisualizationData(trainingDefinitionId, 'time-after-hint', numOfClusters, instanceIds, level)
+          .getVisualizationData(trainingDefinitionId, 'hints', numOfClusters, instanceIds, level)
           .pipe(
             map((data: any) => ClusterVisualizationDataMapper.fromDTO(data)),
             catchError((error) => {
@@ -82,7 +82,7 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
     switch (this._selectedFeature) {
       case Clusterables.WrongFlags:
         return this.visualizationApi
-          .getFeatureSSE(trainingDefinitionId, 'wrong-flags', numOfClusters, instanceIds, level)
+          .getFeatureSSE(trainingDefinitionId, 'wrong-answers', numOfClusters, instanceIds, level)
           .pipe(
             map((data: any) => SseDataMapper.fromDTO(data)),
             catchError((error) => {
@@ -91,7 +91,7 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
           );
       case Clusterables.TimeAfterHint:
         return this.visualizationApi
-          .getFeatureSSE(trainingDefinitionId, 'time-after-hint', numOfClusters, instanceIds, level)
+          .getFeatureSSE(trainingDefinitionId, 'hints', numOfClusters, instanceIds, level)
           .pipe(
             map((data: any) => SseDataMapper.fromDTO(data)),
             catchError((error) => {
@@ -147,7 +147,7 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
   getXLabel(feature = this._selectedFeature): string {
     switch (feature) {
       case Clusterables.WrongFlags:
-        return 'Wrong flags submitted';
+        return 'Wrong answers submitted';
       case Clusterables.TimeAfterHint:
         return 'Time spent after using hint';
     }
@@ -159,7 +159,7 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
       case Clusterables.WrongFlags:
         return 'Time played';
       case Clusterables.TimeAfterHint:
-        return 'Wrong flags after using hint';
+        return 'Wrong answers after using hint';
     }
     return 'Feature Y';
   }

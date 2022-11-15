@@ -41,7 +41,7 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
     return this.http
       .get<VisualizationDataDTO>(
         this.configService.config.trainingServiceUrl +
-          `visualizations/training-definitions/${trainingDefinitionId}/${featureType}`,
+          `clusters/training-definitions/${trainingDefinitionId}/${featureType}`,
         { params: this.addParams(numberOfClusters, instanceIds, level) }
       )
       .pipe(map((response) => ClusterVisualizationDataMapper.fromDTO(response)));
@@ -59,7 +59,7 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
     return this.http
       .get<VisualizationDataDTO>(
         this.configService.config.trainingServiceUrl +
-          `visualizations/training-definitions/${trainingDefinitionId}/radar-chart`,
+          `clusters/training-definitions/${trainingDefinitionId}/radar-chart`,
         { params: this.addParams(numberOfClusters, instanceIds, level) }
       )
       .pipe(map((response) => RadarChartDataMapper.fromDTO(response)));
@@ -75,7 +75,7 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
     return this.http
       .get<SseDTO>(
         this.configService.config.trainingServiceUrl +
-          `visualizations/training-definitions/${trainingDefinitionId}/${featureType}/sse`,
+          `clusters/training-definitions/${trainingDefinitionId}/${featureType}/sse`,
         { params: this.addParams(numberOfClusters, instanceIds, level) }
       )
       .pipe(map((response) => SseDataMapper.fromDTO(response)));
