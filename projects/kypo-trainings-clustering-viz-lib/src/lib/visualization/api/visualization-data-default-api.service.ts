@@ -59,7 +59,7 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
     return this.http
       .get<VisualizationDataDTO>(
         this.configService.config.trainingServiceUrl +
-          `clusters/training-definitions/${trainingDefinitionId}/radar-chart`,
+          `clusters/training-definitions/${trainingDefinitionId}/n-dimensional`,
         { params: this.addParams(numberOfClusters, instanceIds, level) }
       )
       .pipe(map((response) => RadarChartDataMapper.fromDTO(response)));
