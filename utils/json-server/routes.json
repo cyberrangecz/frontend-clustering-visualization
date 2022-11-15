@@ -1,8 +1,8 @@
 {
-  "/kypo-rest-training/api/v1/visualizations/training-definitions/:id/wrong-flags:params": "/clusters",
-  "/kypo-rest-training/api/v1/visualizations/training-definitions/:id/time-after-hint:params": "/clusters2",
-  "/kypo-rest-training/api/v1/visualizations/training-definitions/:id/radar-chart:params": "/radarChart",
-  "/kypo-rest-training/api/v1/visualizations/training-definitions/:id/wrong-flags/sse?numberOfClusters=15": "/sse1",
-  "/kypo-rest-training/api/v1/visualizations/training-definitions/:id/time-after-hint/sse?numberOfClusters=15": "/sse2",
-  "/kypo-rest-training/api/v1/visualizations/training-definitions/:id/n-dimensional/sse?numberOfClusters=15": "/sseNDim"
+  "/kypo-rest-training/api/v1/clusters/training-definitions/:id/wrong-answers:params": "/clusters",
+  "/kypo-rest-training/api/v1/clusters/training-definitions/:id/hints:params": "/clusters2",
+  "/kypo-rest-training/api/v1/clusters/training-definitions/:id/n-dimensional:params": "/radarChart",
+  "/kypo-rest-training/api/v1/clusters/training-definitions/:id/wrong-answers/sse?numberOfClusters=15": "/sse1",
+  "/kypo-rest-training/api/v1/clusters/training-definitions/:id/hints/sse?numberOfClusters=15": "/sse2",
+  "/kypo-rest-training/api/v1/clusters/training-definitions/:id/n-dimensional/sse?numberOfClusters=15": "/sseNDim"
 }
