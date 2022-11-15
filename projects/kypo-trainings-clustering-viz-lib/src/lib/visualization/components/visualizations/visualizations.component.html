@@ -7,6 +7,7 @@
 			[elbowNumClusters]="elbowNumClusters"
 			[includeInButtonToggle]="true"
 			(viewOpen)="toggleView($event)"
+			(insufficientData)="checkData($event)"
 	></kypo-viz-clustering-line-chart>
 
 	<kypo-viz-clustering-scatter-plot

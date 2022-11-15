@@ -22,7 +22,7 @@ export class VisualizationsComponent implements OnInit, OnChanges {
 
   @Output() viewOpen: EventEmitter<boolean> = new EventEmitter();
 
-  elbowNumClusters = 15; // this ensures we dont load data after every linechart change (15 clusters should be more than enough)
+  elbowNumClusters = 15; // this ensures we don't load data after every line chart change (15 clusters should be more than enough)
 
   lineData$: Observable<VisualizationData>;
   visualizationData$: Observable<VisualizationData>;
@@ -44,7 +44,6 @@ export class VisualizationsComponent implements OnInit, OnChanges {
 
   private loadData() {
     this.visualizationDataService.selectedFeature = this.selectedFeature;
-    console.log(this.level);
 
     const lineService = this.visualizationDataService.getLineData(
       this.trainingDefinitionId,
@@ -77,5 +76,9 @@ export class VisualizationsComponent implements OnInit, OnChanges {
         this.radarChartData$ = res;
       });
     }
+  }
+
+  checkData(displayChart: boolean) {
+
   }
 }

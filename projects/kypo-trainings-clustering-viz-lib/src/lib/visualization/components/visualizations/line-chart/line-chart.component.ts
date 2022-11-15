@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angu
 import { D3, D3Service } from '@muni-kypo-crp/d3-service';
 import { AppConfig } from '../../../../app.config';
 import { v4 as uuid } from 'uuid';
+import {VisualizationData} from "../../../models/visualization-data";
 
 @Component({
   selector: 'kypo-viz-clustering-line-chart',
@@ -11,11 +12,12 @@ import { v4 as uuid } from 'uuid';
 export class LineChartComponent implements OnChanges, OnInit {
   @Input() visualizationData: number[] = [];
   @Input() trainingDefinitionId: number;
-  @Input() trainingInstanceId: number;
+  @Input() trainingInstanceId: number[];
   @Input() elbowNumClusters: number;
   @Input() includeInButtonToggle = false;
 
   @Output() viewOpen: EventEmitter<boolean> = new EventEmitter();
+  @Output() insufficientData: EventEmitter<boolean> = new EventEmitter();
 
   public showChart = true;
   public buttonKeyword = 'Hide';
@@ -55,8 +57,14 @@ export class LineChartComponent implements OnChanges, OnInit {
     if (this.gChart != undefined) {
       this.clear();
     }
+    this.checkData();
     this.createSvg();
     this.drawPlot();
+  }
+
+  checkData() {
+    // TODO
+    console.log(this.visualizationData);
   }
 
   private createSvg(): void {
