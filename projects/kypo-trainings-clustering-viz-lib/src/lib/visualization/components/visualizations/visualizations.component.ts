@@ -20,9 +20,8 @@ export class VisualizationsComponent implements OnInit, OnChanges {
   @Input() selectedFeature: Clusterables = Clusterables.WrongFlags; // (wf 1, tah 2, nd 3)
 
   @Output() viewOpen: EventEmitter<boolean> = new EventEmitter();
-  @Output() chartIsHidden: EventEmitter<boolean> = new EventEmitter();
+  @Output() chartIsHidden: EventEmitter<any> = new EventEmitter();
 
-  hideChart = false;
   elbowNumClusters = 15; // this ensures we don't load different data after every line chart change (15 clusters should be just enough)
 
   lineData$: Observable<VisualizationData>;
@@ -82,7 +81,6 @@ export class VisualizationsComponent implements OnInit, OnChanges {
   checkData(hideChart: boolean) {
     // if we don't have enough data for sse, we should hide the remaining related
     // charts as well, since they will also lack data for visualization
-    this.hideChart = hideChart;
-    if (hideChart) this.chartIsHidden.emit(true);
+    this.chartIsHidden.emit({ hide: hideChart, features: this.selectedFeature });
   }
 }

@@ -11,8 +11,6 @@ import { Clusterables } from '../../../models/clusterables-enum';
 })
 export class ScatterPlotComponent implements OnChanges, OnInit {
   @Input() visualizationData: { clusterData: any[] };
-  @Input() trainingDefinitionId: number;
-  @Input() trainingInstanceId: number;
   @Input() numOfClusters: number;
   @Input() isStandalone: boolean;
   @Input() selectedFeature: Clusterables = 0;

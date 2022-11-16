@@ -10,8 +10,6 @@ import { v4 as uuid } from 'uuid';
 })
 export class LineChartComponent implements OnChanges, OnInit {
   @Input() visualizationData: number[] = [];
-  @Input() trainingDefinitionId: number;
-  @Input() trainingInstanceId: number[];
   @Input() elbowNumClusters: number;
   @Input() includeInButtonToggle = false;
 
