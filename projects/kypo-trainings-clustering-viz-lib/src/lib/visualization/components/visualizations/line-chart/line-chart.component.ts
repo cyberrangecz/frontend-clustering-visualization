@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angu
 import { D3, D3Service } from '@muni-kypo-crp/d3-service';
 import { AppConfig } from '../../../../app.config';
 import { v4 as uuid } from 'uuid';
-import {VisualizationData} from "../../../models/visualization-data";
 
 @Component({
   selector: 'kypo-viz-clustering-line-chart',
@@ -57,14 +56,18 @@ export class LineChartComponent implements OnChanges, OnInit {
     if (this.gChart != undefined) {
       this.clear();
     }
-    this.checkData();
-    this.createSvg();
-    this.drawPlot();
+    if (this.checkData()) {
+      this.createSvg();
+      this.drawPlot();
+    }
   }
 
   checkData() {
-    // TODO
-    console.log(this.visualizationData);
+    const isAllNothing = this.visualizationData.every((value) => value === 0 || Number.isNaN(value) || value === null);
+    if (isAllNothing) {
+      this.insufficientData.emit(true);
+    }
+    return !isAllNothing;
   }
 
   private createSvg(): void {

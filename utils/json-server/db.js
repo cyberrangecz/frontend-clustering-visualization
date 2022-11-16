@@ -1656,6 +1656,18 @@ clusteringDB = function() {
       7.665157027831233,
       3.286652416172358
     ],
+    sseWrong:[
+      NaN,
+      0,
+      0,
+      NaN,
+      NaN,
+      NaN,
+      NaN,
+      NaN,
+      NaN,
+      NaN
+    ],
     sseNDim: [
       165,
       144.16192694574772,

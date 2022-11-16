@@ -1,4 +1,4 @@
-<ng-container>
+<ng-container *ngIf="!hideChart">
 	<!-- the line chart is available for every graph type (it can be hidden in the form of a button) -->
 	<kypo-viz-clustering-line-chart
 			[visualizationData]="lineData$"
