@@ -22,6 +22,7 @@ export class VisualizationsComponent implements OnInit, OnChanges {
   @Output() viewOpen: EventEmitter<boolean> = new EventEmitter();
   @Output() chartIsHidden: EventEmitter<any> = new EventEmitter();
 
+  hideLineData = [];
   elbowNumClusters = 15; // this ensures we don't load different data after every line chart change (15 clusters should be just enough)
 
   lineData$: Observable<VisualizationData>;
@@ -78,9 +79,11 @@ export class VisualizationsComponent implements OnInit, OnChanges {
     }
   }
 
-  checkData(hideChart: boolean) {
+  insufficientData(badData: boolean) {
     // if we don't have enough data for sse, we should hide the remaining related
     // charts as well, since they will also lack data for visualization
-    this.chartIsHidden.emit({ hide: hideChart, features: this.selectedFeature });
+    this.hideLineData = this.hideLineData.filter((value) => value.feature !== this.selectedFeature);
+    this.hideLineData.push({ hide: badData, feature: this.selectedFeature });
+    this.chartIsHidden.emit(this.hideLineData);
   }
 }

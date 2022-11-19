@@ -62,9 +62,7 @@ export class LineChartComponent implements OnChanges, OnInit {
 
   checkData() {
     const isAllNothing = this.visualizationData.every((value) => value === 0 || Number.isNaN(value) || value === null);
-    if (isAllNothing) {
-      this.insufficientData.emit(true);
-    }
+    this.insufficientData.emit(isAllNothing);
     return !isAllNothing;
   }
 
