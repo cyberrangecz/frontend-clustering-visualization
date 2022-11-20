@@ -3,7 +3,7 @@
     *ngIf="includeInButtonToggle"
     (click)="toggleChartVisibility()"> {{buttonKeyword}} helper elbow function </button>
 
-    <div [attr.style]="'display: ' + (showChart ? 'block' : 'none')">
+    <div [attr.style]="'display: ' + (showChart ? 'inline-block' : 'none')">
     <div  id="chartDiv"></div>
     <div id="helpDiv">
         <b>How to use this chart?</b>

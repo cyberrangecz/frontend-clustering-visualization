@@ -11,8 +11,6 @@ import { Clusterables } from '../../../models/clusterables-enum';
 })
 export class ScatterPlotComponent implements OnChanges, OnInit {
   @Input() visualizationData: { clusterData: any[] };
-  @Input() trainingDefinitionId: number;
-  @Input() trainingInstanceId: number;
   @Input() numOfClusters: number;
   @Input() isStandalone: boolean;
   @Input() selectedFeature: Clusterables = 0;
@@ -223,7 +221,10 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
       .data(this.data)
       .enter()
       .append('circle')
-      .attr('cx', (d: any) => this.x(this.visualizationDataService.getX(d, this.selectedFeature)) + this.margin)
+      .attr('cx', (d: any) => {
+        const x = this.x(this.visualizationDataService.getX(d, this.selectedFeature));
+        return Number.isNaN(x) ? this.margin : x + this.margin;
+      })
       .attr('cy', (d: any) => this.y(this.visualizationDataService.getY(d, this.selectedFeature)))
       .attr('r', 7)
       .style('opacity', 0.5)

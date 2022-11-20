@@ -4,7 +4,6 @@ import { VisualizationData } from '../../models/visualization-data';
 import { VisualizationsDataService } from '../../services/visualizations-data.service';
 import { Clusterables } from '../../models/clusterables-enum';
 import { Components } from '../../models/components-enum';
-import { RadarChartComponent } from './radar-chart/radar-chart.component';
 
 @Component({
   selector: 'kypo-clustering-visualization',
@@ -21,8 +20,10 @@ export class VisualizationsComponent implements OnInit, OnChanges {
   @Input() selectedFeature: Clusterables = Clusterables.WrongFlags; // (wf 1, tah 2, nd 3)
 
   @Output() viewOpen: EventEmitter<boolean> = new EventEmitter();
+  @Output() chartIsHidden: EventEmitter<any> = new EventEmitter();
 
-  elbowNumClusters = 15; // this ensures we dont load data after every linechart change (15 clusters should be more than enough)
+  hideLineData = [];
+  elbowNumClusters = 15; // this ensures we don't load different data after every line chart change (15 clusters should be just enough)
 
   lineData$: Observable<VisualizationData>;
   visualizationData$: Observable<VisualizationData>;
@@ -44,7 +45,6 @@ export class VisualizationsComponent implements OnInit, OnChanges {
 
   private loadData() {
     this.visualizationDataService.selectedFeature = this.selectedFeature;
-    console.log(this.level);
 
     const lineService = this.visualizationDataService.getLineData(
       this.trainingDefinitionId,
@@ -77,5 +77,13 @@ export class VisualizationsComponent implements OnInit, OnChanges {
         this.radarChartData$ = res;
       });
     }
+  }
+
+  insufficientData(badData: boolean) {
+    // if we don't have enough data for sse, we should hide the remaining related
+    // charts as well, since they will also lack data for visualization
+    this.hideLineData = this.hideLineData.filter((value) => value.feature !== this.selectedFeature);
+    this.hideLineData.push({ hide: badData, feature: this.selectedFeature });
+    this.chartIsHidden.emit(this.hideLineData);
   }
 }
