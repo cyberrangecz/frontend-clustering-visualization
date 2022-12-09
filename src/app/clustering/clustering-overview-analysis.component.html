@@ -78,16 +78,20 @@
 
            <!-- Main content -->
            <mat-sidenav-content style="margin-left: 255px;">
-               <kypo-clustering-visualization
-                        [selectedComponent]="selectedComponent"
-                        [selectedFeature]="selectedFeature"
-                        [trainingDefinitionId]="trainingDefinitionId"
-                        [trainingInstanceId]="trainingInstanceId"
-                        [numOfClusters]="numOfClusters"
-                        [isStandalone]="true"
-                        [level]="level"
-               >
-               </kypo-clustering-visualization>
+               <div id="scatterClustersSvgPlaceholder">
+                   <div id="radarchartPlaceholder">
+                   <kypo-clustering-visualization
+                            [selectedComponent]="selectedComponent"
+                            [selectedFeature]="selectedFeature"
+                            [trainingDefinitionId]="trainingDefinitionId"
+                            [trainingInstanceIds]="trainingInstanceIds"
+                            [numOfClusters]="numOfClusters"
+                            [isStandalone]="true"
+                            [level]="level"
+                   >
+                   </kypo-clustering-visualization>
+                   </div>
+               </div>
             </mat-sidenav-content>
         </mat-sidenav-container>
     </div>
