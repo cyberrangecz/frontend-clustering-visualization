@@ -299,16 +299,21 @@ export class RadarChartComponent implements OnChanges, OnInit {
         .style('font-size', '9')
         .text(ft_name)
         .on('mouseover', function (event, d) {
+          const vizBox = document
+            .querySelector('#radarchartPlaceholder kypo-clustering-visualization')
+            .getBoundingClientRect();
+
           tooltip.transition().ease(d3.easeLinear, 2).duration(300).delay(10).style('opacity', 0.9);
           tooltip
             .html(ft_tooltip)
-            .style('left', d3.pointer(event, d3.select('#radar-chart'))[0] - 200 + 'px')
-            .style('top', d3.pointer(event, d3.select('#radar-chart'))[1] - 100 + 'px');
+            .style('left', event.clientX - vizBox.x + 'px')
+            .style('top', event.clientY - vizBox.y - 20 + 'px');
         })
         .on('mousemove', function (event, d) {
-          tooltip
-            .style('left', d3.pointer(event, d3.select('#radar-chart'))[0] - 200 + 'px')
-            .style('top', d3.pointer(event, d3.select('#radar-chart'))[1] - 100 + 'px');
+          const vizBox = document
+            .querySelector('#radarchartPlaceholder kypo-clustering-visualization')
+            .getBoundingClientRect();
+          tooltip.style('left', event.clientX - vizBox.x + 'px').style('top', event.clientY - vizBox.y - 20 + 'px');
         })
         .on('mouseout', function () {
           tooltip.transition().duration(0).style('opacity', 0);

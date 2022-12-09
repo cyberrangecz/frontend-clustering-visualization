@@ -5,8 +5,8 @@ import {Components} from '../../../projects/kypo-trainings-clustering-viz-lib/sr
 
 @Component({
   selector: 'app-clustering-overview',
-  //templateUrl: './clustering-overview-analysis.component.html', <-- this one is for standalone analysis
-  templateUrl: './clustering-overview.component.html',
+  templateUrl: './clustering-overview-analysis.component.html', // <-- this one is for standalone analysis
+  //templateUrl: './clustering-overview.component.html',
   styleUrls: ['./clustering-overview.component.css']
 })
 export class ClusteringOverviewComponent {
