@@ -19,6 +19,7 @@ import { RadarChartComponent } from './visualization/components/visualizations/r
 import { ClusteringVisualizationConfig } from './visualization/config/kypo-trainings-clustering-viz-lib';
 import { LineChartComponent } from './visualization/components/visualizations/line-chart/line-chart.component';
 import { ScatterPlotComponent } from './visualization/components/visualizations/scatter-plot/scatter-plot.component';
+// import {environment} from "../../../../src/environments/environment";
 
 @NgModule({
   declarations: [RadarChartComponent, VisualizationsComponent, LineChartComponent, ScatterPlotComponent],
@@ -37,10 +38,8 @@ import { ScatterPlotComponent } from './visualization/components/visualizations/
     ConfigService,
     { provide: AppConfig, useValue: VIS_CONFIG },
     { provide: VisualizationDataApi, useClass: VisualizationDataDefaultApi },
-    {
-      provide: VisualizationsDataService,
-      useClass: VisualizationsDataConcreteService,
-    },
+    { provide: VisualizationsDataService, useClass: VisualizationsDataConcreteService }, //environment.providers
+    // use the environment variable only for local demo deploy to surge
   ],
   exports: [RadarChartComponent, LineChartComponent, ScatterPlotComponent, VisualizationsComponent],
 })

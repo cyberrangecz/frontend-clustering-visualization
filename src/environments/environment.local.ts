@@ -2,11 +2,19 @@
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { MockedRestService }
+  from '../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/services/visualizations-data-mock.service';
+import {
+  VisualizationsDataService
+} from '../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/services/visualizations-data.service';
+
 const HOME_URL = 'https://localhost:4200';
 
 export const environment = {
   production: false,
-
+  providers: [
+    { provide: VisualizationsDataService, useClass: MockedRestService}
+  ],
   statisticalVizConfig: {
     trainingServiceUrl: 'http://localhost:3000/kypo-rest-training/api/v1/',
   },

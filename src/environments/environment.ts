@@ -6,7 +6,7 @@ const HOME_URL = 'https://localhost:4200';
 
 export const environment = {
   production: false,
-
+  providers: [],
   statisticalVizConfig: {
     trainingServiceUrl: 'https://172.19.0.22/kypo-rest-training/api/v1/',
   },

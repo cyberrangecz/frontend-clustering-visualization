@@ -14,8 +14,8 @@ import { WrongFlags } from '../models/wrong-flags';
 
 @Injectable()
 export class VisualizationsDataConcreteService extends VisualizationsDataService {
-  private readonly messageBase = 'VisualizationsDataService not connect to API: ';
-  private _selectedFeature: Clusterables;
+  private readonly messageBase = 'VisualizationsDataService cannot connect to API: ';
+  protected _selectedFeature: Clusterables;
 
   set selectedFeature(value: Clusterables) {
     this._selectedFeature = value;

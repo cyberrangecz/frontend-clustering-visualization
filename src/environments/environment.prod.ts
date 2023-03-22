@@ -2,10 +2,19 @@
 // `ng build --configuration production` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { VisualizationsDataConcreteService }
+  from '../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/services/visualizations-data-concrete.service';
+import {
+  VisualizationsDataService
+} from '../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/services/visualizations-data.service';
+
 const HOME_URL = 'https://localhost:4200';
 
 export const environment = {
   production: true,
+  providers: [
+    { provide: VisualizationsDataService, useClass: VisualizationsDataConcreteService}
+  ],
   statisticalVizConfig: {
     trainingServiceUrl: 'https://172.19.0.22/kypo-rest-training/api/v1/',
   },
