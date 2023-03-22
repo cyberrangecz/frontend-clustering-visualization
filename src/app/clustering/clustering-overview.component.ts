@@ -1,7 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
-import {Clusterables} from '../../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/models/clusterables-enum';
-import {Components} from '../../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/models/components-enum';
+import { Clusterables
+} from '../../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/models/clusterables-enum';
+import { Components
+} from '../../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/models/components-enum';
 
 @Component({
   selector: 'app-clustering-overview',
@@ -60,6 +62,11 @@ export class ClusteringOverviewComponent {
 
   selectionChange() {
     this.level = 0;
+  }
+
+  change(selectedComponent: number, selectedFeature: number) {
+    this.selectedComponent = selectedComponent;
+    this.selectedFeature = selectedFeature;
   }
 
   clusterChange(change) {

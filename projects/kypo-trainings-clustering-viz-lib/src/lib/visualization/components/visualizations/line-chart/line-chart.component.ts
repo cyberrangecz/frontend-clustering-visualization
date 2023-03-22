@@ -18,7 +18,7 @@ export class LineChartComponent implements OnChanges, OnInit {
 
   public showChart = true;
   public buttonKeyword = 'Hide';
-  public id: string;
+  public id: string = 'line-' + uuid();
 
   private readonly d3: D3;
   private gChart: any;
@@ -36,8 +36,7 @@ export class LineChartComponent implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
-    this.id = 'line-' + uuid();
-    // if we want to show the visualization as a suporting component, it only displays on demand
+    // if we want to show the visualization as a supporting component, it only displays on demand
     if (this.includeInButtonToggle) {
       this.showChart = false;
       this.buttonKeyword = 'Show';

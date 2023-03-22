@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subscription, throwError, timer } from 'rxjs';
+import { Observable } from 'rxjs';
 import { VisualizationData } from '../../models/visualization-data';
 import { VisualizationsDataService } from '../../services/visualizations-data.service';
 import { Clusterables } from '../../models/clusterables-enum';

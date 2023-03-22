@@ -9,7 +9,7 @@
 	></kypo-viz-clustering-line-chart>
 
 	<kypo-viz-clustering-scatter-plot
-			*ngIf="selectedComponent !== 2"
+			[ngClass]="{'invisible-clusters' : selectedFeature === 2}"
 			[visualizationData]="visualizationData$"
 			[numOfClusters]="numOfClusters"
 			[isStandalone]="isStandalone"
@@ -17,7 +17,7 @@
 	></kypo-viz-clustering-scatter-plot>
 
 	<kypo-viz-clustering-radar-chart
-			*ngIf="selectedComponent === 2"
+			[ngClass]="{'invisible-clusters' : selectedFeature !== 2}"
 			[numOfClusters]="numOfClusters"
 			[visualizationData]="radarChartData$"
 			[isStandalone]="isStandalone">

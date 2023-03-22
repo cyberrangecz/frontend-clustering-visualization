@@ -41,3 +41,7 @@ button.opened {
 .mat-divider {
     margin: 10px 5px;
 }
+
+.mat-drawer-container {
+    min-height: 502px;
+}
