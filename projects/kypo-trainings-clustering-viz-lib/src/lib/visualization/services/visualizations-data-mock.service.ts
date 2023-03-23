@@ -21,6 +21,16 @@ import { SseDataMapper } from '../mappers/sse-data-mapper';
 })
 export class MockedRestService extends VisualizationsDataConcreteService {
   getData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number): any {
+    console.log(
+      'Mock data for TD' +
+        trainingDefinitionId +
+        ', TI ' +
+        instanceIds +
+        ', level ' +
+        level +
+        '. Number of clusters set to ' +
+        numOfClusters
+    );
     switch (this._selectedFeature) {
       case Clusterables.WrongFlags:
         return of(ClusterVisualizationDataMapper.fromDTO({ featureOneClusters }));
@@ -31,9 +41,29 @@ export class MockedRestService extends VisualizationsDataConcreteService {
     }
   }
   getRadarData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number): any {
+    console.log(
+      'Mock data for TD' +
+        trainingDefinitionId +
+        ', TI ' +
+        instanceIds +
+        ', level ' +
+        level +
+        '. Number of clusters set to ' +
+        numOfClusters
+    );
     return of(RadarChartDataMapper.fromDTO(radarClusters));
   }
   getLineData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number) {
+    console.log(
+      'Mock data for TD' +
+        trainingDefinitionId +
+        ', TI ' +
+        instanceIds +
+        ', level ' +
+        level +
+        '. Number of clusters set to ' +
+        numOfClusters
+    );
     switch (this._selectedFeature) {
       case Clusterables.WrongFlags:
         return of(SseDataMapper.fromDTO(featureOneSSE));

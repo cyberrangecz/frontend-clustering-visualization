@@ -19,7 +19,6 @@ import { RadarChartComponent } from './visualization/components/visualizations/r
 import { ClusteringVisualizationConfig } from './visualization/config/kypo-trainings-clustering-viz-lib';
 import { LineChartComponent } from './visualization/components/visualizations/line-chart/line-chart.component';
 import { ScatterPlotComponent } from './visualization/components/visualizations/scatter-plot/scatter-plot.component';
-import { environment } from '../../../../src/environments/environment';
 
 @NgModule({
   declarations: [RadarChartComponent, VisualizationsComponent, LineChartComponent, ScatterPlotComponent],
