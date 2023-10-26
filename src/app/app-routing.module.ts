@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./clustering/clustering.module').then(m => m.ClusteringModule),
-    //canActivate: [SentinelAuthGuardWithLogin],
+    canActivate: [SentinelAuthGuardWithLogin],
   },
   {
     path: '',
