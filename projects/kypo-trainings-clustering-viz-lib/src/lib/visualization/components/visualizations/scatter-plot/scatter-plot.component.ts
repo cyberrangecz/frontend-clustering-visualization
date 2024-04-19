@@ -213,7 +213,6 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
     });
 
     const tooltip = this.tooltip;
-    const chartClass = this.chartClass;
 
     // Add scatter
     this.dataPoints = this.gPlot
