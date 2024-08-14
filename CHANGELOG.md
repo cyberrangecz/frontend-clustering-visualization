@@ -1,3 +1,7 @@
+### 16.0.1 Update sentinel versions.
+* c7979eb -- [CI/CD] Update packages.json version based on GitLab tag.
+* 53e36be -- Merge branch 'update-sentinel-versions' into 'master'
+* a5584ec -- Update sentinel versions.
 ### 16.0.0 Update to Angular 16 and update local issuer to keycloak.
 * c8331d2 -- [CI/CD] Update packages.json version based on GitLab tag.
 *   0450a63 -- Merge branch '6-update-to-angular-16' into 'master'
