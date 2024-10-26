@@ -1,9 +1,8 @@
-import { Component, Input, OnChanges, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
 import { D3, D3Service } from '@muni-kypo-crp/d3-service';
 import { BaseConfig } from '../../../models/base-config';
 import { AppConfig } from '../../../../app.config';
 import { ConfigService } from '../../../config/config.service';
-import { Subscription } from 'rxjs';
 import { VisualizationData } from '../../../models/visualization-data';
 import { EuclidianDoublePoint, Point } from '../../../models/eucledian-double-point';
 
@@ -41,7 +40,11 @@ export class RadarChartComponent implements OnChanges, OnInit {
   public showInfo: boolean;
   public numberOfParticipants: number;
 
-  constructor(d3Service: D3Service, private configService: ConfigService, private appConfig: AppConfig) {
+  constructor(
+    d3Service: D3Service,
+    private configService: ConfigService,
+    private appConfig: AppConfig,
+  ) {
     this.d3 = d3Service.getD3();
     this.radialScale = this.d3.scaleLinear().domain(appConfig.radialScaleDomain).range(appConfig.radialScaleRange);
     this.smallScale = this.d3.scaleLinear().domain(appConfig.radialScaleDomain).range([0, 62]);
@@ -145,7 +148,7 @@ export class RadarChartComponent implements OnChanges, OnInit {
         .attr('preserveAspectRatio', 'xMidYMid meet');
       this.smallSvgs.push(smallChartsSvg);
 
-      const clip = smallChartsSvg
+      /* const clip = smallChartsSvg
         .append('defs')
         .append('SVG:clipPath')
         .attr('id', 'clip')
@@ -153,7 +156,7 @@ export class RadarChartComponent implements OnChanges, OnInit {
         .attr('width', 200)
         .attr('height', 200)
         .attr('x', 0)
-        .attr('y', 0);
+        .attr('y', 0);*/
 
       const smallChartsClipPath = smallChartsSvg.append('g').attr('clip-path', 'url(#clip)');
 
@@ -173,7 +176,7 @@ export class RadarChartComponent implements OnChanges, OnInit {
           .attr('fill', 'none')
           .attr('stroke-width', '1.2')
           .attr('stroke', 'lightGray')
-          .attr('r', radialScaleSmall(t))
+          .attr('r', radialScaleSmall(t)),
       );
 
       for (let i = 0; i < this.features.length; i++) {
@@ -236,7 +239,7 @@ export class RadarChartComponent implements OnChanges, OnInit {
       .attr('viewBox', this.width / 6 + ' ' + this.height / 6 + ' ' + this.width / 1.8 + ' ' + this.height / 1.8)
       .attr('preserveAspectRatio', 'xMidYMid meet');
 
-    const clip = this.svg
+    /* const clip = this.svg
       .append('defs')
       .append('SVG:clipPath')
       .attr('id', 'clip')
@@ -244,7 +247,7 @@ export class RadarChartComponent implements OnChanges, OnInit {
       .attr('width', this.width)
       .attr('height', this.height)
       .attr('x', 0)
-      .attr('y', 0);
+      .attr('y', 0); */
 
     this.gPlot = this.svg.append('g').attr('width', this.width).attr('height', this.height).attr('x', 0).attr('y', 0);
 
@@ -267,7 +270,7 @@ export class RadarChartComponent implements OnChanges, OnInit {
         .attr('fill', 'none')
         .attr('stroke', '#919191')
         .attr('stroke-width', '0.5')
-        .attr('r', this.radialScale(t))
+        .attr('r', this.radialScale(t)),
     );
 
     const tooltip = this.tooltip;
@@ -298,7 +301,7 @@ export class RadarChartComponent implements OnChanges, OnInit {
         .attr('text-anchor', 'middle')
         .style('font-size', '9')
         .text(ft_name)
-        .on('mouseover', function (event, d) {
+        .on('mouseover', function (event) {
           const vizBox = document
             .querySelector('#radarchartPlaceholder kypo-clustering-visualization')
             .getBoundingClientRect();
@@ -309,7 +312,7 @@ export class RadarChartComponent implements OnChanges, OnInit {
             .style('left', event.clientX - vizBox.x + 'px')
             .style('top', event.clientY - vizBox.y - 20 + 'px');
         })
-        .on('mousemove', function (event, d) {
+        .on('mousemove', function (event) {
           const vizBox = document
             .querySelector('#radarchartPlaceholder kypo-clustering-visualization')
             .getBoundingClientRect();
@@ -348,7 +351,7 @@ export class RadarChartComponent implements OnChanges, OnInit {
         .selectAll('.cluster')
         .attr('id', (d, i) => 'c-' + i)
         .attr('clusterNum', (d, i) => i)
-        .on('mouseover', function (event, d) {
+        .on('mouseover', function (event) {
           const clusterSize = data[d3.select(this).attr('clusterNum')].points.length;
           const vizBox = document
             .querySelector('#radarchartPlaceholder kypo-clustering-visualization')
@@ -425,14 +428,13 @@ export class RadarChartComponent implements OnChanges, OnInit {
 
   drawChartBase(baseConfig: BaseConfig): void {
     const d3: D3 = this.d3,
-      padding = baseConfig.padding,
       element = baseConfig.element;
 
     // create svg
     // calculate the height first, width can change when the scrollbar is added
     this.wrapperWidth = Math.max(
       document.getElementById(element)?.getBoundingClientRect().width, // original (standalone) size
-      window.innerWidth - window.innerWidth * 0.37
+      window.innerWidth - window.innerWidth * 0.37,
     ); // get width in the dashboard as a 75% piece of a halfpage
     const maxHeight: number = Math.min(this.wrapperWidth * 0.7, window.innerHeight - 130);
     const minHeight = 400;

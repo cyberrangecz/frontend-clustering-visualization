@@ -24,7 +24,10 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
   });
   options = { headers: this.headers };
 
-  constructor(private http: HttpClient, private configService: ConfigService) {
+  constructor(
+    private http: HttpClient,
+    private configService: ConfigService,
+  ) {
     super();
   }
 
@@ -36,13 +39,13 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
     featureType: string,
     numberOfClusters: number,
     instanceIds: number[],
-    level: number
+    level: number,
   ): Observable<VisualizationData> {
     return this.http
       .get<VisualizationDataDTO>(
         this.configService.config.trainingServiceUrl +
           `clusters/training-definitions/${trainingDefinitionId}/${featureType}`,
-        { params: this.addParams(numberOfClusters, instanceIds, level) }
+        { params: this.addParams(numberOfClusters, instanceIds, level) },
       )
       .pipe(map((response) => ClusterVisualizationDataMapper.fromDTO(response)));
   }
@@ -54,13 +57,13 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
     trainingDefinitionId: number,
     numberOfClusters: number,
     instanceIds: number[],
-    level: number
+    level: number,
   ): Observable<VisualizationData> {
     return this.http
       .get<VisualizationDataDTO>(
         this.configService.config.trainingServiceUrl +
           `clusters/training-definitions/${trainingDefinitionId}/n-dimensional`,
-        { params: this.addParams(numberOfClusters, instanceIds, level) }
+        { params: this.addParams(numberOfClusters, instanceIds, level) },
       )
       .pipe(map((response) => RadarChartDataMapper.fromDTO(response)));
   }
@@ -70,13 +73,13 @@ export class VisualizationDataDefaultApi extends VisualizationDataApi {
     featureType: string,
     numberOfClusters: number,
     instanceIds: number[],
-    level: number
+    level: number,
   ): Observable<SseDataMapper> {
     return this.http
       .get<SseDTO>(
         this.configService.config.trainingServiceUrl +
           `clusters/training-definitions/${trainingDefinitionId}/${featureType}/sse`,
-        { params: this.addParams(numberOfClusters, instanceIds, level) }
+        { params: this.addParams(numberOfClusters, instanceIds, level) },
       )
       .pipe(map((response) => SseDataMapper.fromDTO(response)));
   }

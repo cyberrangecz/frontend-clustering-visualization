@@ -13,14 +13,14 @@ export abstract class VisualizationDataApi {
     featureType: string,
     numberOfClusters: number,
     instanceIds: number[],
-    level: number
+    level: number,
   ): Observable<VisualizationData>;
 
   abstract getRadarChartData(
     trainingDefinitionId: number,
     numberOfClusters: number,
     instanceIds: number[],
-    level: number
+    level: number,
   ): Observable<VisualizationData>;
 
   abstract getFeatureSSE(
@@ -28,6 +28,6 @@ export abstract class VisualizationDataApi {
     featureType: string,
     numberOfClusters: number,
     instanceIds: number[],
-    level: number
+    level: number,
   ): Observable<VisualizationData>;
 }

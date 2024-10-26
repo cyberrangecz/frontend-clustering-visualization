@@ -31,7 +31,10 @@ export class LineChartComponent implements OnChanges, OnInit {
   private xAxis: any;
   private yAxis: any;
 
-  constructor(d3Service: D3Service, private appConfig: AppConfig) {
+  constructor(
+    d3Service: D3Service,
+    private appConfig: AppConfig,
+  ) {
     this.d3 = d3Service.getD3();
   }
 
@@ -123,7 +126,7 @@ export class LineChartComponent implements OnChanges, OnInit {
         d3
           .line()
           .x((d, index) => this.x(index + 1))
-          .y((d) => this.y(d))
+          .y((d) => this.y(d)),
       );
 
     // Add the dots

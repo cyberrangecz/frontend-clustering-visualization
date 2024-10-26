@@ -45,7 +45,7 @@ export const environment = {
           scope: 'openid email profile',
           logoutUrl: AUTH_URL + '/keycloak/realms/KYPO/protocol/openid-connect/logout',
           silentRefreshRedirectUri: AUTH_URL + '/silent-refresh.html',
-          postLogoutRedirectUri: HOME_URL + '/logout-confirmed',
+          postLogoutRedirectUri: AUTH_URL + '/logout-confirmed',
           clearHashAfterLogin: true
         },
       },
