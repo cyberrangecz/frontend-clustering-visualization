@@ -33,7 +33,7 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
     trainingDefinitionId: number,
     numOfClusters: number,
     instanceIds: number[],
-    level: number
+    level: number,
   ): Observable<VisualizationData> {
     switch (this._selectedFeature) {
       case Clusterables.WrongFlags:
@@ -43,7 +43,7 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
             map((data: any) => ClusterVisualizationDataMapper.fromDTO(data)),
             catchError((error) => {
               return throwError(this.messageBase + error.message);
-            })
+            }),
           );
       case Clusterables.TimeAfterHint:
         return this.visualizationApi
@@ -52,7 +52,7 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
             map((data: any) => ClusterVisualizationDataMapper.fromDTO(data)),
             catchError((error) => {
               return throwError(this.messageBase + error.message);
-            })
+            }),
           );
       default:
         return new Observable<VisualizationData>();
@@ -63,13 +63,13 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
     trainingDefinitionId: number,
     numOfClusters: number,
     instanceIds: number[],
-    level: number
+    level: number,
   ): Observable<VisualizationData> {
     return this.visualizationApi.getRadarChartData(trainingDefinitionId, numOfClusters, instanceIds, level).pipe(
       map((data: any) => RadarChartDataMapper.fromDTO(data)),
       catchError((error) => {
         return throwError(this.messageBase + error.message);
-      })
+      }),
     );
   }
 
@@ -77,7 +77,7 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
     trainingDefinitionId: number,
     numOfClusters: number,
     instanceIds: number[],
-    level: number
+    level: number,
   ): Observable<any> {
     switch (this._selectedFeature) {
       case Clusterables.WrongFlags:
@@ -87,7 +87,7 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
             map((data: any) => SseDataMapper.fromDTO(data)),
             catchError((error) => {
               return throwError(this.messageBase + error.message);
-            })
+            }),
           );
       case Clusterables.TimeAfterHint:
         return this.visualizationApi
@@ -96,7 +96,7 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
             map((data: any) => SseDataMapper.fromDTO(data)),
             catchError((error) => {
               return throwError(this.messageBase + error.message);
-            })
+            }),
           );
       case Clusterables.NDimensional:
         return this.visualizationApi
@@ -105,7 +105,7 @@ export class VisualizationsDataConcreteService extends VisualizationsDataService
             map((data: any) => SseDataMapper.fromDTO(data)),
             catchError((error) => {
               return throwError(this.messageBase + error.message);
-            })
+            }),
           );
     }
   }

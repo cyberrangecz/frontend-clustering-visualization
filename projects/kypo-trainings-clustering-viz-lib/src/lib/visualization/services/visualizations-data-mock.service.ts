@@ -29,7 +29,7 @@ export class MockedRestService extends VisualizationsDataConcreteService {
         ', level ' +
         level +
         '. Number of clusters set to ' +
-        numOfClusters
+        numOfClusters,
     );
     switch (this._selectedFeature) {
       case Clusterables.WrongFlags:
@@ -49,7 +49,7 @@ export class MockedRestService extends VisualizationsDataConcreteService {
         ', level ' +
         level +
         '. Number of clusters set to ' +
-        numOfClusters
+        numOfClusters,
     );
     return of(RadarChartDataMapper.fromDTO(radarClusters));
   }
@@ -62,7 +62,7 @@ export class MockedRestService extends VisualizationsDataConcreteService {
         ', level ' +
         level +
         '. Number of clusters set to ' +
-        numOfClusters
+        numOfClusters,
     );
     switch (this._selectedFeature) {
       case Clusterables.WrongFlags:

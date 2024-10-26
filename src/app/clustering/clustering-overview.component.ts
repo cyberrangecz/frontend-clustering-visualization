@@ -1,8 +1,10 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
-import {MatSidenav} from '@angular/material/sidenav';
-import { Clusterables
+import { Component, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
+import {
+  Clusterables
 } from '../../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/models/clusterables-enum';
-import { Components
+import {
+  Components
 } from '../../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/models/components-enum';
 
 @Component({

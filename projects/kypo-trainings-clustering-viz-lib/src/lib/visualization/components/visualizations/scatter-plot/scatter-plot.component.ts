@@ -43,7 +43,7 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
   constructor(
     d3Service: D3Service,
     private visualizationDataService: VisualizationsDataService,
-    private appConfig: AppConfig
+    private appConfig: AppConfig,
   ) {
     this.d3 = d3Service.getD3();
   }
@@ -239,7 +239,7 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
           .style('left', event.clientX - vizBox.x + 'px')
           .style('top', event.clientY - vizBox.y - 10 + 'px');
       })
-      .on('mousemove', function (event: any, d: any) {
+      .on('mousemove', function (event: any) {
         const vizBox = document
           .querySelector('#scatterClustersSvgPlaceholder kypo-clustering-visualization')
           .getBoundingClientRect();

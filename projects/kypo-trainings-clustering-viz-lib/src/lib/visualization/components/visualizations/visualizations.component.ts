@@ -50,7 +50,7 @@ export class VisualizationsComponent implements OnInit, OnChanges {
       this.trainingDefinitionId,
       this.elbowNumClusters,
       this.trainingInstanceIds,
-      this.level
+      this.level,
     );
     lineService.subscribe((res) => {
       this.lineData$ = res;
@@ -60,7 +60,7 @@ export class VisualizationsComponent implements OnInit, OnChanges {
         this.trainingDefinitionId,
         this.numOfClusters,
         this.trainingInstanceIds,
-        this.level
+        this.level,
       );
       scatterService.subscribe((res) => {
         this.visualizationData$ = res;
@@ -71,7 +71,7 @@ export class VisualizationsComponent implements OnInit, OnChanges {
         this.trainingDefinitionId,
         this.numOfClusters,
         this.trainingInstanceIds,
-        this.level
+        this.level,
       );
       radarService.subscribe((res) => {
         this.radarChartData$ = res;
