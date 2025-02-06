@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { D3, D3Service } from '@muni-kypo-crp/d3-service';
+import { D3, D3Service } from '@cyberrangecz-platform/d3-service';
 import { AppConfig } from '../../../../app.config';
 import { v4 as uuid } from 'uuid';
 

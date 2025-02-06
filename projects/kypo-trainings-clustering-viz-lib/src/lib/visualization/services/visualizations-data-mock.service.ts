@@ -40,6 +40,7 @@ export class MockedRestService extends VisualizationsDataConcreteService {
         return new Observable<VisualizationData>();
     }
   }
+
   getRadarData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number): any {
     console.log(
       'Mock data for TD' +
@@ -53,6 +54,7 @@ export class MockedRestService extends VisualizationsDataConcreteService {
     );
     return of(RadarChartDataMapper.fromDTO(radarClusters));
   }
+
   getLineData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number) {
     console.log(
       'Mock data for TD' +

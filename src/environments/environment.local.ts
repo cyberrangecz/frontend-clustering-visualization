@@ -2,10 +2,11 @@
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { MockedRestService }
-  from '../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/services/visualizations-data-mock.service';
 import {
-  VisualizationsDataService
+    MockedRestService
+} from '../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/services/visualizations-data-mock.service';
+import {
+    VisualizationsDataService
 } from '../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/services/visualizations-data.service';
 
 const AUTH_URL = 'https://172.19.0.22';
@@ -14,43 +15,43 @@ const BASE_URL = 'http://localhost:3000';
 const HOME_URL = 'https://localhost:4200';
 
 export const environment = {
-  production: false,
-  providers: [
-    { provide: VisualizationsDataService, useClass: MockedRestService}
-  ],
-  statisticalVizConfig: {
-    trainingServiceUrl: BASE_URL + '/kypo-rest-training/api/v1/',
-  },
-  authConfig: {
-    guardMainPageRedirect: 'visualization',
-    guardLoginPageRedirect: 'login',
-    interceptorAllowedUrls: [
-      'https://localhost',
-      AUTH_URL
-    ],
-    authorizationStrategyConfig: {
-      authorizationUrl: AUTH_URL + '/kypo-rest-user-and-group/api/v1/users/info',
-    },
-    // OIDC SETTINGS
+    production: false,
     providers: [
-      {
-        label: 'Login with local issuer',
-        textColor: 'white',
-        backgroundColor: '#002776',
-        oidcConfig: {
-          requireHttps: true,
-          issuer: AUTH_URL + '/keycloak/realms/KYPO',
-          clientId: 'KYPO-client',
-          redirectUri: HOME_URL,
-          scope: 'openid email profile',
-          logoutUrl: AUTH_URL + '/keycloak/realms/KYPO/protocol/openid-connect/logout',
-          silentRefreshRedirectUri: AUTH_URL + '/silent-refresh.html',
-          postLogoutRedirectUri: AUTH_URL + '/logout-confirmed',
-          clearHashAfterLogin: true
-        },
-      },
+        { provide: VisualizationsDataService, useClass: MockedRestService }
     ],
-  },
+    statisticalVizConfig: {
+        trainingServiceUrl: BASE_URL + '/kypo-rest-training/api/v1/',
+    },
+    authConfig: {
+        guardMainPageRedirect: 'visualization',
+        guardLoginPageRedirect: 'login',
+        interceptorAllowedUrls: [
+            'https://localhost',
+            AUTH_URL
+        ],
+        authorizationStrategyConfig: {
+            authorizationUrl: AUTH_URL + '/kypo-rest-user-and-group/api/v1/users/info',
+        },
+        // OIDC SETTINGS
+        providers: [
+            {
+                label: 'Login with local issuer',
+                textColor: 'white',
+                backgroundColor: '#002776',
+                oidcConfig: {
+                    requireHttps: true,
+                    issuer: AUTH_URL + '/keycloak/realms/KYPO',
+                    clientId: 'KYPO-client',
+                    redirectUri: HOME_URL,
+                    scope: 'openid email profile',
+                    logoutUrl: AUTH_URL + '/keycloak/realms/KYPO/protocol/openid-connect/logout',
+                    silentRefreshRedirectUri: AUTH_URL + '/silent-refresh.html',
+                    postLogoutRedirectUri: AUTH_URL + '/logout-confirmed',
+                    clearHashAfterLogin: true
+                },
+            },
+        ],
+    },
 };
 
 /*

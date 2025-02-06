@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
-import { D3, D3Service } from '@muni-kypo-crp/d3-service';
+import { D3, D3Service } from '@cyberrangecz-platform/d3-service';
 import { BaseConfig } from '../../../models/base-config';
 import { AppConfig } from '../../../../app.config';
 import { ConfigService } from '../../../config/config.service';
@@ -95,12 +95,12 @@ export class RadarChartComponent implements OnChanges, OnInit {
     });
 
     /*this.radialScale = this.d3.scaleLinear()
-        .domain([min, max])
-        .range(this.appConfig.radialScaleRange);
+            .domain([min, max])
+            .range(this.appConfig.radialScaleRange);
 
-    this.smallScale = this.d3.scaleLinear()
-        .domain([min, max])
-        .range([0, 62]);*/
+        this.smallScale = this.d3.scaleLinear()
+            .domain([min, max])
+            .range([0, 62]);*/
   }
 
   // normalize to fit the chart
@@ -117,11 +117,11 @@ export class RadarChartComponent implements OnChanges, OnInit {
     radarData.forEach((d, i) => {
       d.center.point.forEach((p, j) => {
         /*if (p < this.appConfig.radialScaleDomain[0]) {
-          this.visualizationData.radarData[i].center.point[j] = this.appConfig.radialScaleDomain[0];
-        }
-        if (p > this.appConfig.radialScaleDomain[1]) {
-          this.visualizationData.radarData[i].center.point[j] = this.appConfig.radialScaleDomain[1];
-        }*/
+                  this.visualizationData.radarData[i].center.point[j] = this.appConfig.radialScaleDomain[0];
+                }
+                if (p > this.appConfig.radialScaleDomain[1]) {
+                  this.visualizationData.radarData[i].center.point[j] = this.appConfig.radialScaleDomain[1];
+                }*/
         this.visualizationData.radarData[i].center.point[j] = ((p - min) / (max - min)) * 5 - 1;
       });
     });
@@ -149,14 +149,14 @@ export class RadarChartComponent implements OnChanges, OnInit {
       this.smallSvgs.push(smallChartsSvg);
 
       /* const clip = smallChartsSvg
-        .append('defs')
-        .append('SVG:clipPath')
-        .attr('id', 'clip')
-        .append('SVG:rect')
-        .attr('width', 200)
-        .attr('height', 200)
-        .attr('x', 0)
-        .attr('y', 0);*/
+              .append('defs')
+              .append('SVG:clipPath')
+              .attr('id', 'clip')
+              .append('SVG:rect')
+              .attr('width', 200)
+              .attr('height', 200)
+              .attr('x', 0)
+              .attr('y', 0);*/
 
       const smallChartsClipPath = smallChartsSvg.append('g').attr('clip-path', 'url(#clip)');
 
@@ -240,14 +240,14 @@ export class RadarChartComponent implements OnChanges, OnInit {
       .attr('preserveAspectRatio', 'xMidYMid meet');
 
     /* const clip = this.svg
-      .append('defs')
-      .append('SVG:clipPath')
-      .attr('id', 'clip')
-      .append('SVG:rect')
-      .attr('width', this.width)
-      .attr('height', this.height)
-      .attr('x', 0)
-      .attr('y', 0); */
+          .append('defs')
+          .append('SVG:clipPath')
+          .attr('id', 'clip')
+          .append('SVG:rect')
+          .attr('width', this.width)
+          .attr('height', this.height)
+          .attr('x', 0)
+          .attr('y', 0); */
 
     this.gPlot = this.svg.append('g').attr('width', this.width).attr('height', this.height).attr('x', 0).attr('y', 0);
 

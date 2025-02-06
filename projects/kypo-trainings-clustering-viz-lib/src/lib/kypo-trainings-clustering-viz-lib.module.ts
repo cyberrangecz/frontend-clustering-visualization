@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ConfigService } from './visualization/config/config.service';
 import { AppConfig, VIS_CONFIG } from './app.config';
-import { D3Service } from '@muni-kypo-crp/d3-service';
+import { D3Service } from '@cyberrangecz-platform/d3-service';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatGridListModule } from '@angular/material/grid-list';

@@ -43,7 +43,8 @@ button#show-info {
     width: 30px;
     height: 30px;
 }
-button#show-info span{
+
+button#show-info span {
     font-size: 22px;
     padding: 0;
 }

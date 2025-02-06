@@ -1,8 +1,0 @@
-18.0.0 Update to Angular 18.
-16.0.1 Update sentinel versions.
-16.0.0 Update to Angular 16 and update local issuer to keycloak.
-15.0.0 Update to Angular 15
-14.0.2 Propagate insufficient data info for dashboard processing
-14.0.1 Update API routes
-14.0.0 Initial clustering library version
-

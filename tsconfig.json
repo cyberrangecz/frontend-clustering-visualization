@@ -1,33 +1,33 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": "./",
-    "resolveJsonModule": true,
-    "downlevelIteration": true,
-    "importHelpers": true,
-    "module": "esnext",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "target": "ES2022",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2018",
-      "dom"
-    ],
-    "paths": {
-      "kypo2-trainings-clustering-viz-lib": [
-        "dist/kypo2-trainings-clustering-viz-lib"
-      ],
-      "kypo2-trainings-clustering-viz-lib/*": [
-        "dist/kypo2-trainings-clustering-viz-lib/*"
-      ]
-    },
-    "useDefineForClassFields": false
-  }
+    "compileOnSave": false,
+    "compilerOptions": {
+        "baseUrl": "./",
+        "resolveJsonModule": true,
+        "downlevelIteration": true,
+        "importHelpers": true,
+        "module": "esnext",
+        "outDir": "./dist/out-tsc",
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "target": "ES2022",
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "lib": [
+            "es2018",
+            "dom"
+        ],
+        "paths": {
+            "kypo2-trainings-clustering-viz-lib": [
+                "dist/kypo2-trainings-clustering-viz-lib"
+            ],
+            "kypo2-trainings-clustering-viz-lib/*": [
+                "dist/kypo2-trainings-clustering-viz-lib/*"
+            ]
+        },
+        "useDefineForClassFields": false
+    }
 }

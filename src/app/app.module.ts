@@ -6,25 +6,26 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
 import { SentinelLayout1Module } from '@sentinel/layout/layout1';
-import {SentinelAuthModule} from '@sentinel/auth';
-import {SentinelAuthGuardWithLogin, SentinelNegativeAuthGuard} from '@sentinel/auth/guards';
+import { SentinelAuthModule } from '@sentinel/auth';
+import { SentinelAuthGuardWithLogin, SentinelNegativeAuthGuard } from '@sentinel/auth/guards';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    SentinelLayout1Module,
-    SentinelAuthModule.forRoot(environment.authConfig)
-  ],
-  providers: [
-    SentinelAuthGuardWithLogin,
-    SentinelNegativeAuthGuard
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        SentinelLayout1Module,
+        SentinelAuthModule.forRoot(environment.authConfig)
+    ],
+    providers: [
+        SentinelAuthGuardWithLogin,
+        SentinelNegativeAuthGuard
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

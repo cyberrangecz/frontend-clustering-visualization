@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { D3, D3Service } from '@muni-kypo-crp/d3-service';
+import { D3, D3Service } from '@cyberrangecz-platform/d3-service';
 import { AppConfig } from '../../../../app.config';
 import { VisualizationsDataService } from '../../../services/visualizations-data.service';
 import { Clusterables } from '../../../models/clusterables-enum';
@@ -156,7 +156,7 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
     this.x = d3
       .scaleLinear()
       /*.domain(d3.extent(this.data.map(value =>
-            this.visualizationDataService.getX(value))) as [number, number])*/
+                  this.visualizationDataService.getX(value))) as [number, number])*/
       .domain([-0.02, 1.02])
       .range([0, this.width - this.margin]);
 
@@ -174,7 +174,7 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
     this.y = d3
       .scaleLinear()
       /*.domain(d3.extent(this.data.map(value =>
-            this.visualizationDataService.getY(value))) as [number, number])*/
+                  this.visualizationDataService.getY(value))) as [number, number])*/
       .domain([-0.03, 1.03])
       .range([this.height, 0]);
 
