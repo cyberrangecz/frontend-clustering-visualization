@@ -6,7 +6,7 @@ import { Clusterables } from '../../models/clusterables-enum';
 import { Components } from '../../models/components-enum';
 
 @Component({
-  selector: 'kypo-clustering-visualization',
+  selector: 'crczp-clustering-visualization',
   templateUrl: './visualizations.component.html',
   styleUrls: ['./visualizations.component.css'],
 })

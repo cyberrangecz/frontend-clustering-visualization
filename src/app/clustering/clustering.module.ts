@@ -4,8 +4,8 @@ import { ClusteringOverviewComponent } from './clustering-overview.component';
 import { ClusteringRoutingModule } from './clustering-routing.module';
 import { CustomConfig } from '../custom-config';
 import {
-    KypoTrainingsClusteringVizLibModule
-} from '../../../projects/kypo-trainings-clustering-viz-lib/src/public_api';
+    TrainingsClusteringVizLibModule
+} from '../../../projects/trainings-clustering-visualizations-library/src/public_api';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,7 +22,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     imports: [
         CommonModule,
         ClusteringRoutingModule,
-        KypoTrainingsClusteringVizLibModule.forRoot(CustomConfig),
+        TrainingsClusteringVizLibModule.forRoot(CustomConfig),
         MatSidenavModule,
         MatButtonModule,
         MatInputModule,

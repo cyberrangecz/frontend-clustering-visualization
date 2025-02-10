@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import {
     RadarChartComponent
-} from '../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/components/visualizations/radar-chart/radar-chart.component';
+} from '../../projects/trainings-clustering-visualizations-library/src/lib/visualization/components/visualizations/radar-chart/radar-chart.component';
 
 
 describe('AppComponent', () => {

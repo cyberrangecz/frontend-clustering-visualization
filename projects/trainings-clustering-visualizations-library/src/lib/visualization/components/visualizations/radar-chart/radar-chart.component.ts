@@ -7,7 +7,7 @@ import { VisualizationData } from '../../../models/visualization-data';
 import { EuclidianDoublePoint, Point } from '../../../models/eucledian-double-point';
 
 @Component({
-  selector: 'kypo-viz-clustering-radar-chart',
+  selector: 'crczp-viz-clustering-radar-chart',
   templateUrl: './radar-chart.component.html',
   styleUrls: ['./radar-chart.component.css'],
   encapsulation: ViewEncapsulation.None,
@@ -303,7 +303,7 @@ export class RadarChartComponent implements OnChanges, OnInit {
         .text(ft_name)
         .on('mouseover', function (event) {
           const vizBox = document
-            .querySelector('#radarchartPlaceholder kypo-clustering-visualization')
+            .querySelector('#radarchartPlaceholder crczp-clustering-visualization')
             .getBoundingClientRect();
 
           tooltip.transition().ease(d3.easeLinear, 2).duration(300).delay(10).style('opacity', 0.9);
@@ -314,7 +314,7 @@ export class RadarChartComponent implements OnChanges, OnInit {
         })
         .on('mousemove', function (event) {
           const vizBox = document
-            .querySelector('#radarchartPlaceholder kypo-clustering-visualization')
+            .querySelector('#radarchartPlaceholder crczp-clustering-visualization')
             .getBoundingClientRect();
           tooltip.style('left', event.clientX - vizBox.x + 'px').style('top', event.clientY - vizBox.y - 20 + 'px');
         })
@@ -354,7 +354,7 @@ export class RadarChartComponent implements OnChanges, OnInit {
         .on('mouseover', function (event) {
           const clusterSize = data[d3.select(this).attr('clusterNum')].points.length;
           const vizBox = document
-            .querySelector('#radarchartPlaceholder kypo-clustering-visualization')
+            .querySelector('#radarchartPlaceholder crczp-clustering-visualization')
             .getBoundingClientRect();
           tooltip
             .style('left', event.clientX - vizBox.x + 'px')
@@ -368,7 +368,7 @@ export class RadarChartComponent implements OnChanges, OnInit {
         })
         .on('mousemove', function (event) {
           const vizBox = document
-            .querySelector('#radarchartPlaceholder kypo-clustering-visualization')
+            .querySelector('#radarchartPlaceholder crczp-clustering-visualization')
             .getBoundingClientRect();
           tooltip.style('left', event.clientX - vizBox.x + 'px').style('top', event.clientY - vizBox.y - 20 + 'px');
         })

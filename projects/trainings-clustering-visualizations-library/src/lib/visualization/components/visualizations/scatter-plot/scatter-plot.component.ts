@@ -5,7 +5,7 @@ import { VisualizationsDataService } from '../../../services/visualizations-data
 import { Clusterables } from '../../../models/clusterables-enum';
 
 @Component({
-  selector: 'kypo-viz-clustering-scatter-plot',
+  selector: 'crczp-viz-clustering-scatter-plot',
   templateUrl: './scatter-plot.component.html',
   styleUrls: ['./scatter-plot.component.css'],
 })
@@ -230,7 +230,7 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
       .style('fill', (d: any) => this.appConfig.colors[d.clusterId])
       .on('mouseover', function (event, d) {
         const vizBox = document
-          .querySelector('#scatterClustersSvgPlaceholder kypo-clustering-visualization')
+          .querySelector('#scatterClustersSvgPlaceholder crczp-clustering-visualization')
           .getBoundingClientRect();
 
         tooltip.transition().ease(d3.easeLinear, 2).duration(300).delay(10).style('opacity', 0.9);
@@ -241,7 +241,7 @@ export class ScatterPlotComponent implements OnChanges, OnInit {
       })
       .on('mousemove', function (event: any) {
         const vizBox = document
-          .querySelector('#scatterClustersSvgPlaceholder kypo-clustering-visualization')
+          .querySelector('#scatterClustersSvgPlaceholder crczp-clustering-visualization')
           .getBoundingClientRect();
 
         return tooltip

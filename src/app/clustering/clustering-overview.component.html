@@ -7,7 +7,7 @@
 
 <!-- radar chart use -->
 <div id="radarchartPlaceholder">
-    <kypo-clustering-visualization
+    <crczp-clustering-visualization
             [selectedComponent]="clusterables.NDimensional"
             [selectedFeature]="components.RADAR_CHART"
             [trainingDefinitionId]="trainingDefinitionId"
@@ -15,12 +15,12 @@
             [numOfClusters]="numOfClusters"
             [level]="level"
             (viewOpen)="toggleView($event)">
-    </kypo-clustering-visualization>
+    </crczp-clustering-visualization>
 </div>
 
 <!-- scatterplot time after hint use -->
 <div id="scatterClustersSvgPlaceholder" class="tAH">
-    <kypo-clustering-visualization
+    <crczp-clustering-visualization
             [selectedComponent]="clusterables.TimeAfterHint"
             [selectedFeature]="clusterables.TimeAfterHint"
             [trainingDefinitionId]="trainingDefinitionId"
@@ -28,12 +28,12 @@
             [numOfClusters]="numOfClusters"
             [level]="level"
             [isStandalone]="false">
-    </kypo-clustering-visualization>
+    </crczp-clustering-visualization>
 </div>
 
 <!-- scatterplot wrong flags use -->
 <div id="scatterClustersSvgPlaceholder_" class="wF">
-    <kypo-clustering-visualization
+    <crczp-clustering-visualization
             [selectedComponent]="clusterables.WrongFlags"
             [selectedFeature]="clusterables.WrongFlags"
             [trainingDefinitionId]="trainingDefinitionId"
@@ -41,6 +41,6 @@
             [numOfClusters]="numOfClusters"
             [level]="level"
             [isStandalone]="false">
-    </kypo-clustering-visualization>
+    </crczp-clustering-visualization>
 </div>
 

@@ -21,11 +21,11 @@
             "dom"
         ],
         "paths": {
-            "kypo2-trainings-clustering-viz-lib": [
-                "dist/kypo2-trainings-clustering-viz-lib"
+            "trainings-clustering-visualizations-library": [
+                "dist/trainings-clustering-visualizations-library"
             ],
-            "kypo2-trainings-clustering-viz-lib/*": [
-                "dist/kypo2-trainings-clustering-viz-lib/*"
+            "trainings-clustering-visualizations-library/*": [
+                "dist/trainings-clustering-visualizations-library/*"
             ]
         },
         "useDefineForClassFields": false

@@ -4,7 +4,7 @@ import { AppConfig } from '../../../../app.config';
 import { v4 as uuid } from 'uuid';
 
 @Component({
-  selector: 'kypo-viz-clustering-line-chart',
+  selector: 'crczp-viz-clustering-line-chart',
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.css'],
 })

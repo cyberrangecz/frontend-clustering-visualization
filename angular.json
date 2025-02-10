@@ -138,38 +138,38 @@
                 }
             }
         },
-        "kypo-trainings-clustering-viz-lib": {
-            "root": "projects/kypo-trainings-clustering-viz-lib",
-            "sourceRoot": "projects/kypo-trainings-clustering-viz-lib/src",
+        "trainings-clustering-visualizations-library": {
+            "root": "projects/trainings-clustering-visualizations-library",
+            "sourceRoot": "projects/trainings-clustering-visualizations-library/src",
             "projectType": "library",
-            "prefix": "kypo-viz-clustering",
+            "prefix": "viz-clustering",
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-angular:ng-packagr",
                     "options": {
-                        "tsConfig": "projects/kypo-trainings-clustering-viz-lib/tsconfig.lib.json",
-                        "project": "projects/kypo-trainings-clustering-viz-lib/ng-package.json"
+                        "tsConfig": "projects/trainings-clustering-visualizations-library/tsconfig.lib.json",
+                        "project": "projects/trainings-clustering-visualizations-library/ng-package.json"
                     },
                     "configurations": {
                         "production": {
-                            "tsConfig": "projects/kypo-trainings-clustering-viz-lib/tsconfig.lib.prod.json"
+                            "tsConfig": "projects/trainings-clustering-visualizations-library/tsconfig.lib.prod.json"
                         }
                     }
                 },
                 "test": {
                     "builder": "@angular-devkit/build-angular:karma",
                     "options": {
-                        "main": "projects/kypo-trainings-clustering-viz-lib/src/test.ts",
-                        "tsConfig": "projects/kypo-trainings-clustering-viz-lib/tsconfig.spec.json",
-                        "karmaConfig": "projects/kypo-trainings-clustering-viz-lib/karma.conf.js"
+                        "main": "projects/trainings-clustering-visualizations-library/src/test.ts",
+                        "tsConfig": "projects/trainings-clustering-visualizations-library/tsconfig.spec.json",
+                        "karmaConfig": "projects/trainings-clustering-visualizations-library/karma.conf.js"
                     }
                 },
                 "lint": {
                     "builder": "@angular-eslint/builder:lint",
                     "options": {
                         "lintFilePatterns": [
-                            "projects/kypo-trainings-clustering-viz-lib/**/*.ts",
-                            "projects/kypo-trainings-clustering-viz-lib/**/*.component.html"
+                            "projects/trainings-clustering-visualizations-library/**/*.ts",
+                            "projects/trainings-clustering-visualizations-library/**/*.component.html"
                         ]
                     }
                 }

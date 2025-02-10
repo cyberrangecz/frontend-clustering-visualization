@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ClusteringVisualizationConfig } from './kypo-trainings-clustering-viz-lib';
+import { ClusteringVisualizationConfig } from './trainings-clustering-visualizations-library';
 
 @Injectable()
 export class ConfigService {

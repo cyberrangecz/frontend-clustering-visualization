@@ -2,10 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import {
     Clusterables
-} from '../../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/models/clusterables-enum';
+} from '../../../projects/trainings-clustering-visualizations-library/src/lib/visualization/models/clusterables-enum';
 import {
     Components
-} from '../../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/models/components-enum';
+} from '../../../projects/trainings-clustering-visualizations-library/src/lib/visualization/models/components-enum';
 
 @Component({
     selector: 'app-clustering-overview',

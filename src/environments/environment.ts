@@ -9,7 +9,7 @@ export const environment = {
     production: false,
     providers: [],
     statisticalVizConfig: {
-        trainingServiceUrl: BASE_URL + '/kypo-rest-training/api/v1/',
+        trainingServiceUrl: BASE_URL + '/training/api/v1/',
     },
     authConfig: {
         guardMainPageRedirect: 'visualization',
@@ -19,7 +19,7 @@ export const environment = {
             BASE_URL
         ],
         authorizationStrategyConfig: {
-            authorizationUrl: BASE_URL + '/kypo-rest-user-and-group/api/v1/users/info',
+            authorizationUrl: BASE_URL + '/user-and-group/api/v1/users/info',
         },
         // OIDC SETTINGS
         providers: [

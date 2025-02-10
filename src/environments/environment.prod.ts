@@ -4,10 +4,10 @@
 
 import {
     VisualizationsDataConcreteService
-} from '../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/services/visualizations-data-concrete.service';
+} from '../../projects/trainings-clustering-visualizations-library/src/lib/visualization/services/visualizations-data-concrete.service';
 import {
     VisualizationsDataService
-} from '../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/services/visualizations-data.service';
+} from '../../projects/trainings-clustering-visualizations-library/src/lib/visualization/services/visualizations-data.service';
 
 const BASE_URL = 'https://172.19.0.22';
 const HOME_URL = 'https://localhost:4200';
@@ -18,7 +18,7 @@ export const environment = {
         { provide: VisualizationsDataService, useClass: VisualizationsDataConcreteService }
     ],
     statisticalVizConfig: {
-        trainingServiceUrl: BASE_URL + '/kypo-rest-training/api/v1/',
+        trainingServiceUrl: BASE_URL + '/training/api/v1/',
     },
     authConfig: {
         guardMainPageRedirect: 'visualization',
@@ -28,7 +28,7 @@ export const environment = {
             BASE_URL
         ],
         authorizationStrategyConfig: {
-            authorizationUrl: BASE_URL + '/kypo-rest-user-and-group/api/v1/users/info',
+            authorizationUrl: BASE_URL + '/user-and-group/api/v1/users/info',
         },
         // OIDC SETTINGS
         providers: [

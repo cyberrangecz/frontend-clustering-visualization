@@ -4,10 +4,10 @@
 
 import {
     MockedRestService
-} from '../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/services/visualizations-data-mock.service';
+} from '../../projects/trainings-clustering-visualizations-library/src/lib/visualization/services/visualizations-data-mock.service';
 import {
     VisualizationsDataService
-} from '../../projects/kypo-trainings-clustering-viz-lib/src/lib/visualization/services/visualizations-data.service';
+} from '../../projects/trainings-clustering-visualizations-library/src/lib/visualization/services/visualizations-data.service';
 
 const AUTH_URL = 'https://172.19.0.22';
 // in BASE_URL, change value to AUTH_URL for data form local demo or to 'http://localhost:3000' for mocked json server
@@ -20,7 +20,7 @@ export const environment = {
         { provide: VisualizationsDataService, useClass: MockedRestService }
     ],
     statisticalVizConfig: {
-        trainingServiceUrl: BASE_URL + '/kypo-rest-training/api/v1/',
+        trainingServiceUrl: BASE_URL + '/training/api/v1/',
     },
     authConfig: {
         guardMainPageRedirect: 'visualization',
@@ -30,7 +30,7 @@ export const environment = {
             AUTH_URL
         ],
         authorizationStrategyConfig: {
-            authorizationUrl: AUTH_URL + '/kypo-rest-user-and-group/api/v1/users/info',
+            authorizationUrl: AUTH_URL + '/user-and-group/api/v1/users/info',
         },
         // OIDC SETTINGS
         providers: [

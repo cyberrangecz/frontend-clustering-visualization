@@ -16,7 +16,7 @@ import { VisualizationsComponent } from './visualization/components/visualizatio
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { RadarChartComponent } from './visualization/components/visualizations/radar-chart/radar-chart.component';
-import { ClusteringVisualizationConfig } from './visualization/config/kypo-trainings-clustering-viz-lib';
+import { ClusteringVisualizationConfig } from './visualization/config/trainings-clustering-visualizations-library';
 import { LineChartComponent } from './visualization/components/visualizations/line-chart/line-chart.component';
 import { ScatterPlotComponent } from './visualization/components/visualizations/scatter-plot/scatter-plot.component';
 
@@ -42,16 +42,16 @@ import { ScatterPlotComponent } from './visualization/components/visualizations/
   ],
   exports: [RadarChartComponent, LineChartComponent, ScatterPlotComponent, VisualizationsComponent],
 })
-export class KypoTrainingsClusteringVizLibModule {
-  constructor(@Optional() @SkipSelf() parentModule: KypoTrainingsClusteringVizLibModule) {
+export class TrainingsClusteringVizLibModule {
+  constructor(@Optional() @SkipSelf() parentModule: TrainingsClusteringVizLibModule) {
     if (parentModule) {
-      throw new Error('KypoTrainingsClusteringVizLibModule is already loaded. Import it in the main module only');
+      throw new Error('TrainingsClusteringVizLibModule is already loaded. Import it in the main module only');
     }
   }
 
-  static forRoot(config: ClusteringVisualizationConfig): ModuleWithProviders<KypoTrainingsClusteringVizLibModule> {
+  static forRoot(config: ClusteringVisualizationConfig): ModuleWithProviders<TrainingsClusteringVizLibModule> {
     return {
-      ngModule: KypoTrainingsClusteringVizLibModule,
+      ngModule: TrainingsClusteringVizLibModule,
       providers: [{ provide: ClusteringVisualizationConfig, useValue: config }],
     };
   }

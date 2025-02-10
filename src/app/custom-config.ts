@@ -1,5 +1,5 @@
 import { environment } from '../environments/environment';
-import { ClusteringVisualizationConfig } from '../../projects/kypo-trainings-clustering-viz-lib/src/public_api';
+import { ClusteringVisualizationConfig } from '../../projects/trainings-clustering-visualizations-library/src/public_api';
 
 export const CustomConfig: ClusteringVisualizationConfig = {
     trainingServiceUrl: environment.statisticalVizConfig.trainingServiceUrl
