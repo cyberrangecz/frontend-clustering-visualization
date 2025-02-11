@@ -1,6 +1,6 @@
 {
-    "name": "@cyberrangecz-platform/clustering-visualization",
-    "version": "1.0.0",
+    "name": "clustering-visualization",
+    "private": true,
     "scripts": {
         "ng": "ng",
         "start": "ng serve --configuration local --ssl",
@@ -11,20 +11,18 @@
         "prettier-check": "prettier --check \"projects/**/*.ts\"",
         "prettier-fix": "prettier --write \"./projects/**/*.ts\"",
         "build-example-app": "ng build example-app --configuration production",
-        "build-library": "ng build trainings-clustering-visualizations-library --configuration production && cp ./src/styles.css ./dist/trainings-clustering-visualizations-library && cp -R ./utils/json-server ./dist/trainings-clustering-visualizations-library",
+        "build-library": "ng build trainings-clustering-visualizations-library --configuration production && cp ./src/styles.css ./dist/trainings-clustering-visualizations-library",
         "create-package": "cd dist/trainings-clustering-visualizations-library && npm pack",
         "build-and-pack": "npm install && npm run build-library && npm run create-package",
         "ci-update-version": "cd projects/trainings-clustering-visualizations-library/ && npm version $TAG_VERSION",
         "ci-build-and-pack": "npm ci --cache .nnpm ERR! Cannot read property '@angular/animations' of undefinedpm --prefer-offline && npm run build-library && npm run create-package",
-        "ci-publish-package": "cd dist/trainings-clustering-visualizations-library && npm publish",
-        "api": "json-server -w ./utils/json-server/db.js --routes ./utils/json-server/routes.json --middlewares ./utils/json-server/server.js"
+        "ci-publish-package": "cd dist/trainings-clustering-visualizations-library && npm publish"
     },
     "husky": {
         "hooks": {
             "pre-commit": "npm run lint"
         }
     },
-    "private": true,
     "dependencies": {
         "@angular/animations": "^18.2.13",
         "@angular/cdk": "^18.2.14",
@@ -36,14 +34,14 @@
         "@angular/platform-browser": "^18.2.13",
         "@angular/platform-browser-dynamic": "^18.2.13",
         "@angular/router": "^18.2.13",
-        "@cyberrangecz-platform/d3-service": "^18.0.0",
+        "@cyberrangecz-platform/d3-service": "0.0.1",
         "@sentinel/auth": "^18.0.3",
         "@sentinel/common": "^18.0.4",
         "@sentinel/layout": "^18.1.4",
         "@types/d3": "^7.4.3",
         "angular-oauth2-oidc": "^17.0.2",
         "angular-oauth2-oidc-jwks": "^17.0.2",
-        "core-js": "^3.38.1",
+        "core-js": "^3.40.0",
         "d3": "^7.9.0",
         "ngx-indexed-db": "^18.0.0",
         "rxjs": "^7.8.1",
@@ -64,12 +62,11 @@
         "@types/jasmine": "^5.1.4",
         "@types/jasminewd2": "^2.0.13",
         "@types/node": "^22.6.1",
-        "@typescript-eslint/eslint-plugin": "^8.23.0",
-        "@typescript-eslint/parser": "^8.23.0",
-        "eslint": "^9.19.0",
+        "@typescript-eslint/eslint-plugin": "^8.24.0",
+        "@typescript-eslint/parser": "^8.24.0",
+        "eslint": "^9.20.0",
         "jasmine-core": "^5.3.0",
         "jasmine-spec-reporter": "^7.0.0",
-        "json-server": "^0.17.4",
         "karma": "^6.4.4",
         "karma-chrome-launcher": "^3.2.0",
         "karma-cli": "^2.0.0",
@@ -77,7 +74,7 @@
         "karma-jasmine": "^5.1.0",
         "karma-jasmine-html-reporter": "^2.1.0",
         "ng-packagr": "^18.2.1",
-        "prettier": "^3.4.2",
+        "prettier": "^3.5.0",
         "protractor": "~7.0.0",
         "ts-node": "^10.9.2",
         "typescript": "5.5.4"
