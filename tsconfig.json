@@ -21,11 +21,11 @@
             "dom"
         ],
         "paths": {
-            "trainings-clustering-visualizations-library": [
-                "dist/trainings-clustering-visualizations-library"
+            "clustering-visualization": [
+                "dist/clustering-visualization"
             ],
-            "trainings-clustering-visualizations-library/*": [
-                "dist/trainings-clustering-visualizations-library/*"
+            "clustering-visualization/*": [
+                "dist/clustering-visualization/*"
             ]
         },
         "useDefineForClassFields": false

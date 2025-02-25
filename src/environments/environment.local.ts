@@ -4,10 +4,10 @@
 
 import {
     MockedRestService
-} from '../../projects/trainings-clustering-visualizations-library/src/lib/visualization/services/visualizations-data-mock.service';
+} from '../../projects/clustering-visualization/src/lib/visualization/services/visualizations-data-mock.service';
 import {
     VisualizationsDataService
-} from '../../projects/trainings-clustering-visualizations-library/src/lib/visualization/services/visualizations-data.service';
+} from '../../projects/clustering-visualization/src/lib/visualization/services/visualizations-data.service';
 
 // OIDC url
 const OIDC_URL = 'https://localhost:8080';
