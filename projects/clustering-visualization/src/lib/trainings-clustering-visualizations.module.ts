@@ -21,38 +21,40 @@ import { LineChartComponent } from './visualization/components/visualizations/li
 import { ScatterPlotComponent } from './visualization/components/visualizations/scatter-plot/scatter-plot.component';
 
 @NgModule({
-  declarations: [RadarChartComponent, VisualizationsComponent, LineChartComponent, ScatterPlotComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatProgressBarModule,
-    MatTooltipModule,
-    MatGridListModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDividerModule,
-  ],
-  providers: [
-    D3Service,
-    ConfigService,
-    { provide: AppConfig, useValue: VIS_CONFIG },
-    { provide: VisualizationDataApi, useClass: VisualizationDataDefaultApi },
-    { provide: VisualizationsDataService, useClass: VisualizationsDataConcreteService }, //environment.providers
-    // use the environment variable only for local demo deploy to surge
-  ],
-  exports: [RadarChartComponent, LineChartComponent, ScatterPlotComponent, VisualizationsComponent],
+    declarations: [RadarChartComponent, VisualizationsComponent, LineChartComponent, ScatterPlotComponent],
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatProgressBarModule,
+        MatTooltipModule,
+        MatGridListModule,
+        MatButtonModule,
+        MatCardModule,
+        MatDividerModule,
+    ],
+    providers: [
+        D3Service,
+        ConfigService,
+        { provide: AppConfig, useValue: VIS_CONFIG },
+        { provide: VisualizationDataApi, useClass: VisualizationDataDefaultApi },
+        { provide: VisualizationsDataService, useClass: VisualizationsDataConcreteService }, //environment.providers
+        // use the environment variable only for local demo deploy to surge
+    ],
+    exports: [RadarChartComponent, LineChartComponent, ScatterPlotComponent, VisualizationsComponent],
 })
 export class TrainingsClusteringVisualizationsModule {
-  constructor(@Optional() @SkipSelf() parentModule: TrainingsClusteringVisualizationsModule) {
-    if (parentModule) {
-      throw new Error('TrainingsClusteringVizLibModule is already loaded. Import it in the main module only');
+    constructor(@Optional() @SkipSelf() parentModule: TrainingsClusteringVisualizationsModule) {
+        if (parentModule) {
+            throw new Error('TrainingsClusteringVizLibModule is already loaded. Import it in the main module only');
+        }
     }
-  }
 
-  static forRoot(config: ClusteringVisualizationConfig): ModuleWithProviders<TrainingsClusteringVisualizationsModule> {
-    return {
-      ngModule: TrainingsClusteringVisualizationsModule,
-      providers: [{ provide: ClusteringVisualizationConfig, useValue: config }],
-    };
-  }
+    static forRoot(
+        config: ClusteringVisualizationConfig,
+    ): ModuleWithProviders<TrainingsClusteringVisualizationsModule> {
+        return {
+            ngModule: TrainingsClusteringVisualizationsModule,
+            providers: [{ provide: ClusteringVisualizationConfig, useValue: config }],
+        };
+    }
 }

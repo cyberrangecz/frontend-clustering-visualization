@@ -1,6 +1,6 @@
 export class EventIdentification {
-  sandboxId = '';
-  trainingInstanceId = '';
-  trainingDefinitionId = '';
-  trainingRunId = '';
+    sandboxId = '';
+    trainingInstanceId = '';
+    trainingDefinitionId = '';
+    trainingRunId = '';
 }

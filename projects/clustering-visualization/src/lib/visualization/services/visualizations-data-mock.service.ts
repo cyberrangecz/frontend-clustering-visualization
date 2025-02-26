@@ -17,64 +17,64 @@ import { SseDataMapper } from '../mappers/sse-data-mapper';
  * This class serves for deploy to serge for demonstration purposes
  */
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class MockedRestService extends VisualizationsDataConcreteService {
-  getData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number): any {
-    console.log(
-      'Mock data for TD' +
-        trainingDefinitionId +
-        ', TI ' +
-        instanceIds +
-        ', level ' +
-        level +
-        '. Number of clusters set to ' +
-        numOfClusters,
-    );
-    switch (this._selectedFeature) {
-      case Clusterables.WrongFlags:
-        return of(ClusterVisualizationDataMapper.fromDTO({ featureOneClusters }));
-      case Clusterables.TimeAfterHint:
-        return of(ClusterVisualizationDataMapper.fromDTO({ featureTwoClusters }));
-      default:
-        return new Observable<ClusteringVisualizationData>();
+    getData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number): any {
+        console.log(
+            'Mock data for TD' +
+                trainingDefinitionId +
+                ', TI ' +
+                instanceIds +
+                ', level ' +
+                level +
+                '. Number of clusters set to ' +
+                numOfClusters,
+        );
+        switch (this._selectedFeature) {
+            case Clusterables.WrongFlags:
+                return of(ClusterVisualizationDataMapper.fromDTO({ featureOneClusters }));
+            case Clusterables.TimeAfterHint:
+                return of(ClusterVisualizationDataMapper.fromDTO({ featureTwoClusters }));
+            default:
+                return new Observable<ClusteringVisualizationData>();
+        }
     }
-  }
 
-  getRadarData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number): any {
-    console.log(
-      'Mock data for TD' +
-        trainingDefinitionId +
-        ', TI ' +
-        instanceIds +
-        ', level ' +
-        level +
-        '. Number of clusters set to ' +
-        numOfClusters,
-    );
-    return of(RadarChartDataMapper.fromDTO(radarClusters));
-  }
-
-  getLineData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number) {
-    console.log(
-      'Mock data for TD' +
-        trainingDefinitionId +
-        ', TI ' +
-        instanceIds +
-        ', level ' +
-        level +
-        '. Number of clusters set to ' +
-        numOfClusters,
-    );
-    switch (this._selectedFeature) {
-      case Clusterables.WrongFlags:
-        return of(SseDataMapper.fromDTO(featureOneSSE));
-      case Clusterables.TimeAfterHint:
-        return of(SseDataMapper.fromDTO(featureTwoSSE));
-      case Clusterables.NDimensional:
-        return of(SseDataMapper.fromDTO(radarSSE));
-      default:
-        return new Observable<ClusteringVisualizationData>();
+    getRadarData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number): any {
+        console.log(
+            'Mock data for TD' +
+                trainingDefinitionId +
+                ', TI ' +
+                instanceIds +
+                ', level ' +
+                level +
+                '. Number of clusters set to ' +
+                numOfClusters,
+        );
+        return of(RadarChartDataMapper.fromDTO(radarClusters));
     }
-  }
+
+    getLineData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number) {
+        console.log(
+            'Mock data for TD' +
+                trainingDefinitionId +
+                ', TI ' +
+                instanceIds +
+                ', level ' +
+                level +
+                '. Number of clusters set to ' +
+                numOfClusters,
+        );
+        switch (this._selectedFeature) {
+            case Clusterables.WrongFlags:
+                return of(SseDataMapper.fromDTO(featureOneSSE));
+            case Clusterables.TimeAfterHint:
+                return of(SseDataMapper.fromDTO(featureTwoSSE));
+            case Clusterables.NDimensional:
+                return of(SseDataMapper.fromDTO(radarSSE));
+            default:
+                return new Observable<ClusteringVisualizationData>();
+        }
+    }
 }

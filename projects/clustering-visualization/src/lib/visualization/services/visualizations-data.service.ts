@@ -5,31 +5,31 @@ import { Clusterables } from '../models/clusterables-enum';
 import { Clusterable } from '../models/clusterable';
 
 export abstract class VisualizationsDataService {
-  protected visualizationDataSubject$: ReplaySubject<ClusteringVisualizationData> = new ReplaySubject();
+    protected visualizationDataSubject$: ReplaySubject<ClusteringVisualizationData> = new ReplaySubject();
 
-  visualizationData$: Observable<ClusteringVisualizationData> = this.visualizationDataSubject$
-    .asObservable()
-    .pipe(filter((vd) => vd !== undefined && vd !== null));
+    visualizationData$: Observable<ClusteringVisualizationData> = this.visualizationDataSubject$
+        .asObservable()
+        .pipe(filter((vd) => vd !== undefined && vd !== null));
 
-  abstract set selectedFeature(value: Clusterables);
+    abstract set selectedFeature(value: Clusterables);
 
-  abstract get selectedFeature();
+    abstract get selectedFeature();
 
-  abstract getData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number);
+    abstract getData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number);
 
-  abstract getRadarData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number);
+    abstract getRadarData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number);
 
-  abstract getLineData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number);
+    abstract getLineData(trainingDefinitionId: number, numOfClusters: number, instanceIds: number[], level: number);
 
-  /* methods to get information based on selected feature */
+    /* methods to get information based on selected feature */
 
-  abstract getOption(point: Clusterable, feature: Clusterables): number;
+    abstract getOption(point: Clusterable, feature: Clusterables): number;
 
-  abstract getX(value: any, feature: Clusterables): number;
+    abstract getX(value: any, feature: Clusterables): number;
 
-  abstract getY(value: any, feature: Clusterables): number;
+    abstract getY(value: any, feature: Clusterables): number;
 
-  abstract getXLabel(feature: Clusterables): string;
+    abstract getXLabel(feature: Clusterables): string;
 
-  abstract getYLabel(feature: Clusterables): string;
+    abstract getYLabel(feature: Clusterables): string;
 }
