@@ -1,4 +1,4 @@
-name: Clustering visualizations CI
+name: Clustering visualization CI
 
 on:
   push:
@@ -23,4 +23,4 @@ jobs:
       NPMJS_TOKEN: ${{ secrets.NPMJS_TOKEN }}
       SENTINEL_PULL: ${{ secrets.SENTINEL_PULL }}
     with:
-      VERSION_PATH: "projects/clustering-visualizations/package.json"
+      VERSION_PATH: "projects/clustering-visualization/package.json"
