@@ -1,8 +1,8 @@
 export class EuclidianDoublePoint {
-  points: Point[];
-  center: Point;
+    points: Point[];
+    center: Point;
 }
 
 export class Point {
-  point: number[];
+    point: number[];
 }
